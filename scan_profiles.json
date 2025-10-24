@@ -1,0 +1,102 @@
+{
+    "scan_profiles": {
+        "basic": {
+            "name": "Базовое сканирование",
+            "description": "Быстрое базовое сканирование без активного тестирования",
+            "active_scan": false,
+            "spider_timeout": 1,
+            "ajax_spider": false,
+            "scan_policy": null
+        },
+        "standard": {
+            "name": "Стандартное сканирование",
+            "description": "Полное сканирование с активным тестированием",
+            "active_scan": true,
+            "spider_timeout": 2,
+            "ajax_spider": true,
+            "scan_policy": null
+        },
+        "thorough": {
+            "name": "Тщательное сканирование",
+            "description": "Полное тщательное сканирование с увеличенным таймаутом",
+            "active_scan": true,
+            "spider_timeout": 5,
+            "ajax_spider": true,
+            "scan_policy": null
+        },
+        "e-commerce": {
+            "name": "E-Commerce сканирование",
+            "description": "Специализированное сканирование для E-Commerce приложений",
+            "active_scan": true,
+            "spider_timeout": 3,
+            "ajax_spider": true,
+            "scan_policy": "e-commerce-policy"
+        }
+    },
+    "performance_profiles": {
+        "async_basic": {
+            "name": "Асинхронное базовое сканирование",
+            "description": "Базовое сканирование с асинхронным выполнением",
+            "active_scan": false,
+            "spider_timeout": 1,
+            "ajax_spider": false,
+            "scan_policy": null,
+            "async_enabled": true,
+            "concurrent_scans": 1
+        },
+        "parallel_standard": {
+            "name": "Параллельное стандартное сканирование",
+            "description": "Стандартное сканирование с параллельным выполнением",
+            "active_scan": true,
+            "spider_timeout": 2,
+            "ajax_spider": true,
+            "scan_policy": null,
+            "async_enabled": false,
+            "concurrent_scans": 3
+        },
+        "parallel_thorough": {
+            "name": "Параллельное тщательное сканирование",
+            "description": "Тщательное сканирование с параллельным выполнением",
+            "active_scan": true,
+            "spider_timeout": 5,
+            "ajax_spider": true,
+            "scan_policy": null,
+            "async_enabled": false,
+            "concurrent_scans": 2
+        },
+        "async_e-commerce": {
+            "name": "Асинхронное E-Commerce сканирование",
+            "description": "Специализированное сканирование для E-Commerce с асинхронным выполнением",
+            "active_scan": true,
+            "spider_timeout": 3,
+            "ajax_spider": true,
+            "scan_policy": "e-commerce-policy",
+            "async_enabled": true,
+            "concurrent_scans": 1
+        },
+        "fast_scan": {
+            "name": "Быстрое сканирование",
+            "description": "Оптимизированное быстрое сканирование для быстрой проверки",
+            "active_scan": true,
+            "spider_timeout": 1,
+            "ajax_spider": false,
+            "scan_policy": "fast-policy",
+            "async_enabled": true,
+            "concurrent_scans": 4,
+            "threads_per_host": 10,
+            "delay_in_ms": 0
+        },
+        "api_scan": {
+            "name": "API сканирование",
+            "description": "Специализированное сканирование для REST API",
+            "active_scan": true,
+            "spider_timeout": 1,
+            "ajax_spider": false,
+            "scan_policy": "api-policy",
+            "async_enabled": true,
+            "concurrent_scans": 2,
+            "threads_per_host": 5,
+            "delay_in_ms": 100
+        }
+    }
+}

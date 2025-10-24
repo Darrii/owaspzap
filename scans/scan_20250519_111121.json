@@ -1,0 +1,15 @@
+{
+    "target_url": "https://editsvgcode.com/",
+    "profile": {
+        "name": "Базовое сканирование",
+        "description": "Быстрое базовое сканирование без активного тестирования",
+        "active_scan": false,
+        "spider_timeout": 1,
+        "ajax_spider": false,
+        "scan_policy": null
+    },
+    "scan_time": 6.003225088119507,
+    "alerts": [],
+    "alerts_count": 0,
+    "scan_date": "2025-05-19 11:11:27"
+}

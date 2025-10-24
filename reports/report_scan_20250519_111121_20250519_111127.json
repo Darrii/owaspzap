@@ -1,0 +1,42 @@
+{
+    "target_url": "https://editsvgcode.com/",
+    "profile": {
+        "name": "Базовое сканирование",
+        "description": "Быстрое базовое сканирование без активного тестирования",
+        "active_scan": false,
+        "spider_timeout": 1,
+        "ajax_spider": false,
+        "scan_policy": null
+    },
+    "scan_time": 6.003225088119507,
+    "alerts": [],
+    "alerts_count": 0,
+    "scan_date": "2025-05-19 11:11:27",
+    "analysis_metrics": {
+        "original_count": 0,
+        "filtered_count": 0,
+        "final_count": 0,
+        "reduction_percentage": 0
+    },
+    "remediation_guide": {
+        "critical": [],
+        "high": [],
+        "medium": [],
+        "low": []
+    },
+    "summary": {
+        "target_url": "https://editsvgcode.com/",
+        "scan_date": "2025-05-19 11:11:27",
+        "scan_time": 6.003225088119507,
+        "total_alerts": 0,
+        "analyzed_alerts": 0,
+        "false_positives_reduction": 0,
+        "risk_summary": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0
+        },
+        "top_vulnerabilities": []
+    }
+}

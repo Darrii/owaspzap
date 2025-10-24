@@ -1,0 +1,15 @@
+{
+    "target_url": "https://pge.kbtu.kz/",
+    "profile": {
+        "name": "Базовое сканирование",
+        "description": "Быстрое базовое сканирование без активного тестирования",
+        "active_scan": false,
+        "spider_timeout": 1,
+        "ajax_spider": false,
+        "scan_policy": null
+    },
+    "scan_time": 10.189658164978027,
+    "alerts": [],
+    "alerts_count": 0,
+    "scan_date": "2025-05-19 10:05:30"
+}

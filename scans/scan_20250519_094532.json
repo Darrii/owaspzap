@@ -1,0 +1,15 @@
+{
+    "target_url": "https://www.overleaf.com/",
+    "profile": {
+        "name": "Базовое сканирование",
+        "description": "Быстрое базовое сканирование без активного тестирования",
+        "active_scan": false,
+        "spider_timeout": 1,
+        "ajax_spider": false,
+        "scan_policy": null
+    },
+    "scan_time": 227.11364102363586,
+    "alerts": "internal_error",
+    "alerts_count": 14,
+    "scan_date": "2025-05-19 09:49:19"
+}

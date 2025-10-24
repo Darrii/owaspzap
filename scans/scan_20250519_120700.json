@@ -1,0 +1,15 @@
+{
+    "target_url": "http://testphp.vulnweb.com/",
+    "profile": {
+        "name": "Стандартное сканирование",
+        "description": "Полное сканирование с активным тестированием",
+        "active_scan": true,
+        "spider_timeout": 2,
+        "ajax_spider": true,
+        "scan_policy": null
+    },
+    "scan_time": 15.82210898399353,
+    "alerts": [],
+    "alerts_count": 0,
+    "scan_date": "2025-05-19 12:07:15"
+}
