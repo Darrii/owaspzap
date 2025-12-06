@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # OWASP ZAP - Web Application Security Scanner
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    container_name: zap
+    command: zap.sh -daemon -port 8090 -host 0.0.0.0 -config api.key=changeme -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true
+    ports:
+      - "8090:8090"
+    networks:
+      - benchmark_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # DVWA - Damn Vulnerable Web Application
+  dvwa:
+    image: vulnerables/web-dvwa:latest
+    container_name: dvwa
+    ports:
+      - "8080:80"
+    networks:
+      - benchmark_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=dvwa
+      - MYSQL_DATABASE=dvwa
+      - MYSQL_USER=dvwa
+      - MYSQL_PASSWORD=p@ssw0rd
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # WebGoat - OWASP WebGoat
+  webgoat:
+    image: webgoat/webgoat:latest
+    container_name: webgoat
+    ports:
+      - "8081:8080"
+      - "9090:9090"
+    networks:
+      - benchmark_network
+    environment:
+      - WEBGOAT_PORT=8080
+      - WEBWOLF_PORT=9090
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/WebGoat"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # OWASP Juice Shop
+  juiceshop:
+    image: bkimminich/juice-shop:latest
+    container_name: juiceshop
+    ports:
+      - "3000:3000"
+    networks:
+      - benchmark_network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  benchmark_network:
+    driver: bridge
+    name: benchmark_network
+
+volumes:
+  zap_data:
+    name: zap_data
