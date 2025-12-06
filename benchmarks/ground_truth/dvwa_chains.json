@@ -1,0 +1,44 @@
+{
+  "dataset": "DVWA",
+  "version": "1.0",
+  "description": "Ground truth vulnerability chains for DVWA synthetic scan",
+  "scan_file": "benchmarks/dvwa_scan_synthetic.json",
+  "expected_chains": [
+    {
+      "chain_id": "dvwa_path_traversal_to_code_disclosure",
+      "chain_type": "information_gathering",
+      "vulnerability_path": ["Path Traversal", "Source Code Disclosure"],
+      "description": "Path traversal vulnerability leads to source code disclosure",
+      "rule_id": "PATH_TRAVERSAL_TO_CODE_DISCLOSURE",
+      "severity": "high",
+      "exploitability": 0.8,
+      "impact": "Reveals application source code and business logic",
+      "urls": [
+        "http://dvwa.local/vulnerabilities/fi/"
+      ]
+    },
+    {
+      "chain_id": "dvwa_xss_to_csrf_bypass",
+      "chain_type": "authentication_bypass",
+      "vulnerability_path": ["Cross Site Scripting", "Anti-CSRF Tokens Check"],
+      "description": "XSS can be used to extract CSRF tokens and bypass protection",
+      "rule_id": "XSS_TO_CSRF",
+      "severity": "high",
+      "exploitability": 0.85,
+      "impact": "Allows CSRF attacks by stealing anti-CSRF tokens via XSS",
+      "urls": [
+        "http://dvwa.local/vulnerabilities/xss_r/",
+        "http://dvwa.local/vulnerabilities/xss_s/",
+        "http://dvwa.local/vulnerabilities/csrf/"
+      ],
+      "note": "Multiple instances expected due to 2 XSS vulnerabilities"
+    }
+  ],
+  "expected_total_chains": 3,
+  "expected_unique_chain_types": 2,
+  "notes": [
+    "The XSS → CSRF chain appears twice because there are 2 different XSS vulnerabilities (reflected and stored)",
+    "Both chains should be classified as high severity",
+    "Total of 11 vulnerabilities in the scan, but only 4 participate in chains"
+  ]
+}

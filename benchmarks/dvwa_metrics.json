@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-12-06T16:36:35.727265",
+  "dataset": "DVWA",
+  "scan_file": "benchmarks/dvwa_scan_synthetic.json",
+  "ground_truth_file": "benchmarks/ground_truth/dvwa_chains.json",
+  "analysis_time": 0.00232696533203125,
+  "total_vulnerabilities": 11,
+  "metrics": {
+    "expected_chains": 2,
+    "detected_chains": 2,
+    "true_positives": 2,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "detection_rate": 100.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0
+  },
+  "correct_detections": [
+    "Path Traversal \u2192 Source Code Disclosure",
+    "Cross Site Scripting \u2192 Anti-CSRF Tokens Check"
+  ],
+  "missed_chains": [],
+  "false_detections": []
+}
