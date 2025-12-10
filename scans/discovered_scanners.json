@@ -1,0 +1,361 @@
+{
+  "sql_injection": [
+    {
+      "id": "40018",
+      "name": "SQL Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40019",
+      "name": "SQL Injection - MySQL (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40020",
+      "name": "SQL Injection - Hypersonic SQL (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40021",
+      "name": "SQL Injection - Oracle (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40022",
+      "name": "SQL Injection - PostgreSQL (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40024",
+      "name": "SQL Injection - SQLite (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40027",
+      "name": "SQL Injection - MsSQL (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90019",
+      "name": "Server Side Code Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90020",
+      "name": "Remote OS Command Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90021",
+      "name": "XPath Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90024",
+      "name": "Generic Padding Oracle",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90035",
+      "name": "Server Side Template Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90036",
+      "name": "Server Side Template Injection (Blind)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90037",
+      "name": "Remote OS Command Injection (Time Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40003",
+      "name": "CRLF Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90017",
+      "name": "XSLT Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90029",
+      "name": "SOAP XML Injection",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    }
+  ],
+  "xss": [
+    {
+      "id": "40012",
+      "name": "Cross Site Scripting (Reflected)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40014",
+      "name": "Cross Site Scripting (Persistent)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40026",
+      "name": "Cross Site Scripting (DOM Based)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40016",
+      "name": "Cross Site Scripting (Persistent) - Prime",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40017",
+      "name": "Cross Site Scripting (Persistent) - Spider",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    }
+  ],
+  "command_injection": [],
+  "path_traversal": [
+    {
+      "id": "6",
+      "name": "Path Traversal",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "7",
+      "name": "Remote File Inclusion",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    }
+  ],
+  "file_inclusion": [],
+  "code_injection": [],
+  "xpath_injection": [],
+  "ldap_injection": [],
+  "crlf_injection": [],
+  "xxe": [
+    {
+      "id": "90023",
+      "name": "XML External Entity Attack",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    }
+  ],
+  "other": [
+    {
+      "id": "10045",
+      "name": "Source Code Disclosure - /WEB-INF Folder",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "20015",
+      "name": "Heartbleed OpenSSL Vulnerability",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "20017",
+      "name": "Source Code Disclosure - CVE-2012-1823",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "20018",
+      "name": "Remote Code Execution - CVE-2012-1823",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "20019",
+      "name": "External Redirect",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40009",
+      "name": "Server Side Include",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40043",
+      "name": "Log4Shell",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40045",
+      "name": "Spring4Shell",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40048",
+      "name": "Remote Code Execution (React2Shell)",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90034",
+      "name": "Cloud Metadata Potentially Exposed",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "0",
+      "name": "Directory Browsing",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "30001",
+      "name": "Buffer Overflow",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "30002",
+      "name": "Format String Error",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40008",
+      "name": "Parameter Tampering",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40028",
+      "name": "ELMAH Information Leak",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40029",
+      "name": "Trace.axd Information Leak",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40032",
+      "name": ".htaccess Information Leak",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40034",
+      "name": ".env Information Leak",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40035",
+      "name": "Hidden File Finder",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "40042",
+      "name": "Spring Actuator Information Leak",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "10058",
+      "name": "GET for POST",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "10104",
+      "name": "User Agent Fuzzer",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "50000",
+      "name": "Script Active Scan Rules",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    },
+    {
+      "id": "90026",
+      "name": "SOAP Action Spoofing",
+      "enabled": "true",
+      "alertThreshold": "DEFAULT",
+      "attackStrength": "DEFAULT"
+    }
+  ]
+}

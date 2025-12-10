@@ -1,0 +1,11 @@
+{
+  "total_vulnerabilities": 123,
+  "total_chains": 10,
+  "critical_chains": 10,
+  "high_risk_chains": 10,
+  "analysis_time": 24.98,
+  "timestamp": "2025-12-09 05:54:22.912424",
+  "chain_types": {
+    "ChainType.INFORMATION_GATHERING": 10
+  }
+}

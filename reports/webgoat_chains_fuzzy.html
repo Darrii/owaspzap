@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Chain Detection Report</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        section {
+            background: white;
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.critical {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+
+        .stat-card.high {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .timestamp {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .chain-card {
+            background: white;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .chain-card.critical {
+            border-left-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .chain-card.high {
+            border-left-color: #ea580c;
+            background: #fff7ed;
+        }
+
+        .chain-card.medium {
+            border-left-color: #f59e0b;
+            background: #fefce8;
+        }
+
+        .chain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chain-rank {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .chain-type {
+            background: #f3f4f6;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .chain-risk {
+            background: #dc2626;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .chain-path {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 5px;
+        }
+
+        .chain-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .detail-item {
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 5px;
+        }
+
+        .chain-steps {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 5px;
+        }
+
+        .chain-steps ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .chain-steps li {
+            margin: 8px 0;
+            color: #4b5563;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .chains-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .chains-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .chains-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .chains-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .chains-table tr.critical {
+            background: #fef2f2;
+        }
+
+        .chains-table tr.high {
+            background: #fff7ed;
+        }
+
+        .chains-table tr.medium {
+            background: #fefce8;
+        }
+
+        .chain-path-cell {
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .viz-placeholder {
+            text-align: center;
+            padding: 60px;
+            background: #f9fafb;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            color: #6b7280;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            section {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1>🔗 Vulnerability Chain Detection Report</h1>
+            <p class="subtitle">Graph-based Analysis of Compound Exploits</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+    <section class="summary">
+        <h2>📊 Summary</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">25</div>
+                <div class="stat-label">Total Vulnerabilities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">0</div>
+                <div class="stat-label">Chains Detected</div>
+            </div>
+            <div class="stat-card critical">
+                <div class="stat-value">0</div>
+                <div class="stat-label">Critical Chains</div>
+            </div>
+            <div class="stat-card high">
+                <div class="stat-value">0</div>
+                <div class="stat-label">High Risk Chains</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">0.00s</div>
+                <div class="stat-label">Analysis Time</div>
+            </div>
+        </div>
+        <p class="timestamp">Generated: 2025-12-10 03:10:49</p>
+    </section>
+
+        
+    <section class="top-chains">
+        <h2>🔝 Top Vulnerability Chains</h2>
+        <p class="no-data">No vulnerability chains detected.</p>
+    </section>
+
+        
+        
+    <section class="graph-viz">
+        <h2>🕸️ Graph Visualization</h2>
+        <div class="viz-placeholder">
+            <p>Interactive graph visualization coming soon...</p>
+            <p>The vulnerability graph contains 25 nodes and their relationships.</p>
+        </div>
+    </section>
+
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Generated by Vulnerability Chain Detection System</p>
+            <p>SIAAS Research Team © 2025</p>
+        </div>
+    </footer>
+
+    
+    <script>
+        // Add interactive features here in the future
+        console.log('Vulnerability Chain Detection Report loaded');
+    </script>
+
+</body>
+</html>

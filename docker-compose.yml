@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # OWASP ZAP - Web Application Security Scanner
   zap:
