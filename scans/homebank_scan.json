@@ -1,0 +1,999 @@
+{
+	"@programName": "ZAP",
+	"@version": "2.16.1",
+	"@generated": "\u0441\u0431, 13 \u0434\u0435\u043A. 2025 03:40:05",
+	"created": "2025-12-12T22:40:05.867842Z",
+	"site":[ 
+		{
+			"@name": "https://homebank.kz",
+			"@host": "homebank.kz",
+			"@port": "443",
+			"@ssl": "true",
+			"alerts": [ 
+				{
+					"pluginid": "10003",
+					"alertRef": "10003",
+					"alert": "\u0423\u044F\u0437\u0432\u0438\u043C\u043E\u0441\u0442\u044C JS \u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 (Library)",
+					"name": "\u0423\u044F\u0437\u0432\u0438\u043C\u043E\u0441\u0442\u044C JS \u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 (Library)",
+					"riskcode": "3",
+					"confidence": "2",
+					"riskdesc": "\u0412\u044B\u0441\u043E\u043A\u0438\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>The identified library appears to be vulnerable.</p>",
+					"instances":[ 
+						{
+							"id": "69",
+							"uri": "https://homebank.kz/vendor-es2015.7677f4198d3d76dde885.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ".version=\"2.29.1\",e=_e,s.fn=cn,s.min=function(){return Se(\"isBefore\",[].slice.call(arguments,0))},s.max=function(){return Se(\"isAfter\",[].slice.call(arguments,0))},s.now=function(){return Date.now?Date.now():+new Date},s.utc=f,s.unix=function(t){return _e(1e3*t)},s.months=function(t,e){return fn(t,e,\"months\")},s.isDate=u,s.locale=te,s.invalid=g,s.duration=Re,s.isMoment=",
+							"otherinfo": "The identified library moment.js, version 2.29.1 is vulnerable.\nCVE-2022-31129\nCVE-2022-24785\nhttps://github.com/moment/moment/security/advisories/GHSA-wc69-rhjr-hc9g\nhttps://security.snyk.io/vuln/SNYK-JS-MOMENT-2944238\nhttps://github.com/moment/moment/security/advisories/GHSA-8hfj-j24r-96c4\n"
+						},
+						{
+							"id": "80",
+							"uri": "https://homebank.kz/vendor-es5.7677f4198d3d76dde885.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": ".version=\"2.29.1\",t=bt,i.fn=ln,i.min=function(){return wt(\"isBefore\",[].slice.call(arguments,0))},i.max=function(){return wt(\"isAfter\",[].slice.call(arguments,0))},i.now=function(){return Date.now?Date.now():+new Date},i.utc=d,i.unix=function(e){return bt(1e3*e)},i.months=function(e,t){return dn(e,t,\"months\")},i.isDate=c,i.locale=et,i.invalid=m,i.duration=Rt,i.isMoment=",
+							"otherinfo": "The identified library moment.js, version 2.29.1 is vulnerable.\nCVE-2022-31129\nCVE-2022-24785\nhttps://github.com/moment/moment/security/advisories/GHSA-wc69-rhjr-hc9g\nhttps://security.snyk.io/vuln/SNYK-JS-MOMENT-2944238\nhttps://github.com/moment/moment/security/advisories/GHSA-8hfj-j24r-96c4\n"
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
+					"otherinfo": "<p>The identified library moment.js, version 2.29.1 is vulnerable.</p><p>CVE-2022-31129</p><p>CVE-2022-24785</p><p>https://github.com/moment/moment/security/advisories/GHSA-wc69-rhjr-hc9g</p><p>https://security.snyk.io/vuln/SNYK-JS-MOMENT-2944238</p><p>https://github.com/moment/moment/security/advisories/GHSA-8hfj-j24r-96c4</p><p></p>",
+					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
+					"cweid": "1395",
+					"wascid": "-1",
+					"sourceid": "25"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-13",
+					"alert": "CSP: Failure to Define Directive with No Fallback",
+					"name": "CSP: Failure to Define Directive with No Fallback",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 (\u0412\u044B\u0441\u043E\u043A\u0438\u0439)",
+					"desc": "<p>The Content Security Policy fails to define one of the directives that has no fallback. Missing/excluding them is the same as allowing anything.</p>",
+					"instances":[ 
+						{
+							"id": "2",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
+						},
+						{
+							"id": "5",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
+						},
+						{
+							"id": "3",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "The directive(s): form-action is/are among the directives that do not fallback to default-src."
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u0430\u0448 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440, \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439, \u0431\u0430\u043B\u0430\u043D\u0441\u0438\u0440\u043E\u0432\u0449\u0438\u043A \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438 \u0442. \u0434. \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u044B \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 Content-Security-Policy. </p>",
+					"otherinfo": "<p>The directive(s): form-action is/are among the directives that do not fallback to default-src.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-10",
+					"alert": "CSP: script-src unsafe-eval",
+					"name": "CSP: script-src unsafe-eval",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 (\u0412\u044B\u0441\u043E\u043A\u0438\u0439)",
+					"desc": "<p>\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430 (CSP) - \u044D\u0442\u043E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043F\u043E\u043C\u043E\u0433\u0430\u0435\u0442 \u043E\u0431\u043D\u0430\u0440\u0443\u0436\u0438\u0432\u0430\u0442\u044C \u0438 \u0441\u043C\u044F\u0433\u0447\u0430\u0442\u044C \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0435 \u0442\u0438\u043F\u044B \u0430\u0442\u0430\u043A. </p><p>\u0412\u043A\u043B\u044E\u0447\u0430\u044F (\u043D\u043E \u043D\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0432\u0430\u044F\u0441\u044C) \u043C\u0435\u0436\u0441\u0430\u0439\u0442\u043E\u0432\u044B\u043C\u0438 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F\u043C\u0438 (XSS) \u0438 \u0430\u0442\u0430\u043A\u0430\u043C\u0438 \u043F\u0443\u0442\u0435\u043C \u0432\u043D\u0435\u0434\u0440\u0435\u043D\u0438\u044F \u0434\u0430\u043D\u043D\u044B\u0445. </p><p>\u042D\u0442\u0438 \u0430\u0442\u0430\u043A\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442\u0441\u044F \u0434\u043B\u044F \u0432\u0441\u0435\u0433\u043E, \u043E\u0442 \u043A\u0440\u0430\u0436\u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u0434\u043E \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u044F \u0441\u0430\u0439\u0442\u0430 </p><p>\u0438\u043B\u0438 \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0432\u0440\u0435\u0434\u043E\u043D\u043E\u0441\u043D\u043E\u0433\u043E \u041F\u041E. </p><p>CSP \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u043D\u0430\u0431\u043E\u0440 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0445 HTTP-\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0442 \u0432\u043B\u0430\u0434\u0435\u043B\u044C\u0446\u0430\u043C \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u043E\u0432 \u043E\u0431\u044A\u044F\u0432\u043B\u044F\u0442\u044C \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430\u043C \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u043D\u0430 \u044D\u0442\u0443 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 - \u043E\u0445\u0432\u0430\u0442\u044B\u0432\u0430\u0435\u043C\u044B\u0435 \u0442\u0438\u043F\u044B - \u044D\u0442\u043E JavaScript, CSS, HTML-\u0444\u0440\u0435\u0439\u043C\u044B, \u0448\u0440\u0438\u0444\u0442\u044B, \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0432\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u043C\u044B\u0435 \u043E\u0431\u044A\u0435\u043A\u0442\u044B, \u0442\u0430\u043A\u0438\u0435 \u043A\u0430\u043A Java-\u0430\u043F\u043F\u043B\u0435\u0442\u044B, ActiveX, \u0430\u0443\u0434\u0438\u043E \u0438 \u0432\u0438\u0434\u0435\u043E \u0444\u0430\u0439\u043B\u044B. </p>",
+					"instances":[ 
+						{
+							"id": "12",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "script-src includes unsafe-eval."
+						},
+						{
+							"id": "19",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "script-src includes unsafe-eval."
+						},
+						{
+							"id": "20",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "script-src includes unsafe-eval."
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u0430\u0448 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440, \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439, \u0431\u0430\u043B\u0430\u043D\u0441\u0438\u0440\u043E\u0432\u0449\u0438\u043A \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438 \u0442. \u0434. \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u044B \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 Content-Security-Policy. </p>",
+					"otherinfo": "<p>script-src includes unsafe-eval.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-6",
+					"alert": "CSP: style-src \u043D\u0435\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u044B\u0439 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0439 ",
+					"name": "CSP: style-src \u043D\u0435\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u044B\u0439 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0439 ",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 (\u0412\u044B\u0441\u043E\u043A\u0438\u0439)",
+					"desc": "<p>\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430 (CSP) - \u044D\u0442\u043E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043F\u043E\u043C\u043E\u0433\u0430\u0435\u0442 \u043E\u0431\u043D\u0430\u0440\u0443\u0436\u0438\u0432\u0430\u0442\u044C \u0438 \u0441\u043C\u044F\u0433\u0447\u0430\u0442\u044C \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0435 \u0442\u0438\u043F\u044B \u0430\u0442\u0430\u043A. </p><p>\u0412\u043A\u043B\u044E\u0447\u0430\u044F (\u043D\u043E \u043D\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0432\u0430\u044F\u0441\u044C) \u043C\u0435\u0436\u0441\u0430\u0439\u0442\u043E\u0432\u044B\u043C\u0438 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F\u043C\u0438 (XSS) \u0438 \u0430\u0442\u0430\u043A\u0430\u043C\u0438 \u043F\u0443\u0442\u0435\u043C \u0432\u043D\u0435\u0434\u0440\u0435\u043D\u0438\u044F \u0434\u0430\u043D\u043D\u044B\u0445. </p><p>\u042D\u0442\u0438 \u0430\u0442\u0430\u043A\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442\u0441\u044F \u0434\u043B\u044F \u0432\u0441\u0435\u0433\u043E, \u043E\u0442 \u043A\u0440\u0430\u0436\u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u0434\u043E \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u044F \u0441\u0430\u0439\u0442\u0430 </p><p>\u0438\u043B\u0438 \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0432\u0440\u0435\u0434\u043E\u043D\u043E\u0441\u043D\u043E\u0433\u043E \u041F\u041E. </p><p>CSP \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u043D\u0430\u0431\u043E\u0440 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0445 HTTP-\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0442 \u0432\u043B\u0430\u0434\u0435\u043B\u044C\u0446\u0430\u043C \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u043E\u0432 \u043E\u0431\u044A\u044F\u0432\u043B\u044F\u0442\u044C \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430\u043C \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u043D\u0430 \u044D\u0442\u0443 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 - \u043E\u0445\u0432\u0430\u0442\u044B\u0432\u0430\u0435\u043C\u044B\u0435 \u0442\u0438\u043F\u044B - \u044D\u0442\u043E JavaScript, CSS, HTML-\u0444\u0440\u0435\u0439\u043C\u044B, \u0448\u0440\u0438\u0444\u0442\u044B, \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0432\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u043C\u044B\u0435 \u043E\u0431\u044A\u0435\u043A\u0442\u044B, \u0442\u0430\u043A\u0438\u0435 \u043A\u0430\u043A Java-\u0430\u043F\u043F\u043B\u0435\u0442\u044B, ActiveX, \u0430\u0443\u0434\u0438\u043E \u0438 \u0432\u0438\u0434\u0435\u043E \u0444\u0430\u0439\u043B\u044B. </p>",
+					"instances":[ 
+						{
+							"id": "11",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "style-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. "
+						},
+						{
+							"id": "14",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "style-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. "
+						},
+						{
+							"id": "16",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "style-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. "
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u0430\u0448 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440, \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439, \u0431\u0430\u043B\u0430\u043D\u0441\u0438\u0440\u043E\u0432\u0449\u0438\u043A \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438 \u0442. \u0434. \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u044B \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 Content-Security-Policy. </p>",
+					"otherinfo": "<p>style-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. </p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-4",
+					"alert": "CSP: \u0414\u0438\u0440\u0435\u043A\u0442\u0438\u0432\u0430 \u043F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u0447\u043D\u043E\u0433\u043E \u0437\u043D\u0430\u043A\u0430 ",
+					"name": "CSP: \u0414\u0438\u0440\u0435\u043A\u0442\u0438\u0432\u0430 \u043F\u043E\u0434\u0441\u0442\u0430\u043D\u043E\u0432\u043E\u0447\u043D\u043E\u0433\u043E \u0437\u043D\u0430\u043A\u0430 ",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 (\u0412\u044B\u0441\u043E\u043A\u0438\u0439)",
+					"desc": "<p>\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430 (CSP) - \u044D\u0442\u043E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043F\u043E\u043C\u043E\u0433\u0430\u0435\u0442 \u043E\u0431\u043D\u0430\u0440\u0443\u0436\u0438\u0432\u0430\u0442\u044C \u0438 \u0441\u043C\u044F\u0433\u0447\u0430\u0442\u044C \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0435 \u0442\u0438\u043F\u044B \u0430\u0442\u0430\u043A. </p><p>\u0412\u043A\u043B\u044E\u0447\u0430\u044F (\u043D\u043E \u043D\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0432\u0430\u044F\u0441\u044C) \u043C\u0435\u0436\u0441\u0430\u0439\u0442\u043E\u0432\u044B\u043C\u0438 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F\u043C\u0438 (XSS) \u0438 \u0430\u0442\u0430\u043A\u0430\u043C\u0438 \u043F\u0443\u0442\u0435\u043C \u0432\u043D\u0435\u0434\u0440\u0435\u043D\u0438\u044F \u0434\u0430\u043D\u043D\u044B\u0445. </p><p>\u042D\u0442\u0438 \u0430\u0442\u0430\u043A\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442\u0441\u044F \u0434\u043B\u044F \u0432\u0441\u0435\u0433\u043E, \u043E\u0442 \u043A\u0440\u0430\u0436\u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u0434\u043E \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u044F \u0441\u0430\u0439\u0442\u0430 </p><p>\u0438\u043B\u0438 \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0432\u0440\u0435\u0434\u043E\u043D\u043E\u0441\u043D\u043E\u0433\u043E \u041F\u041E. </p><p>CSP \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u043D\u0430\u0431\u043E\u0440 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0445 HTTP-\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0442 \u0432\u043B\u0430\u0434\u0435\u043B\u044C\u0446\u0430\u043C \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u043E\u0432 \u043E\u0431\u044A\u044F\u0432\u043B\u044F\u0442\u044C \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430\u043C \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u043D\u0430 \u044D\u0442\u0443 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 - \u043E\u0445\u0432\u0430\u0442\u044B\u0432\u0430\u0435\u043C\u044B\u0435 \u0442\u0438\u043F\u044B - \u044D\u0442\u043E JavaScript, CSS, HTML-\u0444\u0440\u0435\u0439\u043C\u044B, \u0448\u0440\u0438\u0444\u0442\u044B, \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0432\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u043C\u044B\u0435 \u043E\u0431\u044A\u0435\u043A\u0442\u044B, \u0442\u0430\u043A\u0438\u0435 \u043A\u0430\u043A Java-\u0430\u043F\u043F\u043B\u0435\u0442\u044B, ActiveX, \u0430\u0443\u0434\u0438\u043E \u0438 \u0432\u0438\u0434\u0435\u043E \u0444\u0430\u0439\u043B\u044B. </p>",
+					"instances":[ 
+						{
+							"id": "6",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nstyle-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src"
+						},
+						{
+							"id": "8",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nstyle-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src"
+						},
+						{
+							"id": "7",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:\nstyle-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src"
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u0430\u0448 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440, \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439, \u0431\u0430\u043B\u0430\u043D\u0441\u0438\u0440\u043E\u0432\u0449\u0438\u043A \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438 \u0442. \u0434. \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u044B \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 Content-Security-Policy. </p>",
+					"otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined:</p><p>style-src, img-src, connect-src, frame-src, font-src, media-src, object-src, manifest-src</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-5",
+					"alert": "CSP: \u0441\u043A\u0440\u0438\u043F\u0442-SRC \u043D\u0435\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u044B\u0439 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0439 ",
+					"name": "CSP: \u0441\u043A\u0440\u0438\u043F\u0442-SRC \u043D\u0435\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u044B\u0439 \u0432\u0441\u0442\u0440\u043E\u0435\u043D\u043D\u044B\u0439 ",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 (\u0412\u044B\u0441\u043E\u043A\u0438\u0439)",
+					"desc": "<p>\u041F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430 (CSP) - \u044D\u0442\u043E \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043F\u043E\u043C\u043E\u0433\u0430\u0435\u0442 \u043E\u0431\u043D\u0430\u0440\u0443\u0436\u0438\u0432\u0430\u0442\u044C \u0438 \u0441\u043C\u044F\u0433\u0447\u0430\u0442\u044C \u043E\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0435 \u0442\u0438\u043F\u044B \u0430\u0442\u0430\u043A. </p><p>\u0412\u043A\u043B\u044E\u0447\u0430\u044F (\u043D\u043E \u043D\u0435 \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0438\u0432\u0430\u044F\u0441\u044C) \u043C\u0435\u0436\u0441\u0430\u0439\u0442\u043E\u0432\u044B\u043C\u0438 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u044F\u043C\u0438 (XSS) \u0438 \u0430\u0442\u0430\u043A\u0430\u043C\u0438 \u043F\u0443\u0442\u0435\u043C \u0432\u043D\u0435\u0434\u0440\u0435\u043D\u0438\u044F \u0434\u0430\u043D\u043D\u044B\u0445. </p><p>\u042D\u0442\u0438 \u0430\u0442\u0430\u043A\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0442\u0441\u044F \u0434\u043B\u044F \u0432\u0441\u0435\u0433\u043E, \u043E\u0442 \u043A\u0440\u0430\u0436\u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u0434\u043E \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u044F \u0441\u0430\u0439\u0442\u0430 </p><p>\u0438\u043B\u0438 \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0435\u043D\u0438\u044F \u0432\u0440\u0435\u0434\u043E\u043D\u043E\u0441\u043D\u043E\u0433\u043E \u041F\u041E. </p><p>CSP \u043F\u0440\u0435\u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u043D\u0430\u0431\u043E\u0440 \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0445 HTTP-\u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u0437\u0432\u043E\u043B\u044F\u044E\u0442 \u0432\u043B\u0430\u0434\u0435\u043B\u044C\u0446\u0430\u043C \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u043E\u0432 \u043E\u0431\u044A\u044F\u0432\u043B\u044F\u0442\u044C \u0443\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u043D\u044B\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438 \u043A\u043E\u043D\u0442\u0435\u043D\u0442\u0430, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430\u043C \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044C \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u043D\u0430 \u044D\u0442\u0443 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0443 - \u043E\u0445\u0432\u0430\u0442\u044B\u0432\u0430\u0435\u043C\u044B\u0435 \u0442\u0438\u043F\u044B - \u044D\u0442\u043E JavaScript, CSS, HTML-\u0444\u0440\u0435\u0439\u043C\u044B, \u0448\u0440\u0438\u0444\u0442\u044B, \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438 \u0432\u0441\u0442\u0440\u0430\u0438\u0432\u0430\u0435\u043C\u044B\u0435 \u043E\u0431\u044A\u0435\u043A\u0442\u044B, \u0442\u0430\u043A\u0438\u0435 \u043A\u0430\u043A Java-\u0430\u043F\u043F\u043B\u0435\u0442\u044B, ActiveX, \u0430\u0443\u0434\u0438\u043E \u0438 \u0432\u0438\u0434\u0435\u043E \u0444\u0430\u0439\u043B\u044B. </p>",
+					"instances":[ 
+						{
+							"id": "10",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "script-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. "
+						},
+						{
+							"id": "9",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "script-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. "
+						},
+						{
+							"id": "13",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "script-src 'self' 'unsafe-inline' 'unsafe-eval' www.google.com www.gstatic.com *.a.tile.openstreetmap.org *.b.tile.openstreetmap.org *.c.tile.openstreetmap.org api.amplitude.com *.amplitude.com *.homebank.kz *.halykbank.kz *.halykbank.kz:999; img-src http: https: data:; worker-src 'self' *.homebank.kz *.halykbank.kz blob:; frame-ancestors 'self' kino.kz *.kino.kz;",
+							"otherinfo": "script-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. "
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0432\u0430\u0448 \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440, \u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439, \u0431\u0430\u043B\u0430\u043D\u0441\u0438\u0440\u043E\u0432\u0449\u0438\u043A \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438 \u0442. \u0434. \u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u044B \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 Content-Security-Policy. </p>",
+					"otherinfo": "<p>script-src \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u0442 unsafe-inline. </p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10003",
+					"alertRef": "10003",
+					"alert": "\u0423\u044F\u0437\u0432\u0438\u043C\u043E\u0441\u0442\u044C JS \u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 (Library)",
+					"name": "\u0423\u044F\u0437\u0432\u0438\u043C\u043E\u0441\u0442\u044C JS \u0411\u0438\u0431\u043B\u0438\u043E\u0442\u0435\u043A\u0438 (Library)",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>The identified library appears to be vulnerable.</p>",
+					"instances":[ 
+						{
+							"id": "40",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "this.close)};n.VERSION=\"3.4.1\",n.TRANSITION_DURATION=150,n.prototype.close",
+							"otherinfo": "The identified library bootstrap, version 3.4.1 is vulnerable.\nCVE-2025-1647\nhttps://www.herodevs.com/vulnerability-directory/cve-2025-1647\nhttps://github.com/twbs/bootstrap/issues/20631\nhttps://lists.debian.org/debian-lts-announce/2025/06/msg00001.html\n"
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>Upgrade to the latest version of the affected library.</p>",
+					"otherinfo": "<p>The identified library bootstrap, version 3.4.1 is vulnerable.</p><p>CVE-2025-1647</p><p>https://www.herodevs.com/vulnerability-directory/cve-2025-1647</p><p>https://github.com/twbs/bootstrap/issues/20631</p><p>https://lists.debian.org/debian-lts-announce/2025/06/msg00001.html</p><p></p>",
+					"reference": "<p>https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/</p>",
+					"cweid": "1395",
+					"wascid": "-1",
+					"sourceid": "24"
+				},
+				{
+					"pluginid": "10010",
+					"alertRef": "10010",
+					"alert": "Cookie No HttpOnly Flag",
+					"name": "Cookie No HttpOnly Flag",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "\u041D\u0438\u0437\u043A\u0438\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>\u0424\u0430\u0439\u043B cookie \u0431\u044B\u043B \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D \u0431\u0435\u0437 \u0444\u043B\u0430\u0433\u0430 HttpOnly, \u0447\u0442\u043E \u043E\u0437\u043D\u0430\u0447\u0430\u0435\u0442, \u0447\u0442\u043E \u043A \u043D\u0435\u043C\u0443 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E JavaScript. \u0415\u0441\u043B\u0438 \u043D\u0430 \u044D\u0442\u043E\u0439 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0437\u0430\u043F\u0443\u0449\u0435\u043D \u0432\u0440\u0435\u0434\u043E\u043D\u043E\u0441\u043D\u044B\u0439 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u0439, cookie \u0431\u0443\u0434\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D \u0438 \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u043F\u0435\u0440\u0435\u0434\u0430\u043D \u043D\u0430 \u0434\u0440\u0443\u0433\u043E\u0439 \u0441\u0430\u0439\u0442. \u0415\u0441\u043B\u0438 \u044D\u0442\u043E \u0444\u0430\u0439\u043B cookie \u0441\u0435\u0430\u043D\u0441\u0430, \u0442\u043E \u0432\u043E\u0437\u043C\u043E\u0436\u0435\u043D \u0437\u0430\u0445\u0432\u0430\u0442 \u0441\u0435\u0430\u043D\u0441\u0430. </p>",
+					"instances":[ 
+						{
+							"id": "18",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "TS0195811f",
+							"attack": "",
+							"evidence": "Set-Cookie: TS0195811f",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u0444\u0430\u0439\u043B\u043E\u0432 cookie \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D \u0444\u043B\u0430\u0433 HttpOnly. </p>",
+					"otherinfo": "",
+					"reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
+					"cweid": "1004",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10054",
+					"alertRef": "10054-1",
+					"alert": "Cookie \u0431\u0435\u0437 \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0430 SameSite ",
+					"name": "Cookie \u0431\u0435\u0437 \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0430 SameSite ",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "\u041D\u0438\u0437\u043A\u0438\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</p>",
+					"instances":[ 
+						{
+							"id": "21",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "TS0195811f",
+							"attack": "",
+							"evidence": "Set-Cookie: TS0195811f",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0434\u043B\u044F \u0430\u0442\u0440\u0438\u0431\u0443\u0442\u0430 SameSite \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u043E \u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435 \u00AB\u0441\u043B\u0430\u0431\u044B\u0439\u00BB ('lax'</p><p>)\u0438\u043B\u0438 \u0432 \u0438\u0434\u0435\u0430\u043B\u044C\u043D\u043E\u043C \u0441\u043B\u0443\u0447\u0430\u0435 \u00AB\u0441\u0442\u0440\u043E\u0433\u0438\u0439\u00BB (strict') \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u0444\u0430\u0439\u043B\u043E\u0432 cookie. </p>",
+					"otherinfo": "",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cookie-same-site</p>",
+					"cweid": "1275",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10011",
+					"alertRef": "10011",
+					"alert": "Cookie \u0431\u0435\u0437 \u0444\u043B\u0430\u0436\u043A\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438 ",
+					"name": "Cookie \u0431\u0435\u0437 \u0444\u043B\u0430\u0436\u043A\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438 ",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "\u041D\u0438\u0437\u043A\u0438\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>\u0424\u0430\u0439\u043B cookie \u0431\u044B\u043B \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D \u0431\u0435\u0437 \u0444\u043B\u0430\u0433\u0430 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438, </p><p>\u0447\u0442\u043E \u043E\u0437\u043D\u0430\u0447\u0430\u0435\u0442, \u0447\u0442\u043E \u043A \u043D\u0435\u043C\u0443 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0434\u043E\u0441\u0442\u0443\u043F \u0447\u0435\u0440\u0435\u0437 \u043D\u0435\u0437\u0430\u0448\u0438\u0444\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0435 \u0441\u043E\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F. </p>",
+					"instances":[ 
+						{
+							"id": "26",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "TS0195811f",
+							"attack": "",
+							"evidence": "Set-Cookie: TS0195811f",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "<p>\u0412\u0441\u044F\u043A\u0438\u0439 \u0440\u0430\u0437, \u043A\u043E\u0433\u0434\u0430 \u0444\u0430\u0439\u043B cookie \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u0442 \u043A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E </p><p>\u0438\u043B\u0438 \u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0442\u043E\u043A\u0435\u043D\u043E\u043C \u0441\u0435\u0430\u043D\u0441\u0430, \u0435\u0433\u043E \u0432\u0441\u0435\u0433\u0434\u0430 \u0441\u043B\u0435\u0434\u0443\u0435\u0442 \u043F\u0435\u0440\u0435\u0434\u0430\u0432\u0430\u0442\u044C \u043F\u043E \u0437\u0430\u0448\u0438\u0444\u0440\u043E\u0432\u0430\u043D\u043D\u043E\u043C\u0443 \u043A\u0430\u043D\u0430\u043B\u0443. </p><p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0434\u043B\u044F \u0444\u0430\u0439\u043B\u043E\u0432 cookie, \u0441\u043E\u0434\u0435\u0440\u0436\u0430\u0449\u0438\u0445 \u0442\u0430\u043A\u0443\u044E \u043A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u0443\u044E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E, </p><p>\u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D \u0444\u043B\u0430\u0433 \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438. </p>",
+					"otherinfo": "",
+					"reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
+					"cweid": "614",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10017",
+					"alertRef": "10017",
+					"alert": "\u0412\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u0438\u0441\u0445\u043E\u0434\u043D\u043E\u0433\u043E \u0444\u0430\u0439\u043B\u0430 \u043C\u0435\u0436\u0434\u043E\u043C\u0435\u043D\u043D\u043E\u0433\u043E JavaScript ",
+					"name": "\u0412\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u0438\u0441\u0445\u043E\u0434\u043D\u043E\u0433\u043E \u0444\u0430\u0439\u043B\u0430 \u043C\u0435\u0436\u0434\u043E\u043C\u0435\u043D\u043D\u043E\u0433\u043E JavaScript ",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "\u041D\u0438\u0437\u043A\u0438\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>\u041D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435 \u0435\u0441\u0442\u044C \u043E\u0434\u0438\u043D \u0438\u043B\u0438 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0444\u0430\u0439\u043B\u043E\u0432 \u0441\u0446\u0435\u043D\u0430\u0440\u0438\u0435\u0432 \u0438\u0437 \u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0435\u0433\u043E \u0434\u043E\u043C\u0435\u043D\u0430. </p>",
+					"instances":[ 
+						{
+							"id": "27",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4",
+							"attack": "",
+							"evidence": "<script src=\"https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"id": "25",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4",
+							"attack": "",
+							"evidence": "<script src=\"https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"id": "23",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4",
+							"attack": "",
+							"evidence": "<script src=\"https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4\"></script>",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0438\u0441\u0445\u043E\u0434\u043D\u044B\u0435 \u0444\u0430\u0439\u043B\u044B JavaScript \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u044E\u0442\u0441\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0438\u0437 \u043D\u0430\u0434\u0435\u0436\u043D\u044B\u0445 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u0432, </p><p>\u0438 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0438 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0438\u0440\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u043A\u043E\u043D\u0435\u0447\u043D\u044B\u043C\u0438 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044F\u043C\u0438 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F. </p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "829",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10035",
+					"alertRef": "10035-3",
+					"alert": "\u041C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u0437\u0430\u043F\u0438\u0441\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432 Strict-Transport-Security (\u043D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u044B \u0441\u043E \u0441\u043F\u0435\u0446\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0435\u0439) ",
+					"name": "\u041C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u0437\u0430\u043F\u0438\u0441\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u043E\u0432 Strict-Transport-Security (\u043D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u044B \u0441\u043E \u0441\u043F\u0435\u0446\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0435\u0439) ",
+					"riskcode": "1",
+					"confidence": "3",
+					"riskdesc": "\u041D\u0438\u0437\u043A\u0438\u0439 (\u0412\u044B\u0441\u043E\u043A\u0438\u0439)",
+					"desc": "<p>\u041E\u0431\u043D\u0430\u0440\u0443\u0436\u0435\u043D\u044B \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0438 HTTP Strict Transport Security (HSTS), </p><p>\u043E\u0442\u0432\u0435\u0442 \u0441 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u043C\u0438 \u0437\u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 HSTS \u043D\u0435 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u0441\u043F\u0435\u0446\u0438\u0444\u0438\u043A\u0430\u0446\u0438\u0438 (RFC 6797), </p><p>\u0438 \u0431\u0443\u0434\u0435\u0442 \u043E\u0431\u0440\u0430\u0431\u043E\u0442\u0430\u043D \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0435\u0440\u0432\u044B\u0439 \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A HSTS, </p><p>\u043E\u0441\u0442\u0430\u043B\u044C\u043D\u044B\u0435 \u0431\u0443\u0434\u0443\u0442 \u043F\u0440\u043E\u0438\u0433\u043D\u043E\u0440\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u043C\u0438 \u0430\u0433\u0435\u043D\u0442\u0430\u043C\u0438 </p><p>\u0438\u043B\u0438 \u043F\u043E\u043B\u0438\u0442\u0438\u043A\u0430 HSTS \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E \u043F\u0440\u0438\u043C\u0435\u043D\u0435\u043D.</p><p>HTTP Strict Transport Security (HSTS) - \u044D\u0442\u043E \u043C\u0435\u0445\u0430\u043D\u0438\u0437\u043C \u043F\u043E\u043B\u0438\u0442\u0438\u043A\u0438 \u0432\u0435\u0431-\u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u0438, \u043F\u043E\u0441\u0440\u0435\u0434\u0441\u0442\u0432\u043E\u043C \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440 \u043E\u0431\u044A\u044F\u0432\u043B\u044F\u0435\u0442, \u0447\u0442\u043E \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0435 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0435 \u0430\u0433\u0435\u043D\u0442\u044B (\u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440, \u0432\u0435\u0431-\u0431\u0440\u0430\u0443\u0437\u0435\u0440) \u0434\u043E\u043B\u0436\u043D\u044B \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C \u0441 \u043D\u0438\u043C, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044F \u0442\u043E\u043B\u044C\u043A\u043E \u0431\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u044B\u0435 \u0441\u043E\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F HTTPS (\u0442. \u0415. HTTP \u043D\u0430 \u0443\u0440\u043E\u0432\u043D\u0435 TLS / SSL). </p>",
+					"instances":[ 
+						{
+							"id": "36",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "37",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "73",
+							"uri": "https://homebank.kz/main-es2015.c37cae4d3cf62ca1ec78.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "85",
+							"uri": "https://homebank.kz/main-es5.c37cae4d3cf62ca1ec78.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "42",
+							"uri": "https://homebank.kz/polyfills-es2015.26dbe3a96908fc29d6bf.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "79",
+							"uri": "https://homebank.kz/polyfills-es5.b74e8d2152f2c1357797.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "1",
+							"uri": "https://homebank.kz/runtime-es2015.f25ddae9f02a06d75c25.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "44",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "38",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "81",
+							"uri": "https://homebank.kz/styles.42f2b550020984e1753b.css",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "71",
+							"uri": "https://homebank.kz/vendor-es2015.7677f4198d3d76dde885.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"id": "83",
+							"uri": "https://homebank.kz/vendor-es5.7677f4198d3d76dde885.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "12",
+					"systemic": false,
+					"solution": "<p>\u0423\u0431\u0435\u0434\u0438\u0442\u0435\u0441\u044C, \u0447\u0442\u043E \u0442\u043E\u043B\u044C\u043A\u043E \u043E\u0434\u0438\u043D \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442 \u0432 \u0432\u0430\u0448\u0435\u043C \u0441\u0442\u0435\u043A\u0435: \u043A\u043E\u0434, \u0432\u0435\u0431-\u0441\u0435\u0440\u0432\u0435\u0440, </p><p>\u0441\u0435\u0440\u0432\u0435\u0440 \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0439, \u0431\u0430\u043B\u0430\u043D\u0441\u0438\u0440\u043E\u0432\u0449\u0438\u043A \u043D\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0438 \u0442. \u0434. \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D \u0434\u043B\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0438 </p><p>\u0438\u043B\u0438 \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0438\u044F \u0437\u0430\u0433\u043E\u043B\u043E\u0432\u043A\u0430 HTTP Strict-Transport-Security (HSTS). </p>",
+					"otherinfo": "",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc6797#section-8.1</p>",
+					"cweid": "319",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10096",
+					"alertRef": "10096",
+					"alert": "\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438 \u0432\u0440\u0435\u043C\u0435\u043D\u0438  - Unix",
+					"name": "\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438 \u0432\u0440\u0435\u043C\u0435\u043D\u0438  - Unix",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "\u041D\u0438\u0437\u043A\u0438\u0439 (\u041D\u0438\u0437\u043A\u0438\u0439)",
+					"desc": "<p>A timestamp was disclosed by the application/web server. - Unix</p>",
+					"instances":[ 
+						{
+							"id": "45",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1473231341",
+							"otherinfo": "1473231341, which evaluates to: 2016-09-07 12:55:41."
+						},
+						{
+							"id": "50",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1502002290",
+							"otherinfo": "1502002290, which evaluates to: 2017-08-06 12:51:30."
+						},
+						{
+							"id": "55",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1530992060",
+							"otherinfo": "1530992060, which evaluates to: 2018-07-08 01:34:20."
+						},
+						{
+							"id": "60",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1560198380",
+							"otherinfo": "1560198380, which evaluates to: 2019-06-11 02:26:20."
+						},
+						{
+							"id": "56",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1700485571",
+							"otherinfo": "1700485571, which evaluates to: 2023-11-20 19:06:11."
+						},
+						{
+							"id": "61",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1732584193",
+							"otherinfo": "1732584193, which evaluates to: 2024-11-26 06:23:13."
+						},
+						{
+							"id": "62",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1732584194",
+							"otherinfo": "1732584194, which evaluates to: 2024-11-26 06:23:14."
+						},
+						{
+							"id": "51",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1735328473",
+							"otherinfo": "1735328473, which evaluates to: 2024-12-28 00:41:13."
+						},
+						{
+							"id": "46",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1770035416",
+							"otherinfo": "1770035416, which evaluates to: 2026-02-02 17:30:16."
+						},
+						{
+							"id": "49",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1804603682",
+							"otherinfo": "1804603682, which evaluates to: 2027-03-09 19:48:02."
+						},
+						{
+							"id": "54",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1839030562",
+							"otherinfo": "1839030562, which evaluates to: 2028-04-11 06:49:22."
+						},
+						{
+							"id": "59",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1873313359",
+							"otherinfo": "1873313359, which evaluates to: 2029-05-13 01:49:19."
+						},
+						{
+							"id": "57",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1894986606",
+							"otherinfo": "1894986606, which evaluates to: 2030-01-18 22:10:06."
+						},
+						{
+							"id": "52",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1926607734",
+							"otherinfo": "1926607734, which evaluates to: 2031-01-19 21:48:54."
+						},
+						{
+							"id": "47",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1958414417",
+							"otherinfo": "1958414417, which evaluates to: 2032-01-23 01:00:17."
+						},
+						{
+							"id": "48",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1990404162",
+							"otherinfo": "1990404162, which evaluates to: 2033-01-27 07:02:42."
+						},
+						{
+							"id": "53",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2022574463",
+							"otherinfo": "2022574463, which evaluates to: 2034-02-03 15:14:23."
+						},
+						{
+							"id": "58",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2054922799",
+							"otherinfo": "2054922799, which evaluates to: 2035-02-13 00:53:19."
+						}
+					],
+					"count": "18",
+					"systemic": false,
+					"solution": "<p>\u0412\u0440\u0443\u0447\u043D\u0443\u044E \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435, \u0447\u0442\u043E \u0434\u0430\u043D\u043D\u044B\u0435 \u043E\u0442\u043C\u0435\u0442\u043A\u0438 \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043D\u0435 \u044F\u0432\u043B\u044F\u044E\u0442\u0441\u044F \u043A\u043E\u043D\u0444\u0438\u0434\u0435\u043D\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u043C\u0438 </p><p>\u0438 \u0447\u0442\u043E \u0434\u0430\u043D\u043D\u044B\u0435 \u043D\u0435 \u043C\u043E\u0433\u0443\u0442 \u0431\u044B\u0442\u044C \u0430\u0433\u0440\u0435\u0433\u0438\u0440\u043E\u0432\u0430\u043D\u044B \u0434\u043B\u044F \u0432\u044B\u044F\u0432\u043B\u0435\u043D\u0438\u044F \u0448\u0430\u0431\u043B\u043E\u043D\u043E\u0432, </p><p>\u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043C\u043E\u0436\u043D\u043E \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C. </p>",
+					"otherinfo": "<p>1473231341, which evaluates to: 2016-09-07 12:55:41.</p>",
+					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
+					"cweid": "497",
+					"wascid": "13",
+					"sourceid": "24"
+				},
+				{
+					"pluginid": "10112",
+					"alertRef": "10112",
+					"alert": "Session Management Response Identified",
+					"name": "Session Management Response Identified",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>The given response has been identified as containing a session management token. The 'Other Info' field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to \"Auto-Detect\" then this rule will change the session management to use the tokens identified.</p>",
+					"instances":[ 
+						{
+							"id": "74",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "TS0195811f",
+							"attack": "",
+							"evidence": "TS0195811f",
+							"otherinfo": "cookie:TS0195811f"
+						},
+						{
+							"id": "76",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "TS0195811f",
+							"attack": "",
+							"evidence": "TS0195811f",
+							"otherinfo": "cookie:TS0195811f"
+						}
+					],
+					"count": "2",
+					"systemic": false,
+					"solution": "<p>This is an informational alert rather than a vulnerability and so there is nothing to fix.</p>",
+					"otherinfo": "<p>cookie:TS0195811f</p>",
+					"reference": "<p>https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/</p>",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438 - \u043F\u043E\u0434\u043E\u0437\u0440\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438 ",
+					"name": "\u0420\u0430\u0441\u043A\u0440\u044B\u0442\u0438\u0435 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438 - \u043F\u043E\u0434\u043E\u0437\u0440\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438 ",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0439 (\u041D\u0438\u0437\u043A\u0438\u0439)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker.</p>",
+					"instances":[ 
+						{
+							"id": "72",
+							"uri": "https://homebank.kz/main-es2015.c37cae4d3cf62ca1ec78.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Db",
+							"otherinfo": "The following pattern was used: \\bDB\\b and was detected in likely comment: \"//api2.homebank.kz/hbapi/\",apiCardsUrl:\"https://api2.homebank.kz/api-cards/\",apiHalykclubUrl:\"https://pelican-api.homebank.kz/ha\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "84",
+							"uri": "https://homebank.kz/main-es5.c37cae4d3cf62ca1ec78.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Db",
+							"otherinfo": "The following pattern was used: \\bDB\\b and was detected in likely comment: \"//api2.homebank.kz/hbapi/\",apiCardsUrl:\"https://api2.homebank.kz/api-cards/\",apiHalykclubUrl:\"https://pelican-api.homebank.kz/ha\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "41",
+							"uri": "https://homebank.kz/polyfills-es2015.26dbe3a96908fc29d6bf.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in likely comment: \"//www.w3.org/1999/xhtml\",\"div\"),s={thin:\"1px\",medium:\"3px\",thick:\"5px\"},c={borderBottomWidth:s,borderLeftWidth:s,borderRightWidt\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "78",
+							"uri": "https://homebank.kz/polyfills-es5.b74e8d2152f2c1357797.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in likely comment: \"//www.w3.org/1999/xhtml\",\"div\"),s={thin:\"1px\",medium:\"3px\",thick:\"5px\"},c={borderBottomWidth:s,borderLeftWidth:s,borderRightWidt\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "43",
+							"uri": "https://homebank.kz/scripts.0684ea53b273215e157b.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "bug",
+							"otherinfo": "The following pattern was used: \\bBUG\\b and was detected in likely comment: \"//,Pt={},Mt={},Rt=\"*/\".concat(\"*\"),$t=m.createElement(\"a\");function _t(e){return function(t,n){\"string\"!=typeof t&&(n=t,t=\"*\");v\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "70",
+							"uri": "https://homebank.kz/vendor-es2015.7677f4198d3d76dde885.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//github.com/fingerprintjs/fingerprintjs with your user agent: \"'+navigator.userAgent+'\".'),i.oncomplete=function(){},i=null,t(\"\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"id": "82",
+							"uri": "https://homebank.kz/vendor-es5.7677f4198d3d76dde885.js",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in likely comment: \"//github.com/fingerprintjs/fingerprintjs with your user agent: \"'+navigator.userAgent+'\".'),r.oncomplete=function(){},r=null,e(\"\", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "7",
+					"systemic": false,
+					"solution": "<p>\u0423\u0434\u0430\u043B\u0438\u0442\u0435 \u0432\u0441\u0435 \u043A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u044E\u0442 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044E, </p><p>\u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043C\u043E\u0436\u0435\u0442 \u043F\u043E\u043C\u043E\u0447\u044C \u0437\u043B\u043E\u0443\u043C\u044B\u0448\u043B\u0435\u043D\u043D\u0438\u043A\u0443, </p><p>\u0438 \u0443\u0441\u0442\u0440\u0430\u043D\u0438\u0442\u0435 \u0432\u0441\u0435 \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0435 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B, \u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043E\u043D\u0438 \u0441\u0441\u044B\u043B\u0430\u044E\u0442\u0441\u044F. </p>",
+					"otherinfo": "<p>The following pattern was used: \\bDB\\b and was detected in likely comment: \"//api2.homebank.kz/hbapi/\",apiCardsUrl:\"https://api2.homebank.kz/api-cards/\",apiHalykclubUrl:\"https://pelican-api.homebank.kz/ha\", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "615",
+					"wascid": "13",
+					"sourceid": "26"
+				},
+				{
+					"pluginid": "10109",
+					"alertRef": "10109",
+					"alert": "\u0421\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 ",
+					"name": "\u0421\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 ",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "\u0418\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u044B\u0439 (\u0421\u0440\u0435\u0434\u043D\u0438\u0439)",
+					"desc": "<p>\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0432\u044B\u0433\u043B\u044F\u0434\u0438\u0442 \u043A\u0430\u043A \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435. </p><p>\u0415\u0441\u043B\u0438 \u0432\u0430\u043C \u043D\u0443\u0436\u043D\u043E \u0438\u0437\u0443\u0447\u0438\u0442\u044C \u0435\u0433\u043E \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0438, </p><p>\u0442\u043E Ajax Spider \u043C\u043E\u0436\u0435\u0442 \u043E\u043A\u0430\u0437\u0430\u0442\u044C\u0441\u044F \u0431\u043E\u043B\u0435\u0435 \u044D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u044B\u043C, \u0447\u0435\u043C \u0441\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0439. </p>",
+					"instances":[ 
+						{
+							"id": "34",
+							"uri": "https://homebank.kz",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4\"></script>",
+							"otherinfo": "\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B\n\u043F\u043E\u043A\u0430 \u0435\u0441\u0442\u044C \u0441\u043A\u0440\u0438\u043F\u0442\u044B,\n\u0447\u0442\u043E \u0441\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0443\u0435\u0442 \u043E \u0442\u043E\u043C, \u0447\u0442\u043E \u044D\u0442\u043E \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435."
+						},
+						{
+							"id": "32",
+							"uri": "https://homebank.kz/",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4\"></script>",
+							"otherinfo": "\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B\n\u043F\u043E\u043A\u0430 \u0435\u0441\u0442\u044C \u0441\u043A\u0440\u0438\u043F\u0442\u044B,\n\u0447\u0442\u043E \u0441\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0443\u0435\u0442 \u043E \u0442\u043E\u043C, \u0447\u0442\u043E \u044D\u0442\u043E \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435."
+						},
+						{
+							"id": "29",
+							"uri": "https://homebank.kz/sitemap.xml",
+							"nodeName": null,
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"https://www.google.com/recaptcha/api.js?render=6LeaksYUAAAAAKSdZ3zOupIZj7TGYC67DFlL_MI4\"></script>",
+							"otherinfo": "\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B\n\u043F\u043E\u043A\u0430 \u0435\u0441\u0442\u044C \u0441\u043A\u0440\u0438\u043F\u0442\u044B,\n\u0447\u0442\u043E \u0441\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0443\u0435\u0442 \u043E \u0442\u043E\u043C, \u0447\u0442\u043E \u044D\u0442\u043E \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435."
+						}
+					],
+					"count": "3",
+					"systemic": false,
+					"solution": "<p>\u042D\u0442\u043E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u043E\u043D\u043D\u043E\u0435 \u043F\u0440\u0435\u0434\u0443\u043F\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u0435, \u043F\u043E\u044D\u0442\u043E\u043C\u0443 \u043D\u0438\u043A\u0430\u043A\u0438\u0445 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0439 \u043D\u0435 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F. </p>",
+					"otherinfo": "<p>\u0421\u0441\u044B\u043B\u043A\u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B</p><p>\u043F\u043E\u043A\u0430 \u0435\u0441\u0442\u044C \u0441\u043A\u0440\u0438\u043F\u0442\u044B,</p><p>\u0447\u0442\u043E \u0441\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0443\u0435\u0442 \u043E \u0442\u043E\u043C, \u0447\u0442\u043E \u044D\u0442\u043E \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0435 \u0432\u0435\u0431-\u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435.</p>",
+					"reference": "",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "1"
+				}
+			]
+		}
+	],
+	"sequences":[
+	]
+
+}

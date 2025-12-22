@@ -1,0 +1,37 @@
+Found Java version 17.0.14
+Available memory: 8192 MB
+Using JVM args: -Xmx2048m
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/authhelper-beta-0.33.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/automation-beta-0.57.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/client-alpha-0.19.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/ascanrules-release-77.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/retire-release-0.52.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/callhome-release-0.19.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/spiderAjax-release-23.28.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/webdrivermacos-release-168.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/scripts-release-45.16.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/network-beta-0.24.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/selenium-release-15.42.0.zap 
+Проверка обновлений надстройки завершена 
+Скачивание дополнения с: https://github.com/zaproxy/zap-extensions/releases/download/ascanrulesBeta-v63/ascanrulesBeta-beta-63.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/authhelper-beta-0.33.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/automation-beta-0.57.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/client-alpha-0.19.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/ascanrules-release-77.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/retire-release-0.52.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/callhome-release-0.19.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/spiderAjax-release-23.28.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/webdrivermacos-release-168.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/scripts-release-45.16.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/network-beta-0.24.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/selenium-release-15.42.0.zap 
+Дополнение загружено в: /Users/Dari/Library/Application Support/ZAP/plugin/ascanrulesBeta-beta-63.zap 
+Доступ к URL 
+Использование традиционного паука (spider)
+[=================== ] 99% |[====================] 100% 
+Активное сканирование
+[                    ] 0% |[                    ] 0% /[                    ] 0% -[                    ] 0% \[                    ] 0% |[                    ] 0% /[                    ] 0% -[                    ] 0% \[                    ] 0% |[                    ] 0% /[                    ] 0% -[                    ] 0% \[                    ] 0% |[                    ] 0% /[                    ] 0% -[                    ] 0% \[                    ] 0% |[                    ] 3% /[=                   ] 5% -[==                  ] 11% \[===                 ] 15% |[===                 ] 16% /[====                ] 21% -[====                ] 24% \[=====               ] 28% |[=======             ] 37% /[========            ] 40% -[========            ] 44% \[=========           ] 48% |[=========           ] 48% /[=========           ] 48% -[=========           ] 49% \[==========          ] 50% |[==========          ] 50% /[==========          ] 51% -[==========          ] 51% \[==========          ] 51% |[==========          ] 51% /[==========          ] 52% -[===========         ] 56% \[===========         ] 59% |[============        ] 63% /[=============       ] 66% -[==============      ] 73% \[================    ] 82% |[=================   ] 86% /[==================  ] 90% -[==================  ] 93% \[=================== ] 98% |[====================] 100% 
+Атака завершена
+Запись результатов в /Applications/ZAP.app/Contents/Java/scans/qazyna_scan.json
+Каталог указанный в '-quickout' недоступен для записи:
+/Applications/ZAP.app/Contents/Java/scans

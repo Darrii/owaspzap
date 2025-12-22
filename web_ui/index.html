@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Chain Detection System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            color: #212529;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 24px 32px;
+            border-bottom: 3px solid #34495e;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 4px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 13px;
+            color: #95a5a6;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 24px 32px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-left: 3px solid #34495e;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 2px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #ffffff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #34495e;
+            box-shadow: 0 0 0 2px rgba(52,73,94,0.1);
+        }
+
+        .form-group input:disabled {
+            background: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: #34495e;
+            color: #ffffff;
+            border-color: #2c3e50;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #2c3e50;
+        }
+
+        .btn-danger {
+            background: #c0392b;
+            color: #ffffff;
+            border-color: #a93226;
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: #a93226;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: #ffffff;
+            border-color: #229954;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background: #229954;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: #e9ecef;
+            border: 1px solid #dee2e6;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #34495e;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border: 1px solid;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .status-initializing {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .status-scanning {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .status-failed {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .status-stopped {
+            background: #e2e3e5;
+            border-color: #6c757d;
+            color: #383d41;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border: 1px solid transparent;
+            border-left-width: 3px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 16px 20px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border: 1px solid;
+            font-size: 11px;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .risk-critical {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .risk-high {
+            background: #fff3cd;
+            border-color: #fd7e14;
+            color: #856404;
+        }
+
+        .risk-medium {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .risk-low {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .risk-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        .logs-container {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 4px;
+        }
+
+        .log-info {
+            color: #4ec9b0;
+        }
+
+        .log-warning {
+            color: #ffc107;
+        }
+
+        .log-error {
+            color: #f48771;
+        }
+
+        .filter-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .chains-list {
+            margin-top: 20px;
+        }
+
+        .chain-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .chain-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .chain-item.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .chain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chain-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .chain-meta {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chain-path {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .chain-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .chain-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-arrow {
+            color: #667eea;
+            font-size: 20px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .vuln-details {
+            flex: 1;
+        }
+
+        .vuln-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .vuln-url {
+            font-size: 12px;
+            color: #6c757d;
+            word-break: break-all;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .export-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .subdomains-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .subdomain-tag {
+            background: #667eea;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .url-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .url-item {
+            font-size: 12px;
+            color: #495057;
+            padding: 4px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .url-item:last-child {
+            border-bottom: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .pulsing {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Vulnerability Chain Detection System</h1>
+            <p>Advanced OWASP vulnerability chain analysis with ZAP integration</p>
+        </div>
+
+        <div class="content">
+            <!-- PREVIOUS SCANS -->
+            <div class="section">
+                <h2>📂 Previous Scans</h2>
+                <p style="margin-bottom: 15px; color: #666;">Load a previous scan for chain analysis</p>
+                <div id="previous-scans-list"></div>
+            </div>
+
+            <!-- SCAN CONFIGURATION -->
+            <div class="section">
+                <h2>📡 ZAP Scan Configuration</h2>
+
+                <div class="form-group">
+                    <label for="target-url">Target URL</label>
+                    <input type="text" id="target-url" placeholder="https://example.com" />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="scan-type">Scan Type</label>
+                        <select id="scan-type">
+                            <option value="quick">Quick Scan (Fastest, Basic)</option>
+                            <option value="spider">Spider Scan (Medium, Crawling)</option>
+                            <option value="active">Active Scan (Slow, Comprehensive)</option>
+                            <option value="ajax">Ajax Spider (SPA Support)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scan-depth">Depth (Spider recursion level)</label>
+                        <input type="number" id="scan-depth" value="5" min="1" max="10" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="scan-timeout">Timeout (seconds, 28800 = 8 hours)</label>
+                    <input type="number" id="scan-timeout" value="28800" min="600" />
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="start-scan-btn">🚀 Start ZAP Scan</button>
+                    <button class="btn btn-danger hidden" id="stop-scan-btn">⛔ Stop Scan</button>
+                </div>
+
+                <div class="progress-container" id="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill">0%</div>
+                    </div>
+                    <span class="status-badge status-initializing" id="status-badge">Initializing</span>
+                </div>
+
+                <div class="alert alert-warning" id="warning-37">
+                    ⚠️ <strong>ZAP может надолго застрять на 37%</strong> - это нормально, не прерывайте процесс!
+                </div>
+
+                <div class="alert alert-success" id="scan-success">
+                    ✅ ZAP scan completed successfully!
+                </div>
+
+                <div class="alert alert-danger" id="scan-error">
+                    ❌ Scan error: <span id="error-message"></span>
+                </div>
+
+                <!-- Logs -->
+                <div id="logs-section" class="hidden">
+                    <h3 style="margin-top: 20px; color: #667eea;">📜 Scan Logs</h3>
+                    <div class="logs-container" id="logs-container"></div>
+                </div>
+            </div>
+
+            <!-- ZAP RESULTS -->
+            <div class="section results-container" id="zap-results-section">
+                <h2>📊 ZAP Scan Results</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="total-vulns">0</h3>
+                        <p>Total Vulnerabilities</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-urls">0</h3>
+                        <p>URLs Discovered</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-subdomains">0</h3>
+                        <p>Subdomains Found</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">🎯 Vulnerabilities by Risk</h3>
+                    <div id="vulns-by-risk"></div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">🌐 Subdomains Discovered</h3>
+                    <div class="subdomains-list" id="subdomains-list"></div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">📄 Top 20 Vulnerability Types</h3>
+                    <div id="vulns-by-type"></div>
+                </div>
+
+                <div class="btn-group" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="analyze-chains-btn">🔗 Analyze Vulnerability Chains</button>
+                </div>
+            </div>
+
+            <!-- CHAIN ANALYSIS RESULTS -->
+            <div class="section results-container" id="chains-results-section">
+                <h2>🔗 Vulnerability Chains Analysis</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="total-chains">0</h3>
+                        <p>Total Chains</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="critical-chains">0</h3>
+                        <p>Critical Chains</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="high-chains">0</h3>
+                        <p>High Risk Chains</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="medium-chains">0</h3>
+                        <p>Medium Risk Chains</p>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-panel">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">🔍 Filter Chains</h3>
+
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label>Minimum Risk Score</label>
+                            <input type="number" id="filter-risk" placeholder="0-100" min="0" max="100" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Minimum Confidence</label>
+                            <input type="number" id="filter-confidence" placeholder="0.0-1.0" step="0.1" min="0" max="1" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chain Length</label>
+                            <select id="filter-length">
+                                <option value="">All</option>
+                                <option value="2">2 steps</option>
+                                <option value="3">3 steps</option>
+                                <option value="4">4+ steps</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chain Type</label>
+                            <select id="filter-type">
+                                <option value="">All Types</option>
+                                <option value="PRIVILEGE_ESCALATION">Privilege Escalation</option>
+                                <option value="DATA_EXFILTRATION">Data Exfiltration</option>
+                                <option value="RCE">Remote Code Execution</option>
+                                <option value="ACCOUNT_TAKEOVER">Account Takeover</option>
+                                <option value="AUTHENTICATION_BYPASS">Auth Bypass</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Keyword Search</label>
+                        <input type="text" id="filter-keyword" placeholder="Search in vulnerability names..." />
+                    </div>
+
+                    <button class="btn btn-success" id="apply-filters-btn">Apply Filters</button>
+                </div>
+
+                <!-- Chains List -->
+                <div class="chains-list" id="chains-list"></div>
+
+                <!-- Verification -->
+                <div style="margin-top: 20px;">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="select-all-chains" />
+                        <label for="select-all-chains" style="margin: 0; font-weight: 600;">Select All Chains</label>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" id="verify-selected-btn">🔍 Verify Selected Chains</button>
+                        <button class="btn btn-success" id="verify-all-btn">🔍 Verify All Chains</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERIFICATION RESULTS -->
+            <div class="section results-container" id="verification-results-section">
+                <h2>✅ Exploitability Verification</h2>
+                <div id="verification-results"></div>
+            </div>
+
+            <!-- EXPORT -->
+            <div class="section export-section">
+                <h2>💾 Export Results</h2>
+                <button class="btn btn-success" id="export-json-btn" disabled>📥 Download JSON Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let scanId = null;
+        let websocket = null;
+        let allChains = [];
+        let selectedChains = new Set();
+
+        const elements = {
+            targetUrl: document.getElementById('target-url'),
+            scanType: document.getElementById('scan-type'),
+            scanDepth: document.getElementById('scan-depth'),
+            scanTimeout: document.getElementById('scan-timeout'),
+            startScanBtn: document.getElementById('start-scan-btn'),
+            stopScanBtn: document.getElementById('stop-scan-btn'),
+            progressContainer: document.getElementById('progress-container'),
+            progressFill: document.getElementById('progress-fill'),
+            statusBadge: document.getElementById('status-badge'),
+            warning37: document.getElementById('warning-37'),
+            scanSuccess: document.getElementById('scan-success'),
+            scanError: document.getElementById('scan-error'),
+            logsSection: document.getElementById('logs-section'),
+            logsContainer: document.getElementById('logs-container'),
+            zapResultsSection: document.getElementById('zap-results-section'),
+            chainsResultsSection: document.getElementById('chains-results-section'),
+            verificationResultsSection: document.getElementById('verification-results-section'),
+            analyzeChainsBtn: document.getElementById('analyze-chains-btn'),
+            exportJsonBtn: document.getElementById('export-json-btn'),
+            chainsList: document.getElementById('chains-list'),
+            selectAllChains: document.getElementById('select-all-chains'),
+            verifySelectedBtn: document.getElementById('verify-selected-btn'),
+            verifyAllBtn: document.getElementById('verify-all-btn'),
+            applyFiltersBtn: document.getElementById('apply-filters-btn'),
+            previousScansList: document.getElementById('previous-scans-list')
+        };
+
+        // Load previous scans on page load
+        async function loadPreviousScans() {
+            try {
+                const response = await fetch('/api/scans/previous');
+                const data = await response.json();
+
+                if (data.scans && data.scans.length > 0) {
+                    elements.previousScansList.innerHTML = data.scans.map(scan => `
+                        <div style="padding: 10px; margin-bottom: 10px; background: white; border-radius: 6px; border: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>${scan.scan_id}</strong><br>
+                                <small style="color: #666;">${new Date(scan.modified * 1000).toLocaleString()} • ${(scan.size / 1024).toFixed(0)} KB</small>
+                            </div>
+                            <button class="btn btn-primary" onclick="loadScan('${scan.scan_id}')" style="padding: 8px 16px;">📂 Load & Analyze</button>
+                        </div>
+                    `).join('');
+                } else {
+                    elements.previousScansList.innerHTML = '<p style="color: #666;">No previous scans found</p>';
+                }
+            } catch (error) {
+                console.error('Failed to load previous scans:', error);
+                elements.previousScansList.innerHTML = '<p style="color: #dc3545;">Failed to load scans</p>';
+            }
+        }
+
+        // Load a previous scan
+        async function loadScan(scan_id) {
+            try {
+                const response = await fetch(`/api/scan/load/${scan_id}`, { method: 'POST' });
+                const data = await response.json();
+
+                scanId = scan_id;
+                elements.zapResultsSection.classList.remove('hidden');
+                elements.zapResultsSection.scrollIntoView({ behavior: 'smooth' });
+
+                // Update UI to show scan is loaded
+                document.getElementById('total-vulns').textContent = data.vulnerabilities || '0';
+
+                alert(`✅ Scan loaded! You can now click "Analyze Vulnerability Chains"`);
+            } catch (error) {
+                alert(`❌ Failed to load scan: ${error.message}`);
+            }
+        }
+
+        // Load previous scans on page load
+        loadPreviousScans();
+
+        // Start ZAP Scan
+        elements.startScanBtn.addEventListener('click', async () => {
+            let url = elements.targetUrl.value.trim();
+            if (!url) {
+                alert('Please enter a target URL');
+                return;
+            }
+
+            // Auto-add https:// if not present
+            if (!url.match(/^https?:\/\//i)) {
+                url = 'https://' + url;
+            }
+
+            try {
+                const response = await fetch('/api/scan/start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        url: url,
+                        scan_type: elements.scanType.value,
+                        depth: parseInt(elements.scanDepth.value),
+                        timeout: parseInt(elements.scanTimeout.value)
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Invalid URL format');
+                }
+
+                const data = await response.json();
+                scanId = data.scan_id;
+
+                // Lock UI
+                elements.targetUrl.disabled = true;
+                elements.scanType.disabled = true;
+                elements.scanDepth.disabled = true;
+                elements.scanTimeout.disabled = true;
+                elements.startScanBtn.classList.add('hidden');
+                elements.stopScanBtn.classList.remove('hidden');
+                elements.progressContainer.style.display = 'block';
+                elements.logsSection.classList.remove('hidden');
+                elements.exportJsonBtn.disabled = false;
+
+                // Connect WebSocket
+                connectWebSocket(scanId);
+
+            } catch (error) {
+                showError('Failed to start scan: ' + error.message);
+            }
+        });
+
+        // Stop Scan
+        elements.stopScanBtn.addEventListener('click', async () => {
+            if (!scanId) return;
+
+            try {
+                await fetch(`/api/scan/stop/${scanId}`, { method: 'POST' });
+            } catch (error) {
+                showError('Failed to stop scan: ' + error.message);
+            }
+        });
+
+        // WebSocket Connection
+        function connectWebSocket(scanId) {
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            websocket = new WebSocket(`${wsProtocol}//${window.location.host}/ws/${scanId}`);
+
+            websocket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                handleWebSocketMessage(data);
+            };
+
+            websocket.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            websocket.onclose = () => {
+                console.log('WebSocket closed');
+            };
+        }
+
+        // Handle WebSocket Messages
+        function handleWebSocketMessage(data) {
+            switch (data.type) {
+                case 'progress':
+                    updateProgress(data.progress, data.message);
+                    break;
+                case 'warning':
+                    elements.warning37.style.display = 'block';
+                    break;
+                case 'completed':
+                    handleScanComplete(data.results);
+                    break;
+                case 'chains_analyzed':
+                    handleChainsAnalyzed(data.results);
+                    break;
+            }
+        }
+
+        // Update Progress
+        function updateProgress(progress, message) {
+            elements.progressFill.style.width = progress + '%';
+            elements.progressFill.textContent = progress + '%';
+
+            if (message) {
+                addLog(message, 'info');
+            }
+
+            // Update status
+            if (progress < 100) {
+                elements.statusBadge.className = 'status-badge status-scanning';
+                elements.statusBadge.textContent = 'Scanning';
+            }
+        }
+
+        // Add Log Entry
+        function addLog(message, level = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${level}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            elements.logsContainer.appendChild(entry);
+            elements.logsContainer.scrollTop = elements.logsContainer.scrollHeight;
+        }
+
+        // Handle Scan Complete
+        function handleScanComplete(results) {
+            elements.statusBadge.className = 'status-badge status-completed';
+            elements.statusBadge.textContent = 'Completed';
+            elements.scanSuccess.style.display = 'block';
+            elements.stopScanBtn.classList.add('hidden');
+
+            // Show results
+            displayZAPResults(results);
+        }
+
+        // Display ZAP Results
+        function displayZAPResults(results) {
+            elements.zapResultsSection.style.display = 'block';
+
+            document.getElementById('total-vulns').textContent = results.total_vulnerabilities;
+            document.getElementById('total-urls').textContent = results.total_urls;
+            document.getElementById('total-subdomains').textContent = results.subdomains.length;
+
+            // Vulnerabilities by risk
+            const riskContainer = document.getElementById('vulns-by-risk');
+            riskContainer.innerHTML = '';
+            for (const [risk, count] of Object.entries(results.by_risk)) {
+                const badge = document.createElement('span');
+                badge.className = `risk-badge risk-${risk.toLowerCase()}`;
+                badge.textContent = `${risk}: ${count}`;
+                riskContainer.appendChild(badge);
+            }
+
+            // Subdomains
+            const subdomainsContainer = document.getElementById('subdomains-list');
+            subdomainsContainer.innerHTML = '';
+            results.subdomains.forEach(subdomain => {
+                const tag = document.createElement('span');
+                tag.className = 'subdomain-tag';
+                tag.textContent = subdomain;
+                subdomainsContainer.appendChild(tag);
+            });
+
+            // Vulnerability types
+            const typesContainer = document.getElementById('vulns-by-type');
+            typesContainer.innerHTML = '<div class="url-list" style="max-height: 300px;"></div>';
+            const typesList = typesContainer.querySelector('.url-list');
+            for (const [type, count] of Object.entries(results.by_type)) {
+                const item = document.createElement('div');
+                item.className = 'url-item';
+                item.textContent = `${type}: ${count}`;
+                typesList.appendChild(item);
+            }
+
+            addLog(`Scan completed! Found ${results.total_vulnerabilities} vulnerabilities`, 'info');
+        }
+
+        // Analyze Chains
+        elements.analyzeChainsBtn.addEventListener('click', async () => {
+            if (!scanId) return;
+
+            elements.analyzeChainsBtn.disabled = true;
+            elements.analyzeChainsBtn.textContent = '⏳ Analyzing...';
+            elements.analyzeChainsBtn.classList.add('pulsing');
+
+            try {
+                await fetch('/api/chains/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scan_id: scanId,
+                        min_probability: 0.75,  // Higher threshold for real exploitable chains
+                        min_chain_probability: 0.65,  // Only show highly probable chains
+                        max_chain_length: 4
+                    })
+                });
+
+                addLog('Chain analysis started...', 'info');
+            } catch (error) {
+                showError('Failed to start chain analysis: ' + error.message);
+                elements.analyzeChainsBtn.disabled = false;
+                elements.analyzeChainsBtn.textContent = '🔗 Analyze Vulnerability Chains';
+                elements.analyzeChainsBtn.classList.remove('pulsing');
+            }
+        });
+
+        // Handle Chains Analyzed
+        function handleChainsAnalyzed(results) {
+            elements.analyzeChainsBtn.disabled = false;
+            elements.analyzeChainsBtn.textContent = '🔗 Analyze Vulnerability Chains';
+            elements.analyzeChainsBtn.classList.remove('pulsing');
+
+            displayChainsResults(results);
+        }
+
+        // Display Chains Results
+        function displayChainsResults(results) {
+            elements.chainsResultsSection.style.display = 'block';
+
+            document.getElementById('total-chains').textContent = results.total_chains;
+            document.getElementById('critical-chains').textContent = results.critical;
+            document.getElementById('high-chains').textContent = results.high;
+            document.getElementById('medium-chains').textContent = results.medium;
+
+            allChains = results.chains;
+            renderChains(allChains);
+
+            addLog(`Found ${results.total_chains} vulnerability chains!`, 'info');
+        }
+
+        // Render Chains
+        function renderChains(chains) {
+            elements.chainsList.innerHTML = '';
+
+            if (chains.length === 0) {
+                elements.chainsList.innerHTML = '<p style="text-align: center; color: #6c757d;">No chains match the current filters.</p>';
+                return;
+            }
+
+            chains.forEach((chain, index) => {
+                const chainItem = document.createElement('div');
+                chainItem.className = 'chain-item';
+                chainItem.dataset.chainId = chain.id;
+
+                const riskClass = chain.risk_score > 80 ? 'critical' :
+                                 chain.risk_score > 60 ? 'high' :
+                                 chain.risk_score > 40 ? 'medium' : 'low';
+
+                chainItem.innerHTML = `
+                    <div class="chain-header">
+                        <div class="chain-title">
+                            <input type="checkbox" class="chain-checkbox" data-chain-id="${chain.id}" style="margin-right: 10px;">
+                            Chain #${index + 1}: ${chain.chain_type}
+                        </div>
+                        <div class="chain-meta">
+                            <span class="risk-badge risk-${riskClass}">Risk: ${chain.risk_score.toFixed(1)}</span>
+                            <span class="risk-badge risk-info">Confidence: ${chain.confidence.toFixed(2)}</span>
+                            <span class="risk-badge risk-info">${chain.length} steps</span>
+                        </div>
+                    </div>
+                    <div class="chain-path">
+                        ${chain.vulnerabilities.map((v, i) => `
+                            <div class="chain-step">
+                                <div class="step-number">${i + 1}</div>
+                                <div class="vuln-details">
+                                    <div class="vuln-name">${v.name}</div>
+                                    <div class="vuln-url">${v.url}</div>
+                                    <span class="risk-badge risk-${v.risk.toLowerCase()}">${v.risk}</span>
+                                </div>
+                            </div>
+                            ${i < chain.vulnerabilities.length - 1 ? '<div class="step-arrow">↓</div>' : ''}
+                        `).join('')}
+                    </div>
+                `;
+
+                elements.chainsList.appendChild(chainItem);
+            });
+
+            // Add checkbox listeners
+            document.querySelectorAll('.chain-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const chainId = e.target.dataset.chainId;
+                    if (e.target.checked) {
+                        selectedChains.add(chainId);
+                        e.target.closest('.chain-item').classList.add('selected');
+                    } else {
+                        selectedChains.delete(chainId);
+                        e.target.closest('.chain-item').classList.remove('selected');
+                    }
+                });
+            });
+        }
+
+        // Apply Filters
+        elements.applyFiltersBtn.addEventListener('click', () => {
+            const minRisk = parseFloat(document.getElementById('filter-risk').value) || 0;
+            const minConfidence = parseFloat(document.getElementById('filter-confidence').value) || 0;
+            const lengthFilter = document.getElementById('filter-length').value;
+            const typeFilter = document.getElementById('filter-type').value;
+            const keyword = document.getElementById('filter-keyword').value.toLowerCase();
+
+            const filtered = allChains.filter(chain => {
+                if (chain.risk_score < minRisk) return false;
+                if (chain.confidence < minConfidence) return false;
+                if (lengthFilter && lengthFilter !== '4' && chain.length !== parseInt(lengthFilter)) return false;
+                if (lengthFilter === '4' && chain.length < 4) return false;
+                if (typeFilter && chain.chain_type !== typeFilter) return false;
+                if (keyword && !chain.vulnerabilities.some(v => v.name.toLowerCase().includes(keyword))) return false;
+                return true;
+            });
+
+            renderChains(filtered);
+        });
+
+        // Select All Chains
+        elements.selectAllChains.addEventListener('change', (e) => {
+            const checkboxes = document.querySelectorAll('.chain-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = e.target.checked;
+                const chainId = checkbox.dataset.chainId;
+                if (e.target.checked) {
+                    selectedChains.add(chainId);
+                    checkbox.closest('.chain-item').classList.add('selected');
+                } else {
+                    selectedChains.delete(chainId);
+                    checkbox.closest('.chain-item').classList.remove('selected');
+                }
+            });
+        });
+
+        // Verify Selected Chains
+        elements.verifySelectedBtn.addEventListener('click', async () => {
+            if (selectedChains.size === 0) {
+                alert('Please select at least one chain to verify');
+                return;
+            }
+
+            await verifyChains(Array.from(selectedChains));
+        });
+
+        // Verify All Chains
+        elements.verifyAllBtn.addEventListener('click', async () => {
+            await verifyChains(null);
+        });
+
+        // Verify Chains Function
+        async function verifyChains(chainIds) {
+            if (!scanId) return;
+
+            try {
+                await fetch('/api/chains/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scan_id: scanId,
+                        chain_ids: chainIds
+                    })
+                });
+
+                addLog('Verification started...', 'info');
+                elements.verificationResultsSection.style.display = 'block';
+                document.getElementById('verification-results').innerHTML = '<p class="pulsing" style="text-align: center;">⏳ Verifying exploitability...</p>';
+
+                // Poll for results
+                setTimeout(() => checkVerificationResults(), 5000);
+            } catch (error) {
+                showError('Failed to start verification: ' + error.message);
+            }
+        }
+
+        // Check Verification Results
+        async function checkVerificationResults() {
+            if (!scanId) return;
+
+            try {
+                const response = await fetch(`/api/scan/status/${scanId}`);
+                const data = await response.json();
+
+                if (data.verify_results) {
+                    document.getElementById('verification-results').innerHTML = `
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3>${data.verify_results.verified_chains}</h3>
+                                <p>Chains Verified</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>${data.verify_results.exploitable}</h3>
+                                <p>Exploitable</p>
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 20px; color: #6c757d;">
+                            Note: Verification feature is in development. Manual verification recommended.
+                        </p>
+                    `;
+                    addLog('Verification completed', 'info');
+                }
+            } catch (error) {
+                console.error('Failed to check verification results:', error);
+            }
+        }
+
+        // Export JSON
+        elements.exportJsonBtn.addEventListener('click', async () => {
+            if (!scanId) return;
+
+            try {
+                const response = await fetch(`/api/export/${scanId}`);
+                const data = await response.json();
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `vulnerability_chain_report_${scanId}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+
+                addLog('Report exported successfully', 'info');
+            } catch (error) {
+                showError('Failed to export report: ' + error.message);
+            }
+        });
+
+        // Show Error
+        function showError(message) {
+            elements.scanError.style.display = 'block';
+            document.getElementById('error-message').textContent = message;
+            addLog(message, 'error');
+        }
+    </script>
+</body>
+</html>

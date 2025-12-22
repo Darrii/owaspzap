@@ -1,0 +1,4 @@
+Found Java version 17.0.14
+Available memory: 8192 MB
+Using JVM args: -Xmx2048m
+The home directory is already in use. Ensure no other ZAP instances are running with the same home directory: /Users/Dari/Library/Application Support/ZAP/

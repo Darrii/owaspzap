@@ -1,0 +1,245 @@
+@startuml figure_3_workflow
+!theme plain
+skinparam {
+  BackgroundColor transparent
+  shadowing true
+  DefaultFontSize 10
+  DefaultFontName Arial
+  ArrowColor #2C3E50
+  ArrowThickness 2
+
+  activity {
+    BackgroundColor #ECF0F1
+    BorderColor #34495E
+    BorderThickness 2
+    FontColor #2C3E50
+    FontSize 10
+    FontStyle bold
+    DiamondBackgroundColor #F39C12
+    DiamondBorderColor #D68910
+    DiamondFontColor white
+    StartColor #27AE60
+    EndColor #C0392B
+  }
+
+  partition {
+    BackgroundColor #34495E
+    BorderColor #2C3E50
+    BorderThickness 2
+    FontColor #ECF0F1
+    FontSize 11
+  }
+
+  note {
+    BackgroundColor #3498DB
+    BorderColor #2874A6
+    FontColor white
+    FontSize 9
+  }
+}
+
+title Chain Detection Workflow with Performance Metrics
+title <size:16><b>Chain Detection Workflow with Performance Metrics</b></size>
+
+|#ECF0F1|PHASE 1: INPUT|
+start
+:<b>ZAP Scan Report</b>
+(JSON Format)|
+note right
+  <b>Input:</b>
+  - Format: OWASP ZAP JSON
+  - Contains: alerts[], site info
+  - Example: 129 vulnerabilities
+end note
+
+:<b>Parse Vulnerabilities</b>
+(ZAPAlertParser)|
+note right
+  <b>Parsing:</b>
+  - Extract alert metadata
+  - Map CWE codes
+  - Extract URLs
+  - Deduplicate by signature
+  <b>Output:</b> Vulnerability[]
+end note
+
+if (<b>Vulnerabilities\nFound?</b>) then (yes)
+  :<b>Classify by Taxonomy</b>
+  (VulnerabilityTaxonomy)|
+  note right
+    <b>Categories:</b>
+    - Injection (SQLi, XSS, XXE)
+    - Auth (Broken Auth, Session)
+    - Data (Info Disclosure, SSRF)
+    - Config (Missing Headers)
+    <b>Mapping:</b> CWE → Category
+  end note
+else (no)
+  :<b>Return Empty Report</b>|
+  stop
+endif
+
+|#D5DBDB|PHASE 2: GRAPH CONSTRUCTION|
+
+:<b>Create Graph Nodes</b>
+(NetworkX DiGraph)|
+note right
+  <b>Node Creation:</b>
+  - One node per vulnerability
+  - Attributes: CWE, severity,
+    URL, description
+  <b>Result:</b> 74 nodes
+end note
+
+:<b>Apply Probabilistic Rules</b>
+(24 Chain Rules)|
+note right
+  <b>Rule Engine:</b>
+  - XSS → CSRF (p=0.85)
+  - SQLi → PrivEsc (p=0.90)
+  - Info → Auth Bypass (p=0.80)
+  - SSRF → Internal (p=0.75)
+  <b>Filter:</b> p ≥ 0.75
+  <b>Config:</b> cluster_links=False
+end note
+
+:<b>Build Graph Edges</b>
+(Probability ≥ 0.75)|
+note right
+  <b>Edge Creation:</b>
+  - Source: Vulnerability A
+  - Target: Vulnerability B
+  - Weight: Rule probability
+  <b>Result:</b> 5,325 edges
+end note
+
+|#B2BABB|PHASE 3: CHAIN DETECTION|
+
+:<b>Initialize DFS Search</b>
+(Per Source Node)|
+note right
+  <b>Parameters:</b>
+  - min_length: 2
+  - max_length: 4
+  - min_chain_prob: 0.65
+  - max_chains_per_node: 500
+  - max_unique_patterns: 100
+end note
+
+partition "**DFS Loop (Per Node)**" {
+  :<b>Explore Paths</b>
+  (Depth-First Search)|
+
+  if (<b>Path Length\n≥ 2?</b>) then (yes)
+    if (<b>Chain Prob\n≥ 0.65?</b>) then (yes)
+      :<b>Create Chain</b>
+      (Add to results)|
+      note right
+        <b>Chain Structure:</b>
+        - vulnerabilities[]
+        - confidence (0-1)
+        - risk_score (0-100)
+      end note
+
+      if (<b>Chains\n≥ 500?</b>) then (yes)
+        :<b>Stop Node Search</b>|
+      else (no)
+        :<b>Continue DFS</b>|
+      endif
+    else (no)
+      :<b>Skip Chain</b>|
+    endif
+  else (no)
+    if (<b>Depth\n< 4?</b>) then (yes)
+      :<b>Continue DFS</b>|
+    else (no)
+      :<b>Backtrack</b>|
+    endif
+  endif
+
+  :<b>On-the-fly Deduplication</b>
+  (Hash-based)|
+  note right
+    <b>Dedup Strategy:</b>
+    - Signature: tuple(vuln names)
+    - Keep highest risk score
+    - Stop at 100 unique patterns
+    <b>Reduction:</b> 37,000 → 55
+  end note
+
+  if (<b>Unique Patterns\n≥ 100?</b>) then (yes)
+    :<b>Stop Global Search</b>|
+  else (no)
+    :<b>Next Source Node</b>|
+  endif
+}
+
+note right
+  <b>Performance:</b>
+  - Raw chains found: ~37,000
+  - Unique after dedup: 55
+  - Time: 0.3 seconds
+end note
+
+|#95A5A6|PHASE 4: FILTERING & OUTPUT|
+
+:<b>Remove Subchains</b>
+(If A→B→C, remove A→B)|
+note right
+  <b>Subchain Removal:</b>
+  - Check if chain is contiguous
+    subsequence of longer chain
+  - Keep only maximal chains
+  <b>Reduction:</b> 55 → 44
+end note
+
+:<b>Calculate Risk Scores</b>
+(Multi-factor)|
+note right
+  <b>Risk Factors:</b>
+  - Chain length (longer = higher)
+  - Max CVSS in chain
+  - Confidence score
+  - Exploitability
+  <b>Formula:</b>
+  risk = (length × 15) + max_cvss×7
+         + confidence×10
+end note
+
+:<b>Sort by Risk Score</b>
+(Descending)|
+
+:<b>Generate Report</b>
+(HTML + JSON)|
+note right
+  <b>HTML Report:</b>
+  - Interactive graph visualization
+  - Chain details table
+  - Risk score breakdown
+  <b>JSON Export:</b>
+  - Raw chain data
+  - Vulnerability metadata
+  <b>Final Result:</b> 44 chains
+end note
+
+:<b>Final Chains</b>
+(Ready for Analysis)|
+stop
+
+legend right
+  |<#27AE60>| Start/Success |
+  |<#C0392B>| End/Stop |
+  |<#F39C12>| Decision |
+  |<#ECF0F1>| Process |
+  |<#3498DB>| Note |
+
+  <b>Overall Performance:</b>
+  Input: 129 vulnerabilities
+  Graph: 74 nodes, 5,325 edges
+  Raw chains: ~37,000
+  After dedup: 55 unique
+  Final output: 44 chains
+  Total time: 0.4 seconds
+endlegend
+
+@enduml

@@ -1,24 +1,24 @@
 # Vulnerability Chain Validation Report
 
-**Generated:** 2025-12-10 06:30:03
+**Generated:** 2025-12-10 13:43:50
 
 ---
 
 ## Executive Summary
 
-**Total Chains Detected:** 18
+**Total Chains Detected:** 14
 
 | Application | Vulnerabilities | Chains | Critical | High | Medium | Analysis Time |
 |-------------|-----------------|--------|----------|------|--------|---------------|
-| DVWA | 194 | 13 | 3 | 10 | 0 | 0.08s |
-| Juice Shop | 785 | 4 | 4 | 0 | 0 | 27.25s |
+| DVWA | 194 | 9 | 1 | 8 | 0 | 0.07s |
+| Juice Shop | 785 | 4 | 4 | 0 | 0 | 26.58s |
 | WebGoat | 25 | 1 | 1 | 0 | 0 | 0.00s |
 
 ---
 
 ## DVWA
 
-**Chains Detected:** 13
+**Chains Detected:** 9
 
 ### Chain #1: Compound Exploit
 
@@ -59,13 +59,13 @@ Missing Security Headers → Cross Site Scripting
 
 ### Chain #2: Information Gathering
 
-**Risk Score:** 30.35 🔴 CRITICAL
+**Risk Score:** 29.68 🟠 HIGH
 **Confidence:** 0.75
 
 **Chain Path:**
 
 ```
-SQL Injection → Missing Security Headers
+SQL Injection → Information Disclosure → Missing Security Headers → Cross Site Scripting
 ```
 
 **Vulnerabilities:**
@@ -74,14 +74,23 @@ SQL Injection → Missing Security Headers
    - URL: `http://dvwa/vulnerabilities/sqli/?id=%27&Submit=Submit`
    - Parameter: `id`
    - Evidence: `You have an error in your SQL syntax`
-2. **Missing Security Headers** [MEDIUM]
-   - URL: `http://dvwa/vulnerabilities/sqli/?id=1%27%20OR%20%271%27=%271&Submit=Submit`
+2. **Information Disclosure** [MEDIUM]
+   - URL: `http://dvwa/vulnerabilities/`
+   - Evidence: `Parent Directory`
+3. **Missing Security Headers** [MEDIUM]
+   - URL: `http://dvwa/vulnerabilities/xss_r/`
+4. **Cross Site Scripting** [HIGH]
+   - URL: `http://dvwa/vulnerabilities/xss_r/?name=%3C%2Fpre%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cpre%3E`
+   - Parameter: `name`
+   - Evidence: `</pre><scrIpt>alert(1);</scRipt><pre>`
 
-**Impact:** Exploit chain combining 2 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Missing Security Headers
+**Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Information Disclosure → Missing Security Headers → Cross Site Scripting
 
 **Exploitation Steps:**
 
 - Step 1: SQL injection can extract sensitive database information
+- Step 2: Directory listing exposes file structure, leading to information disclosure
+- Step 3: Missing Content-Security-Policy headers make XSS exploitation easier
 
 **Validation Checklist:**
 
@@ -95,13 +104,13 @@ SQL Injection → Missing Security Headers
 
 ### Chain #3: Information Gathering
 
-**Risk Score:** 30.02 🔴 CRITICAL
+**Risk Score:** 29.68 🟠 HIGH
 **Confidence:** 0.75
 
 **Chain Path:**
 
 ```
-SQL Injection → Information Disclosure
+SQL Injection → Information Disclosure → Information Disclosure → Cross Site Scripting
 ```
 
 **Vulnerabilities:**
@@ -110,15 +119,24 @@ SQL Injection → Information Disclosure
    - URL: `http://dvwa/vulnerabilities/sqli/?id=%27&Submit=Submit`
    - Parameter: `id`
    - Evidence: `You have an error in your SQL syntax`
-2. **Information Disclosure** [LOW]
-   - URL: `http://dvwa/vulnerabilities/upload`
-   - Evidence: `Apache/2.4.25 (Debian)`
+2. **Information Disclosure** [MEDIUM]
+   - URL: `http://dvwa/vulnerabilities/`
+   - Evidence: `Parent Directory`
+3. **Information Disclosure** [MEDIUM]
+   - URL: `http://dvwa/vulnerabilities/?C=D;O=A`
+   - Evidence: `Parent Directory`
+4. **Cross Site Scripting** [HIGH]
+   - URL: `http://dvwa/vulnerabilities/xss_r/?name=%3C%2Fpre%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cpre%3E`
+   - Parameter: `name`
+   - Evidence: `</pre><scrIpt>alert(1);</scRipt><pre>`
 
-**Impact:** Exploit chain combining 2 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Information Disclosure
+**Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Information Disclosure → Information Disclosure → Cross Site Scripting
 
 **Exploitation Steps:**
 
 - Step 1: SQL injection can extract sensitive database information
+- Step 2: Directory listing exposes file structure, leading to information disclosure
+- Step 3: Missing Content-Security-Policy headers make XSS exploitation easier
 
 **Validation Checklist:**
 
@@ -132,13 +150,13 @@ SQL Injection → Information Disclosure
 
 ### Chain #4: Information Gathering
 
-**Risk Score:** 29.46 🟠 HIGH
+**Risk Score:** 29.54 🟠 HIGH
 **Confidence:** 0.75
 
 **Chain Path:**
 
 ```
-SQL Injection → Information Disclosure → Information Disclosure → Missing Security Headers
+SQL Injection → Missing Security Headers → Cross Site Scripting
 ```
 
 **Vulnerabilities:**
@@ -147,22 +165,19 @@ SQL Injection → Information Disclosure → Information Disclosure → Missing 
    - URL: `http://dvwa/vulnerabilities/sqli/?id=%27&Submit=Submit`
    - Parameter: `id`
    - Evidence: `You have an error in your SQL syntax`
-2. **Information Disclosure** [MEDIUM]
-   - URL: `http://dvwa/vulnerabilities/`
-   - Evidence: `Parent Directory`
-3. **Information Disclosure** [MEDIUM]
-   - URL: `http://dvwa/vulnerabilities/?C=D;O=A`
-   - Evidence: `Parent Directory`
-4. **Missing Security Headers** [MEDIUM]
-   - URL: `http://dvwa/vulnerabilities/sqli/?id=1%27%20OR%20%271%27=%271&Submit=Submit`
+2. **Missing Security Headers** [MEDIUM]
+   - URL: `http://dvwa/vulnerabilities/xss_r/`
+3. **Cross Site Scripting** [HIGH]
+   - URL: `http://dvwa/vulnerabilities/xss_r/?name=%3C%2Fpre%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cpre%3E`
+   - Parameter: `name`
+   - Evidence: `</pre><scrIpt>alert(1);</scRipt><pre>`
 
-**Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Information Disclosure → Information Disclosure → Missing Security Headers
+**Impact:** Exploit chain combining 3 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Missing Security Headers → Cross Site Scripting
 
 **Exploitation Steps:**
 
 - Step 1: SQL injection can extract sensitive database information
-- Step 2: Directory listing exposes file structure, leading to information disclosure
-- Step 3: Directory listing exposes file structure, leading to information disclosure
+- Step 2: Missing Content-Security-Policy headers make XSS exploitation easier
 
 **Validation Checklist:**
 
@@ -176,13 +191,13 @@ SQL Injection → Information Disclosure → Information Disclosure → Missing 
 
 ### Chain #5: Information Gathering
 
-**Risk Score:** 29.29 🟠 HIGH
+**Risk Score:** 29.54 🟠 HIGH
 **Confidence:** 0.75
 
 **Chain Path:**
 
 ```
-SQL Injection → Information Disclosure → Information Disclosure → Information Disclosure
+SQL Injection → Information Disclosure → Cross Site Scripting
 ```
 
 **Vulnerabilities:**
@@ -194,20 +209,17 @@ SQL Injection → Information Disclosure → Information Disclosure → Informat
 2. **Information Disclosure** [MEDIUM]
    - URL: `http://dvwa/vulnerabilities/`
    - Evidence: `Parent Directory`
-3. **Information Disclosure** [MEDIUM]
-   - URL: `http://dvwa/vulnerabilities/?C=D;O=A`
-   - Evidence: `Parent Directory`
-4. **Information Disclosure** [LOW]
-   - URL: `http://dvwa/vulnerabilities/upload`
-   - Evidence: `Apache/2.4.25 (Debian)`
+3. **Cross Site Scripting** [HIGH]
+   - URL: `http://dvwa/vulnerabilities/xss_r/?name=%3C%2Fpre%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cpre%3E`
+   - Parameter: `name`
+   - Evidence: `</pre><scrIpt>alert(1);</scRipt><pre>`
 
-**Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Information Disclosure → Information Disclosure → Information Disclosure
+**Impact:** Exploit chain combining 3 vulnerabilities with maximum risk level HIGH. Path: SQL Injection → Information Disclosure → Cross Site Scripting
 
 **Exploitation Steps:**
 
 - Step 1: SQL injection can extract sensitive database information
-- Step 2: Directory listing exposes file structure, leading to information disclosure
-- Step 3: Directory listing exposes file structure, leading to information disclosure
+- Step 2: Missing Content-Security-Policy headers make XSS exploitation easier
 
 **Validation Checklist:**
 
@@ -246,9 +258,9 @@ Cross-Domain Misconfiguration → Session ID in URL Rewrite → Missing Security
 3. **Missing Security Headers** [MEDIUM]
    - URL: `http://juiceshop:3000`
 4. **Session ID in URL Rewrite** [MEDIUM]
-   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=T0mVp7NqWXtqmHgJAABC`
+   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nadG&sid=RD6ZmhVUY6Dr63vcAAAb`
    - Parameter: `sid`
-   - Evidence: `T0mVp7NqWXtqmHgJAABC`
+   - Evidence: `RD6ZmhVUY6Dr63vcAAAb`
 
 **Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level MEDIUM. Path: Cross-Domain Misconfiguration → Session ID in URL Rewrite → Missing Security Headers → Session ID in URL Rewrite
 
@@ -292,9 +304,9 @@ Cross-Domain Misconfiguration → Session ID in URL Rewrite → Cross-Domain Mis
    - URL: `http://juiceshop:3000/main.js`
    - Evidence: `Access-Control-Allow-Origin: *`
 4. **Session ID in URL Rewrite** [MEDIUM]
-   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=T0mVp7NqWXtqmHgJAABC`
+   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nadG&sid=RD6ZmhVUY6Dr63vcAAAb`
    - Parameter: `sid`
-   - Evidence: `T0mVp7NqWXtqmHgJAABC`
+   - Evidence: `RD6ZmhVUY6Dr63vcAAAb`
 
 **Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level MEDIUM. Path: Cross-Domain Misconfiguration → Session ID in URL Rewrite → Cross-Domain Misconfiguration → Session ID in URL Rewrite
 
@@ -336,9 +348,9 @@ Missing Security Headers → Session ID in URL Rewrite → Missing Security Head
 3. **Missing Security Headers** [MEDIUM]
    - URL: `http://juiceshop:3000`
 4. **Session ID in URL Rewrite** [MEDIUM]
-   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=T0mVp7NqWXtqmHgJAABC`
+   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nadG&sid=RD6ZmhVUY6Dr63vcAAAb`
    - Parameter: `sid`
-   - Evidence: `T0mVp7NqWXtqmHgJAABC`
+   - Evidence: `RD6ZmhVUY6Dr63vcAAAb`
 
 **Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level MEDIUM. Path: Missing Security Headers → Session ID in URL Rewrite → Missing Security Headers → Session ID in URL Rewrite
 
@@ -381,9 +393,9 @@ Missing Security Headers → Session ID in URL Rewrite → Cross-Domain Misconfi
    - URL: `http://juiceshop:3000/main.js`
    - Evidence: `Access-Control-Allow-Origin: *`
 4. **Session ID in URL Rewrite** [MEDIUM]
-   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=T0mVp7NqWXtqmHgJAABC`
+   - URL: `http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nadG&sid=RD6ZmhVUY6Dr63vcAAAb`
    - Parameter: `sid`
-   - Evidence: `T0mVp7NqWXtqmHgJAABC`
+   - Evidence: `RD6ZmhVUY6Dr63vcAAAb`
 
 **Impact:** Exploit chain combining 4 vulnerabilities with maximum risk level MEDIUM. Path: Missing Security Headers → Session ID in URL Rewrite → Cross-Domain Misconfiguration → Session ID in URL Rewrite
 

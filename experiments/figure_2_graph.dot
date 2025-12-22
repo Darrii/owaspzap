@@ -1,0 +1,231 @@
+digraph vulnerability_graph {
+    // Graph settings - LEFT TO RIGHT for attack flow
+    graph [
+        bgcolor="white"
+        rankdir=LR
+        splines=spline
+        nodesep=1.0
+        ranksep=1.5
+        fontname="Arial"
+        fontsize=14
+        dpi=600
+        labelloc=t
+        label=<<b><font point-size="18">Vulnerability Chain Detection: Example Attack Flow</font></b><br/>
+               <font point-size="12">Example Chain: V2 → V3 → V5 (XSS → Info Disclosure → CSRF)</font>>
+    ];
+
+    // Node defaults
+    node [
+        style="filled,rounded"
+        shape=box
+        fontname="Arial"
+        fontsize=11
+        fontcolor=white
+        penwidth=2
+        margin=0.25
+        width=2.2
+        height=1.0
+    ];
+
+    // Edge defaults
+    edge [
+        fontname="Arial"
+        fontsize=11
+        fontcolor="#2C3E50"
+        penwidth=2
+        arrowsize=1.2
+    ];
+
+    // ============ ATTACK FLOW: ENTRY POINTS ============
+
+    {rank=same;
+        V4 [
+            label="V4: Missing Headers\nCVSS: 3.7 (Low)"
+            fillcolor="#7F8C8D"
+            color="#5D6D7E"
+        ];
+
+        V6 [
+            label="V6: Weak Password\nCVSS: 4.0 (Medium)"
+            fillcolor="#F39C12"
+            color="#D68910"
+        ];
+    }
+
+    // ============ ATTACK FLOW: EXPLOITATION ============
+
+    {rank=same;
+        V2 [
+            label=<
+                <b>V2: Reflected XSS</b><br/>
+                <font point-size="10">CVSS: 7.3 (High)</font><br/>
+                <font point-size="9" color="#27AE60"><b>★ CHAIN START</b></font>
+            >
+            fillcolor="#E67E22"
+            color="#CA6F1E"
+            penwidth=3
+        ];
+
+        V1 [
+            label="V1: SQL Injection\nCVSS: 9.8 (Critical)"
+            fillcolor="#C0392B"
+            color="#922B21"
+        ];
+    }
+
+    // ============ ATTACK FLOW: PIVOTING ============
+
+    {rank=same;
+        V3 [
+            label=<
+                <b>V3: Info Disclosure</b><br/>
+                <font point-size="10">CVSS: 5.3 (Medium)</font><br/>
+                <font point-size="9" color="#27AE60"><b>★ CHAIN STEP 2</b></font>
+            >
+            fillcolor="#F39C12"
+            color="#D68910"
+            penwidth=3
+        ];
+    }
+
+    // ============ ATTACK FLOW: IMPACT ============
+
+    {rank=same;
+        V5 [
+            label=<
+                <b>V5: CSRF</b><br/>
+                <font point-size="10">CVSS: 6.5 (Medium)</font><br/>
+                <font point-size="9" color="#27AE60"><b>★ CHAIN END</b></font>
+            >
+            fillcolor="#F39C12"
+            color="#D68910"
+            penwidth=3
+        ];
+    }
+
+    // ============ EXAMPLE CHAIN EDGES (HIGHLIGHTED) ============
+
+    V2 -> V3 [
+        label=<<b>p=0.85</b><br/><font point-size="9">XSS steals CSRF token<br/>via injected JavaScript</font>>
+        color="#27AE60"
+        penwidth=5
+        style=bold
+        fontcolor="#27AE60"
+    ];
+
+    V3 -> V5 [
+        label=<<b>p=0.80</b><br/><font point-size="9">Stolen token enables<br/>CSRF attack</font>>
+        color="#27AE60"
+        penwidth=5
+        style=bold
+        fontcolor="#27AE60"
+    ];
+
+    // ============ OTHER EDGES (SECONDARY CHAINS) ============
+
+    V1 -> V3 [
+        label=<<b>p=0.90</b><br/><font point-size="8">SQLi extracts<br/>sensitive data</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V4 -> V2 [
+        label=<<b>p=0.75</b><br/><font point-size="8">Missing X-Frame<br/>enables XSS</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V2 -> V5 [
+        label=<<b>p=0.82</b><br/><font point-size="8">Direct XSS<br/>to CSRF</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V6 -> V1 [
+        label=<<b>p=0.70</b><br/><font point-size="8">Brute force<br/>enables SQLi</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V3 -> V6 [
+        label=<<b>p=0.65</b><br/><font point-size="8">Info leaks<br/>credentials</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    // ============ LEGEND (VERTICAL, BELOW V5) ============
+
+    Legend [
+    shape=plaintext
+    label=<
+    <table border="0" cellspacing="0" cellpadding="4">
+        <!-- Заголовок -->
+        <tr>
+            <td align="left">
+                <font color="black" point-size="18"><b>Legend</b></font>
+            </td>
+        </tr>
+
+        <!-- Основная легенда -->
+        <tr>
+            <td>
+                <table border="2" cellborder="1" cellspacing="0" cellpadding="8"
+                       bgcolor="#ECF0F1" color="#34495E">
+                    <tr><td bgcolor="#C0392B"><font color="white">Critical (CVSS ≥ 9.0)</font></td></tr>
+                    <tr><td bgcolor="#E67E22"><font color="white">High (CVSS 7.0–8.9)</font></td></tr>
+                    <tr><td bgcolor="#F39C12"><font color="white">Medium (CVSS 4.0–6.9)</font></td></tr>
+                    <tr><td bgcolor="#7F8C8D"><font color="white">Low (CVSS &lt; 4.0)</font></td></tr>
+                    <tr>
+                        <td align="center" bgcolor="white">
+                            <table border="0" cellspacing="10">
+                                <tr>
+                                    <td><font color="#27AE60">━━━━━</font></td>
+                                    <td><font point-size="9" color="#27AE60"><b>Critical Path</b></font></td>
+                                </tr>
+                                <tr>
+                                    <td><font color="#95A5A6">╌╌╌╌╌</font></td>
+                                    <td><font point-size="9" color="#95A5A6">Alternative Paths</font></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    >
+];
+
+    
+    // Create invisible spacer node to push Legend down and right
+    Spacer1 [style=invis, width=0, height=0];
+    
+    V5 -> Spacer1 [style=invis];
+    Spacer1 -> Legend [style=invis];
+    
+    {rank=same; Spacer1; Legend;}
+
+    // ============ ANNOTATIONS ============
+
+    // Attack flow labels
+    {
+        node [shape=plaintext, fontsize=12, fontcolor="#2C3E50", style=""];
+
+        Stage1 [label=<<b>Entry Points</b><br/><font point-size="9">(Weak defenses)</font>>];
+        Stage2 [label=<<b>Exploitation</b><br/><font point-size="9">(Active attack)</font>>];
+        Stage3 [label=<<b>Pivoting</b><br/><font point-size="9">(Data extraction)</font>>];
+        Stage4 [label=<<b>Impact</b><br/><font point-size="9">(Privilege abuse)</font>>];
+
+        Stage1 -> Stage2 -> Stage3 -> Stage4 [style=invis];
+
+        {rank=same; Stage1; V4; V6;}
+        {rank=same; Stage2; V2; V1;}
+        {rank=same; Stage3; V3;}
+        {rank=same; Stage4; V5;}
+    }
+}

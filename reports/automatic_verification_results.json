@@ -1,0 +1,24 @@
+{
+  "summary": {
+    "total_chains": 11,
+    "verified_chains": 0,
+    "exploitable_chains": 0,
+    "verification_rate": 0.0,
+    "exploitability_rate": 0.0
+  },
+  "dvwa": {
+    "total": 11,
+    "verified": 0,
+    "exploitable": 0
+  },
+  "juiceshop": {
+    "total": 0,
+    "verified": 0,
+    "exploitable": 0
+  },
+  "webgoat": {
+    "total": 0,
+    "verified": 0,
+    "exploitable": 0
+  }
+}

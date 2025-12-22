@@ -1,0 +1,211 @@
+digraph vulnerability_graph {
+    // Graph settings - LEFT TO RIGHT for attack flow
+    graph [
+        bgcolor="white"
+        rankdir=LR
+        splines=spline
+        nodesep=1.0
+        ranksep=1.5
+        fontname="Arial"
+        fontsize=14
+        dpi=600
+        labelloc=t
+        label=<<b><font point-size="18">Vulnerability Chain Detection: Example Attack Flow</font></b><br/>
+               <font point-size="12">Example Chain: V2 → V3 → V5 (XSS → Info Disclosure → CSRF)</font>>
+    ];
+
+    // Node defaults
+    node [
+        style="filled,rounded"
+        shape=box
+        fontname="Arial"
+        fontsize=11
+        fontcolor=white
+        penwidth=2
+        margin=0.25
+        width=2.2
+        height=1.0
+    ];
+
+    // Edge defaults
+    edge [
+        fontname="Arial"
+        fontsize=11
+        fontcolor="#2C3E50"
+        penwidth=2
+        arrowsize=1.2
+    ];
+
+    // ============ ATTACK FLOW: ENTRY POINTS ============
+
+    {rank=same;
+        V4 [
+            label="V4: Missing Headers\nCVSS: 3.7 (Low)"
+            fillcolor="#7F8C8D"
+            color="#5D6D7E"
+        ];
+
+        V6 [
+            label="V6: Weak Password\nCVSS: 4.0 (Medium)"
+            fillcolor="#F39C12"
+            color="#D68910"
+        ];
+    }
+
+    // ============ ATTACK FLOW: EXPLOITATION ============
+
+    {rank=same;
+        V2 [
+            label=<
+                <b>V2: Reflected XSS</b><br/>
+                <font point-size="10">CVSS: 7.3 (High)</font><br/>
+                <font point-size="9" color="#27AE60"><b>★ CHAIN START</b></font>
+            >
+            fillcolor="#E67E22"
+            color="#CA6F1E"
+            penwidth=3
+        ];
+
+        V1 [
+            label="V1: SQL Injection\nCVSS: 9.8 (Critical)"
+            fillcolor="#C0392B"
+            color="#922B21"
+        ];
+    }
+
+    // ============ ATTACK FLOW: PIVOTING ============
+
+    {rank=same;
+        V3 [
+            label=<
+                <b>V3: Info Disclosure</b><br/>
+                <font point-size="10">CVSS: 5.3 (Medium)</font><br/>
+                <font point-size="9" color="#27AE60"><b>★ CHAIN STEP 2</b></font>
+            >
+            fillcolor="#F39C12"
+            color="#D68910"
+            penwidth=3
+        ];
+    }
+
+    // ============ ATTACK FLOW: IMPACT ============
+
+    {rank=same;
+        V5 [
+            label=<
+                <b>V5: CSRF</b><br/>
+                <font point-size="10">CVSS: 6.5 (Medium)</font><br/>
+                <font point-size="9" color="#27AE60"><b>★ CHAIN END</b></font>
+            >
+            fillcolor="#F39C12"
+            color="#D68910"
+            penwidth=3
+        ];
+    }
+
+    // ============ EXAMPLE CHAIN EDGES (HIGHLIGHTED) ============
+
+    V2 -> V3 [
+        label=<<b>p=0.85</b><br/><font point-size="9">XSS steals CSRF token<br/>via injected JavaScript</font>>
+        color="#27AE60"
+        penwidth=5
+        style=bold
+        fontcolor="#27AE60"
+    ];
+
+    V3 -> V5 [
+        label=<<b>p=0.80</b><br/><font point-size="9">Stolen token enables<br/>CSRF attack</font>>
+        color="#27AE60"
+        penwidth=5
+        style=bold
+        fontcolor="#27AE60"
+    ];
+
+    // ============ OTHER EDGES (SECONDARY CHAINS) ============
+
+    V1 -> V3 [
+        label=<<b>p=0.90</b><br/><font point-size="8">SQLi extracts<br/>sensitive data</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V4 -> V2 [
+        label=<<b>p=0.75</b><br/><font point-size="8">Missing X-Frame<br/>enables XSS</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V2 -> V5 [
+        label=<<b>p=0.82</b><br/><font point-size="8">Direct XSS<br/>to CSRF</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V6 -> V1 [
+        label=<<b>p=0.70</b><br/><font point-size="8">Brute force<br/>enables SQLi</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    V3 -> V6 [
+        label=<<b>p=0.65</b><br/><font point-size="8">Info leaks<br/>credentials</font>>
+        color="#95A5A6"
+        penwidth=2
+        style=dashed
+    ];
+
+    // ============ LEGEND ============
+
+    subgraph cluster_legend {
+        label=<<b>Legend</b>>;
+        style=filled;
+        color="#34495E";
+        fillcolor="#ECF0F1";
+        fontname="Arial";
+        fontsize=12;
+        penwidth=2;
+
+        node [shape=box, style="filled,rounded", fontsize=10, margin=0.2, width=2.0, height=0.5];
+
+        L1 [label="Critical (CVSS ≥ 9.0)", fillcolor="#C0392B", fontcolor=white];
+        L2 [label="High (CVSS 7.0-8.9)", fillcolor="#E67E22", fontcolor=white];
+        L3 [label="Medium (CVSS 4.0-6.9)", fillcolor="#F39C12", fontcolor=white];
+        L4 [label="Low (CVSS < 4.0)", fillcolor="#7F8C8D", fontcolor=white];
+
+        // Edge examples
+        node [shape=plaintext, style="", fillcolor="transparent", fontsize=10];
+        edge [fontsize=9];
+
+        LE1 [label=""];
+        LE2 [label=""];
+        LE3 [label=""];
+        LE4 [label=""];
+
+        LE1 -> LE2 [label="Critical Path", color="#27AE60", penwidth=5, style=bold];
+        LE3 -> LE4 [label="Alternative Paths", color="#95A5A6", penwidth=2, style=dashed];
+
+        // Force vertical layout
+        L1 -> L2 -> L3 -> L4 -> LE1 -> LE3 [style=invis];
+    }
+
+    // ============ ANNOTATIONS ============
+
+    // Attack flow labels
+    {
+        node [shape=plaintext, fontsize=12, fontcolor="#2C3E50", style=""];
+
+        Stage1 [label=<<b>Entry Points</b><br/><font point-size="9">(Weak defenses)</font>>];
+        Stage2 [label=<<b>Exploitation</b><br/><font point-size="9">(Active attack)</font>>];
+        Stage3 [label=<<b>Pivoting</b><br/><font point-size="9">(Data extraction)</font>>];
+        Stage4 [label=<<b>Impact</b><br/><font point-size="9">(Privilege abuse)</font>>];
+
+        {rank=same; Stage1; V4; V6;}
+        {rank=same; Stage2; V2; V1;}
+        {rank=same; Stage3; V3;}
+        {rank=same; Stage4; V5;}
+    }
+}

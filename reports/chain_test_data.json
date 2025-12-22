@@ -1,0 +1,269 @@
+{
+  "metadata": {
+    "generated": "2025-12-10 08:28:43",
+    "purpose": "Exact vulnerability details for validation testing",
+    "source": "ZAP scan results"
+  },
+  "DVWA": {
+    "chain_1": {
+      "chain_number": 1,
+      "chain_type": "compound_exploit",
+      "risk_score": 39.33050000000001,
+      "confidence": 0.6,
+      "vulnerabilities": [
+        {
+          "name": "Missing Security Headers",
+          "url": "http://dvwa/vulnerabilities/xss_r/",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 2,
+          "description": "Exact details not found in scan"
+        },
+        {
+          "name": "Cross Site Scripting",
+          "url": "http://dvwa/vulnerabilities/xss_r/?name=%3C%2Fpre%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cpre%3E",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 3,
+          "description": "Exact details not found in scan"
+        }
+      ]
+    },
+    "chain_2": {
+      "chain_number": 2,
+      "chain_type": "information_gathering",
+      "risk_score": 30.352500000000003,
+      "confidence": 0.75,
+      "vulnerabilities": [
+        {
+          "name": "SQL Injection",
+          "url": "http://dvwa/vulnerabilities/sqli/?id=%27&Submit=Submit",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 3,
+          "description": "Exact details not found in scan"
+        },
+        {
+          "name": "Missing Security Headers",
+          "url": "http://dvwa/sitemap.xml",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 2,
+          "description": "Exact details not found in scan"
+        }
+      ]
+    },
+    "chain_3": {
+      "chain_number": 3,
+      "chain_type": "information_gathering",
+      "risk_score": 30.015,
+      "confidence": 0.75,
+      "vulnerabilities": [
+        {
+          "name": "SQL Injection",
+          "url": "http://dvwa/vulnerabilities/sqli/?id=%27&Submit=Submit",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 3,
+          "description": "Exact details not found in scan"
+        },
+        {
+          "name": "Information Disclosure",
+          "url": "http://dvwa/vulnerabilities/brute",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 1,
+          "description": "Exact details not found in scan"
+        }
+      ]
+    }
+  },
+  "Juice Shop": {
+    "chain_1": {
+      "chain_number": 1,
+      "chain_type": "session_hijacking",
+      "risk_score": 41.592000000000006,
+      "confidence": 0.7000000000000001,
+      "vulnerabilities": [
+        {
+          "name": "Cross-Domain Misconfiguration",
+          "url": "http://juiceshop:3000/assets/public/favicon_js.ico",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "Access-Control-Allow-Origin: *",
+          "risk": "Medium",
+          "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server...."
+        },
+        {
+          "name": "Session ID in URL Rewrite",
+          "url": "http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nF83&sid=5XdRaunQ4qFGFs6jAAAN",
+          "method": "GET",
+          "param": "sid",
+          "attack": "",
+          "evidence": "5XdRaunQ4qFGFs6jAAAN",
+          "risk": "Medium",
+          "description": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs...."
+        },
+        {
+          "name": "Missing Security Headers",
+          "url": "http://juiceshop:3000",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 2,
+          "description": "Exact details not found in scan"
+        },
+        {
+          "name": "Session ID in URL Rewrite",
+          "url": "http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=V-uaT5B4NlERHXaPAABE",
+          "method": "GET",
+          "param": "sid",
+          "attack": "",
+          "evidence": "V-uaT5B4NlERHXaPAABE",
+          "risk": "Medium",
+          "description": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs...."
+        }
+      ]
+    },
+    "chain_2": {
+      "chain_number": 2,
+      "chain_type": "session_hijacking",
+      "risk_score": 41.592000000000006,
+      "confidence": 0.7000000000000001,
+      "vulnerabilities": [
+        {
+          "name": "Cross-Domain Misconfiguration",
+          "url": "http://juiceshop:3000/assets/public/favicon_js.ico",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "Access-Control-Allow-Origin: *",
+          "risk": "Medium",
+          "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server...."
+        },
+        {
+          "name": "Session ID in URL Rewrite",
+          "url": "http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nF83&sid=5XdRaunQ4qFGFs6jAAAN",
+          "method": "GET",
+          "param": "sid",
+          "attack": "",
+          "evidence": "5XdRaunQ4qFGFs6jAAAN",
+          "risk": "Medium",
+          "description": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs...."
+        },
+        {
+          "name": "Cross-Domain Misconfiguration",
+          "url": "http://juiceshop:3000/main.js",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "Access-Control-Allow-Origin: *",
+          "risk": "Medium",
+          "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server...."
+        },
+        {
+          "name": "Session ID in URL Rewrite",
+          "url": "http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=V-uaT5B4NlERHXaPAABE",
+          "method": "GET",
+          "param": "sid",
+          "attack": "",
+          "evidence": "V-uaT5B4NlERHXaPAABE",
+          "risk": "Medium",
+          "description": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs...."
+        }
+      ]
+    },
+    "chain_3": {
+      "chain_number": 3,
+      "chain_type": "session_hijacking",
+      "risk_score": 41.592000000000006,
+      "confidence": 0.7000000000000001,
+      "vulnerabilities": [
+        {
+          "name": "Missing Security Headers",
+          "url": "http://juiceshop:3000/ftp/eastere.gg",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 2,
+          "description": "Exact details not found in scan"
+        },
+        {
+          "name": "Session ID in URL Rewrite",
+          "url": "http://juiceshop:3000/socket.io/?EIO=4&transport=polling&t=Pi2nF83&sid=5XdRaunQ4qFGFs6jAAAN",
+          "method": "GET",
+          "param": "sid",
+          "attack": "",
+          "evidence": "5XdRaunQ4qFGFs6jAAAN",
+          "risk": "Medium",
+          "description": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs...."
+        },
+        {
+          "name": "Missing Security Headers",
+          "url": "http://juiceshop:3000",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "",
+          "risk": 2,
+          "description": "Exact details not found in scan"
+        },
+        {
+          "name": "Session ID in URL Rewrite",
+          "url": "http://juiceshop:3000/socket.io/?EIO=4&transport=websocket&sid=V-uaT5B4NlERHXaPAABE",
+          "method": "GET",
+          "param": "sid",
+          "attack": "",
+          "evidence": "V-uaT5B4NlERHXaPAABE",
+          "risk": "Medium",
+          "description": "URL rewrite is used to track user session ID. The session ID may be disclosed via cross-site referer header. In addition, the session ID might be stored in browser history or server logs...."
+        }
+      ]
+    }
+  },
+  "WebGoat": {
+    "chain_1": {
+      "chain_number": 1,
+      "chain_type": "information_gathering",
+      "risk_score": 30.2445,
+      "confidence": 0.6,
+      "vulnerabilities": [
+        {
+          "name": "SQL Injection",
+          "url": "http://webgoat:8080/WebGoat/register.mvc",
+          "method": "POST",
+          "param": "username",
+          "attack": "ZAP%",
+          "evidence": "",
+          "risk": "High",
+          "description": "SQL injection may be possible...."
+        },
+        {
+          "name": "Spring Actuator Information Leak",
+          "url": "http://webgoat:8080/WebGoat/actuator/health",
+          "method": "GET",
+          "param": "",
+          "attack": "",
+          "evidence": "{\"status\":\"UP\",\"components\":{\"db\":{\"status\":\"UP\",\"components\":{\"dataSource\":{\"status\":\"UP\",\"details\"",
+          "risk": "Medium",
+          "description": "Spring Actuator for Health is enabled and may reveal sensitive information about this application. Spring Actuators can be used for real monitoring purposes, but should be used with caution as to not ..."
+        }
+      ]
+    }
+  }
+}

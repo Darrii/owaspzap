@@ -1,0 +1,6 @@
+Found Java version 17.0.14
+Available memory: 8192 MB
+Using JVM args: -Xmx2048m
+Доступ к URL 
+Не удалось атаковать URL: Connect to https://qoldau.kz:443 [qoldau.kz/5.104.236.137] failed: Connect timed out
+Запись результатов в /Users/Dari/Desktop/OWASPpr/scans/qoldau_scan.json

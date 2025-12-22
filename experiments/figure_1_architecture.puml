@@ -1,0 +1,130 @@
+@startuml figure_1_architecture
+!theme plain
+skinparam backgroundColor transparent
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam rectangleFontSize 11
+skinparam rectangleFontStyle bold
+skinparam ArrowThickness 3
+skinparam ArrowColor #2C3E50
+
+title <size:18><b>System Architecture: Vulnerability Chain Detection Pipeline</b></size>
+
+rectangle "Web Application\nUnder Test" as webapp #ECF0F1 {
+}
+
+note right of webapp
+  <b>Target:</b> Any web application
+  <b>Example:</b> testphp.vulnweb.com
+end note
+
+rectangle "OWASP ZAP Scanner" as zap #34495E {
+  rectangle "Spider\n(Crawl pages)" as spider #5D6D7E
+  rectangle "Active Scan\n(Inject payloads)" as active #5D6D7E
+}
+
+note right of zap
+  <b>Config:</b>
+  - Port: 8090
+  - API Key: changeme
+  - Max Depth: 5
+  - Timeout: 28800s
+end note
+
+rectangle "JSON Parser\n(ZAPAlertParser)" as parser #2C3E50
+
+note right of parser
+  <b>Input:</b> ZAP JSON Report
+  <b>Output:</b> Vulnerability[]
+  <b>Dedup:</b> By alert signature
+end note
+
+rectangle "Graph Builder\n(NetworkX DiGraph)" as graph #2C3E50
+
+note right of graph
+  <b>Structure:</b>
+  - Nodes: Vulnerabilities
+  - Edges: Probabilistic rules
+  - Type: Directed Graph
+end note
+
+rectangle "Rule Engine\n(24 Probabilistic Rules)" as rules #2C3E50
+
+note right of rules
+  <b>Examples:</b>
+  - XSS → CSRF (p=0.85)
+  - SQLi → PrivEsc (p=0.90)
+  - Info → Auth Bypass (p=0.80)
+  - SSRF → Internal (p=0.75)
+  <b>Config:</b>
+  - min_probability: 0.75
+  - cluster_links: False
+end note
+
+rectangle "DFS Chain Detector\nmax_depth=4, min_prob=0.65" as dfs #2C3E50
+
+note right of dfs
+  <b>Parameters:</b>
+  - min_length: 2
+  - max_length: 4
+  - min_chain_prob: 0.65
+  - max_chains_per_node: 500
+  - max_unique_patterns: 100
+end note
+
+rectangle "Smart Filter" as filter #2C3E50 {
+  rectangle "Deduplicator\n(Hash-based)" as dedup #5D6D7E
+  rectangle "Subchain\nRemoval" as subchain #5D6D7E
+}
+
+note right of filter
+  <b>Deduplication:</b>
+  - Signature: tuple(vuln names)
+  - Keep highest risk score
+  <b>Subchain Removal:</b>
+  - If A→B→C exists,
+    remove A→B and B→C
+end note
+
+rectangle "Risk Score\nCalculator" as risk #2C3E50
+
+note right of risk
+  <b>Formula:</b>
+  risk = (length × 15) +
+         (max_cvss × 7) +
+         (confidence × 10)
+  <b>Range:</b> 0-100
+end note
+
+rectangle "Report Generator" as report #27AE60 {
+  rectangle "HTML\nDashboard" as html #229954
+  rectangle "JSON\nExport" as json #229954
+}
+
+note right of report
+  <b>Outputs:</b>
+  - HTML: Interactive graph
+  - JSON: Raw chain data
+  <b>Final Result:</b> 44 chains
+end note
+
+' Vertical flow with labels
+webapp -down-> zap : <b>Scan</b>
+zap -down-> parser : <b>JSON Report\n(129 alerts)</b>
+parser -down-> graph : <b>Vulnerabilities\n(classified)</b>
+graph -down-> rules : <b>Graph\n(74 nodes)</b>
+rules -down-> dfs : <b>Edges + P\n(5,325 edges)</b>
+dfs -down-> filter : <b>Raw Chains\n(~37,000)</b>
+filter -down-> risk : <b>Filtered Chains\n(55 unique)</b>
+risk -down-> report : <b>Scored Chains\n(44 final)</b>
+
+legend bottom
+  <b>Performance Metrics:</b>
+  Input: 129 vulnerabilities → Output: 44 chains
+  Graph: 74 nodes, 5,325 edges
+  Reduction: 37,000 raw → 55 unique → 44 final
+  Total time: 0.4 seconds
+endlegend
+
+@enduml
