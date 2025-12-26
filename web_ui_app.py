@@ -596,11 +596,12 @@ async def run_chain_analysis(scan_id: str, config: ChainAnalysisRequest):
         chains = filtered_chains
         session.add_log(f"After removing subchains: {len(chains)} final chains")
 
-        # Categorize chains
-        critical_chains = [c for c in chains if c.risk_score > 80]
-        high_chains = [c for c in chains if 60 < c.risk_score <= 80]
-        medium_chains = [c for c in chains if 40 < c.risk_score <= 60]
-        low_chains = [c for c in chains if c.risk_score <= 40]
+        # Categorize chains using normalized risk score thresholds (0-100)
+        # CRITICAL: 90-100, HIGH: 70-89, MEDIUM: 40-69, LOW: 0-39
+        critical_chains = [c for c in chains if c.risk_score >= 90]
+        high_chains = [c for c in chains if 70 <= c.risk_score < 90]
+        medium_chains = [c for c in chains if 40 <= c.risk_score < 70]
+        low_chains = [c for c in chains if c.risk_score < 40]
 
         # Sort chains by risk score (highest first) and limit to top 1000 for UI performance
         chains_sorted = sorted(chains, key=lambda c: c.risk_score, reverse=True)

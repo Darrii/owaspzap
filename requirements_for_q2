@@ -1,0 +1,184 @@
+
+## **ПРАВИЛЬНЫЙ ПОРЯДОК:**
+
+### **ФАЗа 1: МЕТОДОЛОГИЯ** ← БЕЗ ТЕСТОВ!
+- Диаграммы (Figure 1, 2, 3)
+- Описание архитектуры
+- Pseudocode алгоритмов
+- **ЦЕЛЬ:** Объяснить ЧТО и КАК мы сделали
+
+### **ФАЗА 2: ТЕСТЫ** ← РЕАЛЬНЫЕ ЭКСПЕРИМЕНТЫ!
+- Запустить baseline ZAP
+- Запустить enhanced detection
+- Собрать raw data (JSON)
+- **ЦЕЛЬ:** Получить реальные данные
+
+### **ФАЗА 3: РЕЗУЛЬТАТЫ** ← ПОСЛЕ ТЕСТОВ!
+- Рассчитать метрики (Precision, Recall, F1)
+- Создать таблицы (Excel + LaTeX)
+- Создать графики (PNG + PDF)
+- **ЦЕЛЬ:** Визуализировать результаты
+
+---
+
+```markdown
+## ПОРЯДОК РАБОТЫ (СТРОГАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ!)
+
+### ФАЗА 1: МЕТОДОЛОГИЯ (БЕЗ ТЕСТОВ!)
+
+**Что делать:**
+1. Создать Figure 1: System Architecture
+   - Показать компоненты системы
+   - ZAP → Parser → Graph → Rules → DFS → Filter → Report
+   
+2. Создать Figure 2: Vulnerability Graph Example
+   - Пример графа с 5 узлами
+   - Рёбра с вероятностями
+   - Пример chain: V2→V3→V5
+   
+3. Создать Figure 3: Chain Detection Workflow
+   - Flowchart процесса detection
+   - От input до output
+
+4. Написать Methodology section в article.tex
+   - Detailed architecture description
+   - Algorithm explanation
+   - Pseudocode (если нужно)
+
+**Что НЕ делать:**
+- ❌ НЕ запускать тесты
+- ❌ НЕ создавать таблицы
+- ❌ НЕ генерировать результаты
+
+**Deliverables:**
+```
+experiments/diagrams/
+├── figure_1_architecture.png
+├── figure_1_architecture.pdf
+├── figure_2_graph.png
+├── figure_2_graph.pdf
+├── figure_3_workflow.png
+└── figure_3_workflow.pdf
+
+article.tex (+ Methodology section)
+```
+
+---
+
+### ФАЗА 2: ЗАПУСК ТЕСТОВ (РЕАЛЬНЫЕ ЭКСПЕРИМЕНТЫ!)
+
+**Что делать:**
+1. Установить/запустить 4 test applications
+   - DVWA (port 8080)
+   - WebGoat (port 8081)
+   - Juice Shop (port 8082)
+   - Benchmark (port 8443)
+
+2. Запустить baseline ZAP scans
+   - Для каждого из 4 приложений
+   - Сохранить results в JSON
+
+3. Запустить enhanced chain detection
+   - Для каждого из 4 приложений
+   - Сохранить chains в JSON
+
+4. Создать ground truth file
+   - Known chains для каждого приложения
+
+**Что НЕ делать:**
+- ❌ НЕ выдумывать результаты
+- ❌ НЕ использовать синтетические данные
+- ❌ НЕ создавать таблицы/графики (ещё рано!)
+
+**Deliverables:**
+```
+experiments/results/raw_data/
+├── dvwa/
+│   ├── baseline_zap.json
+│   └── enhanced_system.json
+├── webgoat/
+│   ├── baseline_zap.json
+│   └── enhanced_system.json
+├── juiceshop/
+│   ├── baseline_zap.json
+│   └── enhanced_system.json
+└── benchmark/
+    ├── baseline_zap.json
+    └── enhanced_system.json
+
+experiments/ground_truth/
+└── known_chains.json
+```
+
+---
+
+### ФАЗА 3: ОБРАБОТКА РЕЗУЛЬТАТОВ (ПОСЛЕ ТЕСТОВ!)
+
+**Что делать:**
+1. Рассчитать метрики
+   - Precision, Recall, F1-Score
+   - Based on ground truth
+   - Для каждого приложения + average
+
+2. Создать 4 таблицы
+   - Table IV: Applications (Excel + CSV + LaTeX)
+   - Table V: Comparison (Excel + CSV + LaTeX)
+   - Table VI: Performance (Excel + CSV + LaTeX)
+   - Table VII: Metrics (Excel + CSV + LaTeX)
+
+3. Создать 4 графика
+   - Figure 4: Chain Detection Performance
+   - Figure 5: Deduplication Effectiveness
+   - Figure 6: Precision/Recall Comparison
+   - Figure 8: Chain Length Distribution
+
+4. Написать Results section в article.tex
+   - Experimental Setup
+   - Results and Discussion
+   - Insert tables
+   - Reference figures
+
+**Что НЕ делать:**
+- ❌ НЕ подделывать метрики
+- ❌ НЕ округлять для "красоты"
+
+**Deliverables:**
+```
+experiments/results/tables/
+├── table_iv.xlsx + .csv + .tex
+├── table_v.xlsx + .csv + .tex
+├── table_vi.xlsx + .csv + .tex
+└── table_vii.xlsx + .csv + .tex
+
+experiments/results/graphs/
+├── figure_4.png + .pdf
+├── figure_5.png + .pdf
+├── figure_6.png + .pdf
+└── figure_8.png + .pdf
+
+article.tex (+ Results section)
+```
+
+---
+
+### ФАЗА 4: ФИНАЛИЗАЦИЯ
+
+**Что делать:**
+1. Написать Conclusion section
+2. Проверить что article.tex компилируется
+3. Проверить все ссылки на tables/figures
+4. Финальная вычитка
+
+**Deliverables:**
+```
+article.pdf (готовая статья)
+```
+```
+
+---
+
+
+1. Сначала методология (диаграммы, описание)
+2. Потом тесты (реальные эксперименты)
+3. Потом результаты (таблицы, графики, метрики)
+

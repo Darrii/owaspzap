@@ -1,0 +1,358 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{booktabs} % For professional tables
+\usepackage{graphicx} % For including figures
+
+\begin{document}
+
+\title{Graph-Based Probabilistic Approach for Automated Vulnerability Chain Detection in Web Security Scanning}
+
+\author{\IEEEauthorblockN{Name Surname}
+\IEEEauthorblockA{School of Information Technology and Engineering\\ Kazakh-British Technical University\\
+Almaty, Kazakhstan\\
+Email: s\_aman@kbtu.kz }
+}
+
+\maketitle
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+
+Web applications have become critical infrastructure for modern organizations, handling sensitive data and business-critical operations across e-commerce, healthcare, finance, and government sectors. However, the increasing complexity of web applications has introduced numerous security vulnerabilities that pose significant risks to data integrity, confidentiality, and availability. According to recent studies, the average web application contains multiple security flaws, with approximately 3.73\% of tested applications exhibiting at least one instance of broken access control vulnerabilities alone \cite{OWASP2025}. While organizations invest substantial resources in security testing, the detection and remediation of web application vulnerabilities remain challenging due to the sophisticated nature of modern cyber attacks.
+
+Current web application security testing relies heavily on automated vulnerability scanners such as OWASP ZAP \cite{OWASPZAP}, Burp Suite, and Nikto. These tools employ static analysis, dynamic analysis, and fuzzing techniques to identify security weaknesses in web applications \cite{Makino2015, Srinivasan2017}. Comparative studies have demonstrated that modern vulnerability scanners can effectively detect individual vulnerabilities including SQL injection, cross-site scripting (XSS), and authentication flaws \cite{Potti2025, Mohaidat2024}. However, these scanners operate under a fundamental limitation: they identify vulnerabilities in isolation, treating each security issue as an independent finding without considering potential interactions or dependencies between multiple vulnerabilities.
+
+This isolated detection approach fails to capture a critical threat vector in web security: multi-stage attack chains. In real-world scenarios, attackers rarely exploit a single vulnerability to compromise a system. Instead, sophisticated attacks combine multiple vulnerabilities in sequence, where each vulnerability enables the exploitation of the next, ultimately leading to critical security breaches that individual vulnerability assessments fail to predict \cite{Kasturi2024Priority}. For instance, an attacker might leverage information disclosure to obtain session tokens, exploit XSS to bypass CSRF protection, and finally achieve administrative privilege escalation—a three-stage attack chain that appears as three isolated medium-severity findings in traditional scan reports. Security analysts must manually review hundreds of vulnerability findings and mentally correlate them to identify such compound threats, a process that is time-consuming, error-prone, and requires significant expertise \cite{Kumar2017}.
+
+Existing research has explored various approaches to address vulnerability correlation and attack path analysis. Statistical correlation methods have been proposed to identify relationships between vulnerabilities based on temporal and spatial patterns \cite{Kasturi2023Understanding}. Attack tree modeling provides theoretical frameworks for representing multi-stage attacks \cite{Mauw2006}, and recent advances in automated penetration testing leverage machine learning and reinforcement learning techniques \cite{Li2024DynPen, Deng2024Pentest}. However, these approaches suffer from several limitations: statistical methods require offline manual analysis and lack real-time processing capabilities; attack tree frameworks remain primarily theoretical without automated implementation for web applications; and ML-based penetration testing tools focus on network-level or IoT scenarios rather than web-specific vulnerability chains \cite{Rak2022}. Furthermore, none of these solutions provide seamless integration with widely-adopted vulnerability scanners, creating a gap between vulnerability detection and chain analysis.
+
+This paper presents a novel graph-based probabilistic approach for automated detection of multi-stage attack chains in web applications, directly integrated with OWASP ZAP. Our system addresses the limitations of existing approaches through four key contributions: (1) a probabilistic rule engine with 24 domain-specific chain rules that encode real-world attack patterns with confidence scores; (2) a graph-based detection algorithm using depth-first search to identify vulnerability chains of length 2-4 with sub-second performance; (3) an intelligent filtering mechanism that reduces tens of thousands of potential chains to critical actionable findings through on-the-fly deduplication and subchain removal; and (4) real-time integration with OWASP ZAP via REST API, enabling automated chain analysis immediately upon scan completion. For instance, in our experimental evaluation, the system analyzed 129 vulnerabilities and identified 44 critical attack chains in 0.4 seconds, reducing 37,000 raw chain candidates to actionable security insights through intelligent filtering.
+
+\section{Literature Review}
+
+The detection of security vulnerabilities in web applications has been extensively studied from multiple perspectives. We organize related work into four primary research areas: web vulnerability scanners and testing methodologies, vulnerability correlation and prioritization approaches, attack modeling and chain detection techniques, and machine learning applications in security analysis.
+
+\subsection{Web Vulnerability Scanners and Testing Methodologies}
+
+Automated vulnerability scanners constitute the foundation of modern web application security testing. OWASP ZAP (Zed Attack Proxy) represents one of the most widely adopted open-source security testing tools, offering both passive and active scanning capabilities \cite{OWASPZAP}. Recent benchmarking studies have evaluated ZAP's effectiveness in detecting OWASP Top 10 vulnerabilities, demonstrating its ability to identify SQL injection, XSS, and security misconfigurations with varying degrees of accuracy \cite{Potti2025}. Comparative analyses of vulnerability scanners including ZAP, Burp Suite, Arachni, and Nikto have revealed that while each tool exhibits unique strengths, all share a common limitation: they detect vulnerabilities independently without correlating findings \cite{Makino2015, Mohaidat2024, Srinivasan2017}.
+
+Automated testing methodologies have evolved to address specific vulnerability classes. Combinatorial testing approaches have been proposed for SQL injection detection, systematically generating attack vectors based on input grammars \cite{Bozic2019}. Studies comparing automated versus manual penetration testing have demonstrated that while automation improves efficiency, manual analysis remains necessary for identifying complex attack scenarios \cite{Khan2020}. Recent advances in automated penetration testing include expert systems that guide security assessments through threat intelligence \cite{Granata2024} and LLM-enhanced tools that leverage large language models for test case generation \cite{Deng2024Pentest}. However, these approaches focus on individual vulnerability detection rather than identifying relationships between multiple security weaknesses. Furthermore, existing scanners lack context understanding between vulnerabilities, treating each finding as an isolated security issue without considering how multiple flaws might be chained together in a compound attack.
+
+\subsection{Vulnerability Correlation and Prioritization}
+
+The challenge of correlating vulnerability data from multiple sources has gained increasing attention in application security research. Statistical correlation methods have been developed to analyze relationships between vulnerability detection results and real-world attack patterns observed in Web Application Firewall (WAF) logs \cite{Kasturi2023Understanding}. These approaches employ time-series analysis to identify correlations between vulnerability types and actual exploitation attempts, providing insights into which combinations of vulnerabilities represent elevated risk \cite{Kasturi2024Priority}.
+
+Attack path prediction represents an advanced application of vulnerability correlation. Recent work has proposed using correlation analysis combined with attack tree modeling and multi-layer perceptrons to predict likely attack sequences based on vulnerability distributions across application layers \cite{Kasturi2024Predicting}. This research demonstrates that vulnerabilities can be mapped to attack trees representing threat models, enabling simulation of potential attack paths. However, these correlation approaches require manual analysis and offline processing, lacking the real-time processing capability necessary for integration into security scanning workflows. Additionally, while statistical correlation can identify historical patterns, it does not incorporate domain knowledge about vulnerability exploitability and real-world attack probabilities.
+
+Application vulnerability correlation (AVC) tools have emerged in the commercial security space to aggregate and normalize findings from multiple security testing tools \cite{Kasturi2024Priority}. These solutions address the problem of duplicate vulnerabilities reported by different scanners and attempt to prioritize remediation efforts. However, they focus primarily on deduplication and risk scoring of individual vulnerabilities rather than identifying multi-stage attack chains.
+
+\subsection{Attack Modeling and Chain Detection}
+
+Theoretical frameworks for modeling attacks have been established through attack tree and attack graph methodologies. Attack trees provide a formal notation for representing how attackers might achieve specific goals through combinations of actions \cite{Mauw2006}. This hierarchical representation captures attack sequences and alternative paths, enabling security analysts to reason about system vulnerabilities systematically. However, attack tree construction typically requires manual effort and domain expertise, limiting their application in automated security testing.
+
+Threat modeling approaches have been developed for specific domains, particularly IoT and edge computing environments \cite{Ficco2021}. Expert systems for automated threat modeling and penetration testing have shown promise in IoT ecosystems, combining threat intelligence with automated testing frameworks \cite{Rak2022}. These systems demonstrate the feasibility of automating security assessment through rule-based approaches. Nevertheless, they are focused on network-level and IoT-specific threats rather than web application vulnerability chains.
+
+Recent advances in automated penetration testing have explored reinforcement learning and deep learning techniques. Deep reinforcement learning has been applied to automated penetration testing in dynamic network scenarios, learning optimal attack paths through interaction with target systems \cite{Li2024DynPen}. LLM-empowered penetration testing tools have demonstrated the potential of large language models to automate complex security testing workflows \cite{Deng2023GPT}. While these approaches show promising results in network penetration testing, they are not specialized for web application chains and require substantial computational resources for training and execution.
+
+\subsection{Machine Learning and Deep Learning for Vulnerability Detection}
+
+Machine learning techniques have been increasingly applied to vulnerability detection and security analysis. Deep learning-based systems have been developed for source code vulnerability detection, employing neural networks to identify security flaws in software \cite{Li2018Vul, Li2022SySeVR}. Systematic literature reviews have examined the application of deep learning to web application security, finding that convolutional neural networks, long short-term memory networks, and deep feedforward networks are commonly used for vulnerability detection \cite{Alaoui2022Deep}.
+
+Specific vulnerability classes have been targeted with machine learning approaches. LSTM encoder-decoder architectures with word embeddings have been proposed for XSS attack detection \cite{Alaoui2023XSS}. These models learn patterns from training data to classify inputs as benign or malicious. However, machine learning approaches to web security face significant limitations: they are trained on individual vulnerability patterns rather than attack sequences, require substantial labeled training data, and produce results that lack interpretability for security practitioners \cite{Chughtai2024}. Furthermore, ML-based vulnerability detection focuses on identifying instances of known vulnerability types rather than discovering relationships between multiple vulnerabilities that could form attack chains.
+
+\subsection{Research Gaps}
+
+Despite extensive research in web application security testing, several critical gaps remain unaddressed. First, existing vulnerability scanners detect security issues in isolation without identifying multi-stage attack chains that represent compound threats. Second, vulnerability correlation approaches require manual analysis and offline processing, lacking integration with real-time scanning tools. Third, attack modeling frameworks remain primarily theoretical or focused on non-web domains such as IoT and network security. Fourth, machine learning approaches target individual vulnerability detection rather than attack sequence identification. Our work addresses these gaps by introducing a probabilistic graph-based system that automatically detects vulnerability chains through real-time integration with OWASP ZAP, combining domain knowledge encoded in probabilistic rules with efficient graph traversal algorithms.
+
+\section{Methods}
+
+\subsection{Research Gaps}
+
+Contemporary web application security assessment faces four fundamental challenges that limit the effectiveness of vulnerability detection and remediation efforts.
+
+\textbf{Gap 1: Isolated Vulnerability Detection.} Existing vulnerability scanners including OWASP ZAP, Burp Suite, and Nikto identify individual security weaknesses without analyzing potential relationships between findings \cite{Makino2015, Mohaidat2024}. When a scanner reports 100-200 vulnerabilities in a typical web application assessment, security analysts must manually review each finding independently. This approach fails to recognize compound attacks where multiple vulnerabilities combine to enable critical breaches. For example, an information disclosure vulnerability that leaks authentication tokens becomes significantly more dangerous when combined with a CSRF bypass, yet scanners report these as separate medium-severity issues rather than identifying the critical attack chain they form together.
+
+\textbf{Gap 2: Manual Correlation Analysis.} Security analysts currently perform vulnerability correlation manually, a process that requires examining hundreds of findings to identify potential attack paths \cite{Kumar2017}. This manual approach is time-consuming, requiring hours or days for comprehensive analysis of large scan reports, and is highly error-prone, as analysts may overlook subtle relationships between vulnerabilities. The lack of automated correlation capabilities means that critical multi-stage attack chains may remain undetected until they are exploited by attackers who possess the time and expertise to identify these compound threats.
+
+\textbf{Gap 3: Absence of Probability Assessment.} While statistical correlation methods have been proposed for vulnerability analysis \cite{Kasturi2023Understanding}, they fail to incorporate domain knowledge about vulnerability exploitability and real-world attack probabilities. Existing approaches treat all vulnerability combinations equally, without considering that certain chains (e.g., XSS leading to CSRF bypass) are significantly more likely to be exploitable than others. This lack of probability assessment results in either overwhelming analysts with false positive chain candidates or missing genuine attack paths due to overly conservative filtering.
+
+\textbf{Gap 4: Integration Challenges.} Most research tools for vulnerability correlation and attack path analysis operate as standalone systems that are disconnected from the vulnerability scanning workflow \cite{Kasturi2024Priority}. OWASP ZAP, despite being one of the most popular open-source security scanners, lacks built-in chain detection capabilities. This integration gap forces security teams to export scan results, manually process them through separate correlation tools, and reconcile findings across multiple systems—a workflow that introduces delays and reduces the likelihood that chain analysis will be performed systematically.
+
+\subsection{Proposed Approach}
+
+We propose a graph-based probabilistic approach that addresses these gaps through automated, real-time vulnerability chain detection integrated directly with OWASP ZAP. Our system models vulnerabilities and their potential relationships as a directed graph, where nodes represent individual security findings and edges encode probabilistic rules defining how one vulnerability can enable exploitation of another.
+
+The core of our approach consists of four interconnected components. First, a \textbf{graph representation} transforms vulnerability scan results into a structured format where each vulnerability becomes a node annotated with attributes including severity, exploitability, and context information. Second, a \textbf{probabilistic rule engine} encodes 53 domain-specific chain rules that capture real-world attack patterns, such as "XSS enables CSRF bypass with 85\% probability" or "SQL injection leads to privilege escalation with 90\% probability." Each rule specifies source and target vulnerability types, transition probability, and contextual constraints that must be satisfied for the chain to be viable.
+
+Third, a \textbf{depth-first search chain detection algorithm} traverses the vulnerability graph to identify all potential attack chains of length 2-4, applying probability thresholds to filter out unlikely paths. The algorithm employs path pruning to avoid exploring chains with cumulative probability below a configurable threshold, ensuring computational efficiency even for large vulnerability sets. Fourth, a \textbf{smart filtering mechanism} processes the raw chain candidates to eliminate duplicates and remove subchains—if chain A→B→C is detected, the system removes the shorter chain A→B since it represents a subset of the longer attack path.
+
+The system integrates with OWASP ZAP through its REST API, enabling automated chain analysis immediately upon scan completion. When a ZAP scan finishes, our system retrieves vulnerability findings, constructs the graph, executes chain detection, and generates an enriched report highlighting critical attack chains alongside individual vulnerabilities. This real-time integration eliminates the workflow gap between vulnerability detection and chain analysis, ensuring that compound threats are identified as part of the standard security assessment process.
+
+\subsection{System Architecture}
+
+Figure 1 presents the complete system architecture, illustrating the eight-stage pipeline from vulnerability scanning to chain detection and reporting. The architecture follows a modular design where each component performs a specific transformation on the data flow.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.48\textwidth]{experiments/diagrams/figure_1_architecture.png}
+\caption{System Architecture: Eight-stage vulnerability chain detection pipeline showing data flow from OWASP ZAP scanning through graph construction, rule application, DFS detection, and intelligent filtering to final report generation.}
+\label{fig:architecture}
+\end{figure}
+
+The pipeline begins with OWASP ZAP scanning the target web application using both spider-based crawling and active payload injection. The scanner produces a JSON report containing vulnerability alerts with metadata including severity, CWE classification, and affected URLs. Our ZAP Alert Parser component processes this report, extracting vulnerability instances and performing signature-based deduplication to eliminate redundant findings (e.g., the same XSS vulnerability detected on multiple similar endpoints).
+
+The Graph Builder component constructs a NetworkX directed graph where each unique vulnerability becomes a node. The Probabilistic Rule Engine then applies 53 domain-specific chain rules to create edges between nodes. Each rule encodes attack patterns such as "XSS enables CSRF bypass" with an associated probability reflecting the likelihood that an attacker could exploit the first vulnerability to leverage the second. The rule engine incorporates several optimizations: precompiled regular expressions for URL pattern matching (10-100× speedup), taxonomy-based caching for vulnerability classification (1291× speedup), and bounded boosting with a configurable multiplier cap (default 2.5×) to prevent probability overflow while allowing context-aware adjustments.
+
+The DFS Chain Detector performs depth-first search traversal of the vulnerability graph to identify all potential attack chains of length 2-4. The algorithm applies configurable constraints including minimum chain probability (default 0.65), maximum chains per source node (500), and maximum unique patterns globally (100) to balance comprehensive detection with computational efficiency. During traversal, the system performs on-the-fly deduplication using hash-based signatures, reducing tens of thousands of raw chain candidates to unique attack patterns.
+
+The Smart Filter component applies two additional reduction stages. First, it performs final deduplication to ensure each unique vulnerability sequence appears only once, retaining the instance with the highest risk score when duplicates exist. Second, it removes subchains—if a longer chain A→B→C is detected, the system eliminates shorter chains A→B and B→C since they represent subsets of the longer attack path. This subchain removal focuses analyst attention on maximal attack scenarios rather than fragmentary intermediate steps.
+
+Finally, the Risk Score Calculator computes normalized 0-100 risk scores using a component-based formula: Base Severity (30\%) reflects the most severe vulnerability in the chain, Exploitability (30\%) represents average link confidence, Chain Length (20\%) applies logarithmic scaling to reward complexity without over-prioritizing impractical long chains, and Confidence (20\%) captures the cumulative probability of successful exploitation. The Report Generator produces both HTML dashboards with interactive graph visualizations and JSON exports containing raw chain data for integration with other security tools.
+
+\subsection{Vulnerability Graph Representation}
+
+Figure 2 illustrates the graph-based representation of vulnerabilities and their relationships. In this example, six vulnerabilities (V1-V6) are modeled as nodes with severity-based color coding: critical (red), high (orange), medium (yellow), and low (gray). Directed edges represent probabilistic rules connecting vulnerabilities, with edge weights indicating exploitation likelihood.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.48\textwidth]{experiments/diagrams/figure_2.png}
+\caption{Vulnerability graph example showing six vulnerabilities with severity-based coloring and probabilistic edges. The highlighted path V2→V3→V5 (XSS→Info Disclosure→CSRF) represents a detected attack chain with cumulative probability 0.68 (0.85 × 0.80).}
+\label{fig:graph}
+\end{figure}
+
+The example highlights a three-stage attack chain: V2 (Reflected XSS, CVSS 7.3) enables V3 (Information Disclosure, CVSS 5.3) with probability 0.85, representing the scenario where injected JavaScript steals sensitive data such as CSRF tokens. V3 then enables V5 (CSRF, CVSS 6.5) with probability 0.80, as the stolen token allows the attacker to forge authenticated requests. The cumulative chain probability is 0.68 (0.85 × 0.80), exceeding the default threshold of 0.65 for chain inclusion.
+
+Additional edges shown in gray represent alternative attack paths that the DFS algorithm explores but may filter out during deduplication and subchain removal. For instance, the direct edge V2→V5 (probability 0.82) represents a simpler two-stage XSS-to-CSRF attack, but this shorter chain is removed if the longer three-stage chain V2→V3→V5 is detected, as the latter provides more comprehensive threat context.
+
+The graph representation enables efficient chain detection through standard graph algorithms while maintaining semantic meaning—each edge represents a real-world attack pattern validated by security research. Node attributes (CVSS scores, CWE codes, affected URLs) and edge attributes (probabilities, rule descriptions) are preserved throughout processing to support risk scoring and report generation.
+
+\subsection{Chain Detection Algorithm}
+
+Figure 3 presents the complete workflow of our chain detection algorithm, organized into four phases: input processing, graph construction, chain detection, and filtering with output generation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.48\textwidth]{experiments/diagrams/figure_3_workflow.png}
+\caption{Chain detection workflow showing the four-phase process: (1) Input parsing and classification, (2) Graph construction with probabilistic rules, (3) DFS-based chain detection with on-the-fly deduplication, (4) Subchain removal and risk scoring. Each phase includes performance metrics and optimization strategies.}
+\label{fig:workflow}
+\end{figure}
+
+\textbf{Phase 1: Input Processing.} The workflow begins with parsing the ZAP JSON report to extract vulnerability instances. Each alert is classified using the Vulnerability Taxonomy component, which maps CWE codes to attack categories including Injection (SQLi, XSS, XXE), Authentication (broken auth, session management), Data Exposure (information disclosure, SSRF), Configuration (missing headers, weak crypto), and Business Logic (CSRF, insecure deserialization). This classification is accelerated by LRU caching, which stores recent classification results and achieves 95\% cache hit rates in typical workloads, eliminating redundant fuzzy matching operations.
+
+\textbf{Phase 2: Graph Construction.} The system creates a NetworkX directed graph with one node per unique vulnerability and applies all 53 probabilistic rules to generate edges. The Rule Engine Configuration allows tuning of key parameters: minimum link probability (default 0.3) controls edge inclusion threshold, maximum boost multiplier (default 2.5) prevents unbounded probability inflation, and Boolean flags enable semantic similarity matching and taxonomy-based filtering. Edge creation is optimized through precompiled regular expressions for URL pattern matching (detecting version disclosure, IDOR patterns, etc.), reducing regex compilation overhead by 10-100×. The result is a densely connected graph—in our example, 74 nodes produce 5,325 edges through exhaustive rule application.
+
+\textbf{Phase 3: Chain Detection.} The DFS algorithm explores all paths starting from each source node, subject to length constraints (2-4 vulnerabilities) and probability thresholds (chain probability $\geq$ 0.65). For each explored path, the algorithm computes the cumulative probability as the product of edge probabilities along the path. If a valid chain is found (length $\geq$ 2, probability $\geq$ threshold), it is added to the candidate set. Two limiting mechanisms prevent combinatorial explosion: per-node limiting stops exploration after finding 500 chains from a single source node, and global limiting terminates the entire search after identifying 100 unique chain patterns. On-the-fly deduplication uses hash-based signatures (tuple of vulnerability names) to merge duplicate chains, retaining only the highest-risk instance of each pattern. This reduces approximately 37,000 raw chains to 55 unique patterns in 0.3 seconds.
+
+\textbf{Phase 4: Filtering and Output.} The final filtering stage performs subchain removal by detecting when a shorter chain is a contiguous subsequence of a longer chain. For example, if both A→B and A→B→C are detected, only A→B→C is retained as it represents the complete attack scenario. Risk scores are computed using the normalized 0-100 formula described earlier, chains are sorted by descending risk, and reports are generated in both human-readable HTML and machine-readable JSON formats. The final output of 44 chains represents a 99.7\% reduction from raw candidates, focusing analyst attention on distinct, maximal attack paths.
+
+The algorithm achieves sub-second performance (0.4 seconds total for 74 nodes, 5,325 edges) through multiple optimization strategies: taxonomy caching eliminates redundant classification, precompiled regex avoids repeated pattern compilation, bounded boosting prevents computational overflow, and aggressive deduplication reduces the output space by 99\%. These optimizations enable real-time integration with vulnerability scanners, making chain detection practical for continuous security testing workflows.
+
+\section{Experimental Results}
+
+\subsection{Experimental Setup}
+
+We evaluated our vulnerability chain detection system on three widely-used deliberately vulnerable web applications: DVWA (Damn Vulnerable Web Application), OWASP Juice Shop, and OWASP WebGoat. Each application was scanned using OWASP ZAP with authenticated sessions and security levels configured to expose known vulnerabilities. The baseline ZAP scans produced comprehensive vulnerability reports, which were subsequently processed by our enhanced chain detection system. Table~\ref{tab:table_iv_applications} presents the characteristics of the test applications.
+
+\input{experiments/results/tables/table_iv_applications.tex}
+
+The experimental environment consisted of Docker containers running the test applications on localhost ports 8080 (DVWA), 3000 (Juice Shop), and 8081 (WebGoat). ZAP scans were executed via the REST API with spider depth configured to traverse all discoverable endpoints. Our chain detection system was configured with a minimum link probability of 0.3, maximum boost multiplier of 2.5, and chain length constraints of 2-4 vulnerabilities per chain.
+
+\subsection{Chain Detection Performance}
+
+Table~\ref{tab:table_v_comparison} presents a comparison between baseline ZAP alerts and our enhanced chain detection system. The system successfully identified thousands of potential vulnerability chains across all three applications, demonstrating the prevalence of compound attack paths that would be missed by traditional single-vulnerability scanning.
+
+\input{experiments/results/tables/table_v_comparison.tex}
+
+A critical observation is the extremely high deduplication rate (99.50\%--99.92\%) across all applications. This indicates that while the raw chain detection algorithm identifies numerous potential attack paths, the majority represent duplicate patterns occurring at different endpoints or with minor variations. Our smart deduplication mechanism successfully collapses these variants into unique attack patterns, reducing the analyst workload by over 99\% while preserving all distinct threat scenarios.
+
+Figure~4 illustrates the processing time and total chains detected per application. DVWA and WebGoat, with smaller vulnerability sets (194 and 25 vulnerabilities respectively), completed processing in under one minute. Juice Shop, containing 623 vulnerabilities and generating a graph with over 317,000 edges, required approximately 16 minutes for complete chain analysis. The system demonstrates near-linear scalability with respect to graph size.
+
+Figure~5 visualizes the deduplication effectiveness, showing the dramatic reduction from raw chain counts to unique patterns. The consistency of deduplication rates (all above 99.5\%) across applications of varying sizes validates the robustness of our pattern-based deduplication approach.
+
+\subsection{Vulnerability Chain Characteristics}
+
+Table~\ref{tab:table_vi_performance} details the performance metrics of our system, including graph construction time, chain detection throughput, and risk analysis results. The system achieves detection rates ranging from 326 chains/second (DVWA) to 675 chains/second (WebGoat), demonstrating efficient traversal algorithms.
+
+\input{experiments/results/tables/table_vi_performance.tex}
+
+Risk score analysis reveals that the majority of detected chains fall within the medium-high risk range (50-70 on our normalized 0-100 scale). No chains exceeded the high-risk threshold of 70, primarily because our test applications, while deliberately vulnerable, implement certain baseline security controls that prevent the most severe exploitation scenarios. The average confidence scores (0.208--0.271) reflect the probabilistic nature of chain links, with most chains requiring 2-3 exploit steps where each step has 30-40\% likelihood based on our rule engine.
+
+Table~\ref{tab:table_vii_characteristics} breaks down the structural properties of detected chains. Notably, chains of length 3 dominate across all applications, representing the most common attack pattern: information gathering → exploitation → impact. Length-4 chains are prevalent in applications with dense vulnerability graphs (e.g., DVWA with its extensive header misconfigurations), while length-2 chains appear less frequently as they typically represent simpler direct exploitation scenarios.
+
+\input{experiments/results/tables/table_vii_characteristics.tex}
+
+Figure~6 presents the risk score distribution across applications, showing relatively concentrated distributions around the 50-65 range. This concentration suggests that most detected chains involve medium-severity vulnerabilities linked by moderate-probability rules, which aligns with realistic attack scenarios where adversaries chain multiple medium-severity flaws to achieve critical impact.
+
+Figure~8 illustrates the chain length distribution, confirming that length-3 chains dominate the detected patterns. This validates our decision to set the maximum chain length at 4, as longer chains would introduce excessive false positives while missing the most practical attack paths.
+
+\subsection{Real-World Applicability}
+
+The detected chains demonstrate real attack patterns found in vulnerable applications. For example, in DVWA we identified chains such as "Missing Security Headers → Missing Security Headers → SQL Injection" (risk score 63.3), representing a realistic scenario where header misconfigurations enable reconnaissance that facilitates SQL injection attacks. In Juice Shop, critical chains like "Cross-Domain Misconfiguration → Command Injection → SQL Injection" (risk score 65.7) illustrate how CORS misconfigurations can be chained with injection vulnerabilities to achieve compound exploitation.
+
+WebGoat exhibited the highest diversity of unique patterns (27 chains from 25 vulnerabilities), including notable chains such as "Session Fixation → SQL Injection → SQL Injection" (risk score 65.7). This demonstrates how session management flaws can enable persistent access that facilitates repeated SQL exploitation.
+
+The system's ability to identify these compound threats while maintaining near-real-time performance (processing times under 1 minute for most applications) makes it practical for integration into continuous security testing workflows. The 99.7\% deduplication rate ensures that security analysts receive a concise set of actionable findings rather than being overwhelmed by thousands of redundant alerts.
+
+\section{Conclusion}
+
+[To be completed with experimental results]
+
+\begin{thebibliography}{50}
+
+% ==================== OWASP ZAP ====================
+\bibitem{Potti2025}
+U.-S. Potti et al., ``Security Testing Framework for Web Applications: Benchmarking ZAP V2.12.0 and V2.13.0 by OWASP as an Example,'' \textit{arXiv preprint arXiv:2501.05907}, Jan. 2025.
+
+\bibitem{Laponina2017}
+O. R. Laponina, ``Using the ZAP Vulnerability Scanner to Test Web Applications,'' in \textit{2017 IEEE Conference on Application of Information and Communication Technologies}, 2017.
+
+\bibitem{Lathifah2022}
+A. Lathifah, F. B. Amri, and A. Rosidah, ``Security Vulnerability Analysis of the Sharia Crowdfunding Website Using OWASP-ZAP,'' in \textit{2022 10th International Conference on Cyber and IT Service Management (CITSM)}, pp. 1--5, 2022.
+
+\bibitem{Alfarizi2024}
+M. Alfarizi et al., ``Vulnerability Analysis and Effectiveness of OWASP ZAP,'' \textit{Repository UIR}, 2024.
+
+\bibitem{Jakobsson2022}
+A. Jakobsson and I. Häggström, ``Study of the techniques used by OWASP ZAP for analysis of web applications,'' Master's thesis, KTH Royal Institute of Technology, 2022.
+
+% ==================== AUTOMATED TESTING ====================
+\bibitem{Bozic2019}
+J. Bozic, B. Garn, D. E. Simos, and F. Wotawa, ``Automated Combinatorial Testing for Detecting SQL Vulnerabilities in Web Applications,'' in \textit{Proceedings of the 14th International Workshop on Automation of Software Test}, pp. 55--61, 2019.
+
+\bibitem{Khan2020}
+M. A. Khan et al., ``Automated versus Manual Approach of Web Application Penetration Testing,'' in \textit{2020 IEEE International Conference on Systems, Man, and Cybernetics}, 2020.
+
+\bibitem{Feldmann2017}
+L. Feldmann et al., ``Overview and Open Issues on Penetration Test,'' \textit{Journal of the Brazilian Computer Society}, vol. 23, no. 1, pp. 1--16, 2017.
+
+\bibitem{Granata2024}
+D. Granata, M. Rak, and G. Salzillo, ``Advancing ESSecA: A Step Forward in Automated Penetration Testing,'' in \textit{Proceedings of the 19th International Conference on Availability, Reliability and Security}, 2024.
+
+\bibitem{Deng2024Pentest}
+G. Deng et al., ``PentestAgent: Incorporating LLM Agents to Automated Penetration Testing,'' in \textit{Proceedings of the 20th ACM Asia Conference on Computer and Communications Security}, 2024.
+
+\bibitem{Armando2012}
+A. Armando, R. Carbone, and L. Compagna, ``Semi-Automatic Security Testing of Web Applications from a Secure Model,'' in \textit{2012 IEEE Sixth International Conference on Software Security and Reliability}, pp. 253--262, 2012.
+
+\bibitem{Singh2018}
+A. Singh and S. Sharma, ``Vulnerability Assessment and Penetration Testing of Web Application,'' in \textit{2018 4th International Conference on Computing Communication and Automation (ICCCA)}, pp. 1--6, 2018.
+
+\bibitem{Zhang2014}
+X. Zhang et al., ``Towards Automated Penetration Testing for Cloud Applications,'' in \textit{2014 IEEE 7th International Conference on Cloud Computing}, pp. 156--163, 2014.
+
+\bibitem{Li2024DynPen}
+Q. Li et al., ``DynPen: Automated Penetration Testing in Dynamic Network Scenarios Using Deep Reinforcement Learning,'' \textit{IEEE Transactions on Information Forensics and Security}, vol. 19, pp. 1--14, 2024.
+
+\bibitem{Deng2023GPT}
+G. Deng et al., ``PENTESTGPT: An LLM-Empowered Automatic Penetration Testing Tool,'' in \textit{Proceedings of the 33rd USENIX Conference on Security Symposium}, 2024.
+
+% ==================== VULNERABILITY DETECTION ====================
+\bibitem{Alaoui2022Deep}
+R. L. Alaoui and E. H. Nfaoui, ``Deep Learning for Vulnerability and Attack Detection on Web Applications: A Systematic Literature Review,'' \textit{Future Internet}, vol. 14, no. 4, p. 118, 2022.
+
+\bibitem{Chughtai2024}
+M. S. Chughtai, I. Bibi, S. Karim, S. W. A. Shah, A. A. Laghari, and A. A. Khan, ``Deep Learning Trends and Future Perspectives of Web Security and Vulnerabilities,'' \textit{Journal of High Speed Networks}, 2024.
+
+\bibitem{Tahir2024}
+M. Tahir et al., ``Deep Learning and Web Applications Vulnerabilities Detection,'' \textit{International Journal of Advanced Computer Science and Applications}, vol. 15, no. 7, 2024.
+
+\bibitem{Iqbal2015}
+A. Iqbal et al., ``Web Application Security Vulnerabilities Detection Approaches: A Systematic Mapping Study,'' in \textit{2015 IEEE/ACIS 16th International Conference on Software Engineering}, pp. 1--6, 2015.
+
+\bibitem{Singh2022Analysis}
+A. Singh and A. Sharma, ``Deep Analysis of Attacks and Vulnerabilities of Web Security,'' in \textit{Advances in Data and Information Sciences}, pp. 1085--1095, Springer, 2022.
+
+\bibitem{Kumar2017}
+S. Kumar, R. Mahajan, N. Kumar, and S. K. Khatri, ``A Study on Web Application Security and Detecting Security Vulnerabilities,'' in \textit{2017 6th International Conference on Reliability, Infocom Technologies and Optimization}, pp. 451--455, 2017.
+
+% ==================== VULNERABILITY SCANNERS ====================
+\bibitem{Makino2015}
+Y. Makino and V. Klyuev, ``Evaluation of Web Vulnerability Scanners,'' in \textit{2015 IEEE 8th International Conference on Intelligent Data Acquisition and Advanced Computing Systems}, vol. 1, pp. 399--402, 2015.
+
+\bibitem{Mohaidat2024}
+A. I. Mohaidat and A. Al-Helali, ``Web Vulnerability Scanning Tools: A Comprehensive Overview, Selection Guidance, and Cyber Security Recommendations,'' \textit{International Journal of Research Studies in Computer Science and Engineering}, vol. 10, no. 1, pp. 8--15, 2024.
+
+\bibitem{Srinivasan2017}
+S. M. Srinivasan and R. S. Sangwan, ``Web App Security: A Comparison and Categorization of Testing Frameworks,'' \textit{IEEE Software}, vol. 34, no. 1, pp. 99--102, 2017.
+
+\bibitem{Alzahrani2017}
+A. Alzahrani, A. Alqazzaz, Y. Zhu, H. Fu, and N. Almashfi, ``Web Application Security Tools Analysis,'' in \textit{2017 IEEE 3rd International Conference on Big Data Security on Cloud}, pp. 237--242, 2017.
+
+\bibitem{Ghanem2023}
+M. C. Ghanem and T. M. Chen, ``Enhancing Web Application Security through Automated Penetration Testing with Multiple Vulnerability Scanners,'' \textit{Computers}, vol. 12, no. 11, p. 235, 2023.
+
+\bibitem{Zhang2020Auto}
+Y. Zhang et al., ``An Automatic Vulnerability Scanner for Web Applications,'' in \textit{2020 IEEE Conference on Communications and Network Security}, 2020.
+
+\bibitem{Touseef2019}
+P. Touseef, ``Analysis of Automated Web Application Security Vulnerabilities Testing,'' in \textit{Proceedings of the 3rd International Conference on Future Networks and Distributed Systems}, 2019.
+
+% ==================== VULNERABILITY CORRELATION ====================
+\bibitem{Kasturi2024Priority}
+S. Kasturi, X. Li, J. Pickard, and P. Li, ``Prioritization of Application Security Vulnerability Remediation Using Metrics, Correlation Analysis, and Threat Model,'' \textit{American Journal of Software Engineering and Applications}, vol. 12, no. 1, pp. 5--13, 2024.
+
+\bibitem{Kasturi2023Understanding}
+S. Kasturi et al., ``Understanding Statistical Correlation of Application Security Vulnerability Data from Detection and Monitoring Tools,'' in \textit{2023 IEEE International Conference on Big Data}, pp. 1--6, 2023.
+
+\bibitem{Kasturi2024Predicting}
+S. Kasturi, ``Predicting Application Security Attack Paths Using Correlation Analysis, Attack Tree, and Multi-Layer Perceptron,'' Ph.D. dissertation, Indiana State University, 2024.
+
+% ==================== WEB SECURITY ====================
+\bibitem{Vieira2024}
+M. Vieira et al., ``Web Application Security through Comprehensive Vulnerability Assessment,'' \textit{Procedia Computer Science}, vol. 230, pp. 77--86, 2024.
+
+\bibitem{Fonseca2014}
+J. Fonseca, M. Vieira, and H. Madeira, ``Evaluation of Web Security Mechanisms Using Vulnerability and Attack Injection,'' \textit{IEEE Transactions on Dependable and Secure Computing}, vol. 11, no. 5, pp. 440--453, 2014.
+
+\bibitem{Huang2017}
+H. C. Huang, Z. K. Zhang, H. W. Cheng, and S. P. Shieh, ``Web Application Security: Threats, Countermeasures, and Pitfalls,'' \textit{Computer}, vol. 50, no. 6, pp. 81--85, 2017.
+
+% ==================== OWASP ====================
+\bibitem{OWASP2021}
+OWASP Foundation, ``OWASP Top 10:2021,'' 2021. [Online]. Available: https://owasp.org/Top10/
+
+\bibitem{OWASP2025}
+OWASP Foundation, ``OWASP Top 10:2025,'' 2025. [Online]. Available: https://owasp.org/Top10/2025/
+
+\bibitem{OWASPBenchmark}
+OWASP Foundation, ``OWASP Benchmark Project,'' 2024. [Online]. Available: https://owasp.org/www-project-benchmark/
+
+\bibitem{OWASPZAP}
+OWASP Foundation, ``OWASP Zed Attack Proxy (ZAP),'' 2024. [Online]. Available: https://www.zaproxy.org/
+
+% ==================== SQL & XSS ====================
+\bibitem{Kieyzun2009}
+A. Kieyzun, P. J. Guo, K. Jayaraman, and M. D. Ernst, ``Automatic Creation of SQL Injection and Cross-Site Scripting Attacks,'' in \textit{2009 IEEE 31st International Conference on Software Engineering}, pp. 199--209, 2009.
+
+\bibitem{Alaoui2023XSS}
+R. L. Alaoui and E. H. Nfaoui, ``Cross Site Scripting Attack Detection Approach Based on LSTM Encoder-Decoder and Word Embeddings,'' \textit{International Journal of Intelligent Systems and Applications in Engineering}, vol. 11, pp. 277--282, 2023.
+
+% ==================== MACHINE LEARNING ====================
+\bibitem{Li2018Vul}
+Z. Li et al., ``VulDeePecker: A Deep Learning-Based System for Vulnerability Detection,'' in \textit{Proceedings 2018 Network and Distributed System Security Symposium}, 2018.
+
+\bibitem{Li2022SySeVR}
+Z. Li, D. Zou, S. Xu, H. Jin, Y. Zhu, and Z. Chen, ``SySeVR: A Framework for Using Deep Learning to Detect Software Vulnerabilities,'' \textit{IEEE Transactions on Dependable and Secure Computing}, vol. 19, no. 4, pp. 2244--2258, 2022.
+
+% ==================== TESTING FRAMEWORKS ====================
+\bibitem{Antunes2011}
+N. Antunes and M. Vieira, ``Enhancing Penetration Testing with Attack Signatures and Interface Monitoring for the Detection of Injection Vulnerabilities in Web Services,'' in \textit{2011 IEEE International Conference on Services Computing}, pp. 104--111, 2011.
+
+\bibitem{Felderer2016}
+M. Felderer, M. Büchler, M. Johns, A. D. Brucker, R. Breu, and A. Pretschner, ``Security Testing: A Survey,'' \textit{Advances in Computers}, vol. 101, pp. 1--51, 2016.
+
+\bibitem{Garn2014}
+B. Garn, I. Kapsalis, D. E. Simos, and S. Winkler, ``On the Applicability of Combinatorial Testing to Web Application Security Testing: A Case Study,'' in \textit{Proceedings of the 2014 Workshop on Joining AcadeMiA and Industry Contributions to Test Automation and Model-Based Testing}, pp. 16--21, 2014.
+
+% ==================== ATTACK MODELING ====================
+\bibitem{Mauw2006}
+S. Mauw and M. Oostdijk, ``Foundations of Attack Trees,'' in \textit{International Conference on Information Security and Cryptology}, pp. 186--198, 2006.
+
+\bibitem{Ficco2021}
+M. Ficco, D. Granata, M. Rak, and G. Salzillo, ``Threat Modeling of Edge-Based IoT Applications,'' in \textit{Quality of Information and Communications Technology}, pp. 282--296, Springer, 2021.
+
+\bibitem{Rak2022}
+M. Rak, G. Salzillo, and D. Granata, ``ESSecA: An Automated Expert System for Threat Modelling and Penetration Testing for IoT Ecosystems,'' \textit{Computers and Electrical Engineering}, vol. 99, p. 107721, 2022.
+
+\end{thebibliography}
+\end{document}

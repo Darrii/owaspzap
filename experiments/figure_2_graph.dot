@@ -11,7 +11,8 @@ digraph vulnerability_graph {
         dpi=600
         labelloc=t
         label=<<b><font point-size="18">Vulnerability Chain Detection: Example Attack Flow</font></b><br/>
-               <font point-size="12">Example Chain: V2 → V3 → V5 (XSS → Info Disclosure → CSRF)</font>>
+               <font point-size="12">Example Chain: V2 → V3 → V5 (XSS → Info Disclosure → CSRF)</font><br/>
+               <font point-size="10">53 Probabilistic Rules | Risk Scoring 0-100 | Bounded Boosting (max 2.5×)</font>>
     ];
 
     // Node defaults

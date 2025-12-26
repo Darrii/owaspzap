@@ -27,14 +27,14 @@
 \citation{Kasturi2024Predicting}
 \citation{Kasturi2024Priority}
 \citation{Mauw2006}
-\citation{Ficco2021}
-\citation{Rak2022}
-\citation{Li2024DynPen}
-\citation{Deng2023GPT}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Literature Review}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Web Vulnerability Scanners and Testing Methodologies}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Vulnerability Correlation and Prioritization}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Attack Modeling and Chain Detection}{2}{}\protected@file@percent }
+\citation{Ficco2021}
+\citation{Rak2022}
+\citation{Li2024DynPen}
+\citation{Deng2023GPT}
 \citation{Li2018Vul}
 \citation{Li2022SySeVR}
 \citation{Alaoui2022Deep}
@@ -49,7 +49,51 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-E}}Research Gaps}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {III}Methods}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Research Gaps}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Proposed Approach}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Proposed Approach}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}System Architecture}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System Architecture: Eight-stage vulnerability chain detection pipeline showing data flow from OWASP ZAP scanning through graph construction, rule application, DFS detection, and intelligent filtering to final report generation.}}{4}{}\protected@file@percent }
+\newlabel{fig:architecture}{{1}{4}{}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Vulnerability Graph Representation}{5}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Vulnerability graph example showing six vulnerabilities with severity-based coloring and probabilistic edges. The highlighted path V2$\rightarrow $V3$\rightarrow $V5 (XSS$\rightarrow $Info Disclosure$\rightarrow $CSRF) represents a detected attack chain with cumulative probability 0.68 (0.85 $\times $ 0.80).}}{5}{}\protected@file@percent }
+\newlabel{fig:graph}{{2}{5}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Probabilistic Rule Derivation}{5}{}\protected@file@percent }
+\citation{Bozic2019}
+\citation{Alaoui2023XSS}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces CVE Examples Supporting Chain Rules}}{6}{}\protected@file@percent }
+\newlabel{tab:cve_examples}{{I}{6}{}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-F}}Chain Detection Algorithm}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Chain detection workflow showing the four-phase process: (1) Input parsing and classification, (2) Graph construction with probabilistic rules, (3) DFS-based chain detection with on-the-fly deduplication, (4) Subchain removal and risk scoring. Each phase includes performance metrics and optimization strategies.}}{6}{}\protected@file@percent }
+\newlabel{fig:workflow}{{3}{6}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Results}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Experimental Setup}{7}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Test Applications Overview}}{7}{}\protected@file@percent }
+\newlabel{tab:table_iv_applications}{{II}{7}{}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Baseline vs Enhanced System Comparison}}{7}{}\protected@file@percent }
+\newlabel{tab:table_v_comparison}{{III}{7}{}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Chain Detection Performance}{7}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Examples of Deduplicated Chains from DVWA}}{8}{}\protected@file@percent }
+\newlabel{tab:dedup_examples}{{IV}{8}{}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Processing time and total chains detected per application, demonstrating near-linear scalability with respect to vulnerability count and graph size.}}{8}{}\protected@file@percent }
+\newlabel{fig:performance}{{4}{8}{}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Deduplication effectiveness showing reduction from thousands of raw chains to unique patterns, with 99.5-99.9\% deduplication rates across all applications.}}{8}{}\protected@file@percent }
+\newlabel{fig:deduplication}{{5}{8}{}{figure.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces System Performance Metrics}}{8}{}\protected@file@percent }
+\newlabel{tab:table_vi_performance}{{V}{8}{}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Vulnerability Chain Characteristics}}{8}{}\protected@file@percent }
+\newlabel{tab:table_vii_characteristics}{{VI}{8}{}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Vulnerability Chain Characteristics}{8}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Risk score distribution across applications showing concentration in the 50-65 range, indicating predominantly medium-severity chains.}}{9}{}\protected@file@percent }
+\newlabel{fig:risk_distribution}{{6}{9}{}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Chain length distribution showing dominance of 3-step chains across all applications, validating the maximum chain length parameter of 4.}}{9}{}\protected@file@percent }
+\newlabel{fig:length_distribution}{{7}{9}{}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Real-World Applicability}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Comparative Analysis}{9}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Comparison with Baseline Approaches}}{9}{}\protected@file@percent }
+\newlabel{tab:comparison}{{VII}{9}{}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-F}}Qualitative Analysis and Validation}{10}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Expert Evaluation of Detected Chains (n=20)}}{10}{}\protected@file@percent }
+\newlabel{tab:expert_evaluation}{{VIII}{10}{}{table.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Conclusion}{10}{}\protected@file@percent }
 \bibcite{Potti2025}{1}
 \bibcite{Laponina2017}{2}
 \bibcite{Lathifah2022}{3}
@@ -73,6 +117,7 @@
 \bibcite{Kumar2017}{21}
 \bibcite{Makino2015}{22}
 \bibcite{Mohaidat2024}{23}
+\@writefile{toc}{\contentsline {section}{References}{11}{}\protected@file@percent }
 \bibcite{Srinivasan2017}{24}
 \bibcite{Alzahrani2017}{25}
 \bibcite{Ghanem2023}{26}
@@ -84,8 +129,6 @@
 \bibcite{Vieira2024}{32}
 \bibcite{Fonseca2014}{33}
 \bibcite{Huang2017}{34}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Conclusion}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{4}{}\protected@file@percent }
 \bibcite{OWASP2021}{35}
 \bibcite{OWASP2025}{36}
 \bibcite{OWASPBenchmark}{37}
@@ -100,4 +143,4 @@
 \bibcite{Mauw2006}{46}
 \bibcite{Ficco2021}{47}
 \bibcite{Rak2022}{48}
-\gdef \@abspage@last{5}
+\gdef \@abspage@last{12}

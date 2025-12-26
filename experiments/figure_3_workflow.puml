@@ -92,24 +92,34 @@ note right
 end note
 
 :<b>Apply Probabilistic Rules</b>
-(24 Chain Rules)|
+(53 Chain Rules + RuleEngineConfig)|
 note right
-  <b>Rule Engine:</b>
+  <b>Rule Engine Config:</b>
+  - min_link_probability: 0.3
+  - max_boost_multiplier: 2.5
+  - enable_semantic_similarity: True
+  - enable_taxonomy_matching: True
+  <b>Example Rules:</b>
   - XSS → CSRF (p=0.85)
   - SQLi → PrivEsc (p=0.90)
   - Info → Auth Bypass (p=0.80)
   - SSRF → Internal (p=0.75)
-  <b>Filter:</b> p ≥ 0.75
+  <b>Total:</b> 53 probabilistic rules
   <b>Config:</b> cluster_links=False
 end note
 
 :<b>Build Graph Edges</b>
-(Probability ≥ 0.75)|
+(Probability ≥ 0.3, Bounded Boosting)|
 note right
   <b>Edge Creation:</b>
   - Source: Vulnerability A
   - Target: Vulnerability B
-  - Weight: Rule probability
+  - Base probability: from rule
+  - Apply boost factors (capped at 2.5×)
+  - Precompiled regex for URL patterns
+  <b>Optimizations:</b>
+  - Taxonomy caching (1291× speedup)
+  - Bounded boosting (max 2.5×)
   <b>Result:</b> 5,325 edges
 end note
 
@@ -194,16 +204,18 @@ note right
 end note
 
 :<b>Calculate Risk Scores</b>
-(Multi-factor)|
+(Component-based 0-100)|
 note right
-  <b>Risk Factors:</b>
-  - Chain length (longer = higher)
-  - Max CVSS in chain
-  - Confidence score
-  - Exploitability
-  <b>Formula:</b>
-  risk = (length × 15) + max_cvss×7
-         + confidence×10
+  <b>NEW Formula (normalized 0-100):</b>
+  - Base Severity (30%): max_vuln_risk/3.0 × 30
+  - Exploitability (30%): avg_link_exploit × 30
+  - Chain Length (20%): logarithmic [0,10,15,18,20]
+  - Confidence (20%): chain_probability × 20
+  <b>Severity Classes:</b>
+  - CRITICAL: 90-100
+  - HIGH: 70-89
+  - MEDIUM: 40-69
+  - LOW: 0-39
 end note
 
 :<b>Sort by Risk Score</b>

@@ -1,0 +1,287 @@
+{
+  "timestamp": "2025-12-25 01:45:35",
+  "target": "webgoat",
+  "processing_time": 13.443,
+  "statistics": {
+    "total_vulnerabilities": 25,
+    "unique_vulnerabilities": 5,
+    "graph_nodes": 21,
+    "graph_edges": 424,
+    "total_chains_found": 9080,
+    "unique_patterns": 27,
+    "filtered_chains": 27,
+    "unique_patterns_only": true
+  },
+  "chains": [
+    {
+      "vulnerabilities": [
+        "Session Fixation",
+        "SQL Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "SQL Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "SQL Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Missing Security Headers",
+        "SQL Injection"
+      ],
+      "risk_score": 63.34,
+      "confidence": 0.208,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check",
+        "SQL Injection"
+      ],
+      "risk_score": 63.34,
+      "confidence": 0.208,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Missing Security Headers",
+        "Missing Security Headers",
+        "Missing Security Headers"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 56.16,
+      "confidence": 0.271,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Missing Security Headers",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 56.16,
+      "confidence": 0.271,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Missing Security Headers",
+        "Spring Actuator Information Leak"
+      ],
+      "risk_score": 56.16,
+      "confidence": 0.271,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Missing Security Headers",
+        "Missing Security Headers"
+      ],
+      "risk_score": 56.16,
+      "confidence": 0.271,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check",
+        "Missing Security Headers"
+      ],
+      "risk_score": 56.16,
+      "confidence": 0.271,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check",
+        "Spring Actuator Information Leak"
+      ],
+      "risk_score": 56.16,
+      "confidence": 0.271,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Session Fixation",
+        "Missing Security Headers",
+        "Missing Security Headers"
+      ],
+      "risk_score": 53.34,
+      "confidence": 0.208,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Session Fixation",
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 53.34,
+      "confidence": 0.208,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Missing Security Headers",
+        "Session Fixation"
+      ],
+      "risk_score": 53.34,
+      "confidence": 0.208,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Anti-CSRF Tokens Check",
+        "Session Fixation"
+      ],
+      "risk_score": 53.34,
+      "confidence": 0.208,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Anti-CSRF Tokens Check",
+        "Missing Security Headers"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Anti-CSRF Tokens Check",
+        "Spring Actuator Information Leak"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Spring Actuator Information Leak",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Missing Security Headers",
+        "Spring Actuator Information Leak",
+        "Missing Security Headers"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Missing Security Headers",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Missing Security Headers",
+        "Spring Actuator Information Leak"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Spring Actuator Information Leak",
+        "Missing Security Headers"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Spring Actuator Information Leak",
+        "Anti-CSRF Tokens Check"
+      ],
+      "risk_score": 52.79,
+      "confidence": 0.207,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Session Fixation",
+        "Spring Actuator Information Leak"
+      ],
+      "risk_score": 47.5,
+      "confidence": 0.35,
+      "length": 2
+    },
+    {
+      "vulnerabilities": [
+        "Anti-CSRF Tokens Check",
+        "Session Fixation"
+      ],
+      "risk_score": 47.5,
+      "confidence": 0.35,
+      "length": 2
+    }
+  ]
+}

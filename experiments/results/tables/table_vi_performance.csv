@@ -1,0 +1,4 @@
+App,Time (s),Ch/sec,Avg Risk,Avg Conf
+DVWA,30.1,326.0,58.6,0.224
+JUICESHOP,950.3,10.0,62.9,0.228
+WEBGOAT,13.4,675.0,56.0,0.237

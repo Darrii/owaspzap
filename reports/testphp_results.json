@@ -1,0 +1,1346 @@
+{
+    "scan_id": "c295482c-dae6-4229-8237-7eae7c5049f7",
+    "url": "http://testphp.vulnweb.com/",
+    "scan_type": "active",
+    "depth": 5,
+    "timeout": 28800,
+    "status": "completed",
+    "progress": 100,
+    "elapsed_time": 4182.233127355576,
+    "zap_results": {
+        "total_vulnerabilities": 126,
+        "by_risk": {
+            "MEDIUM": 51,
+            "LOW": 62,
+            "HIGH": 13
+        },
+        "by_type": {
+            "Missing Security Headers": 55,
+            "Information Disclosure": 24,
+            "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)": 18,
+            "Anti-CSRF Tokens Check": 15,
+            "Cross Site Scripting": 10,
+            "SQL Injection": 3,
+            "ZAP is Out of Date": 1
+        },
+        "total_urls": 35,
+        "urls_sample": [
+            "http://testphp.vulnweb.com/listproducts.php?cat=1",
+            "http://testphp.vulnweb.com/search.php?test=%27",
+            "http://testphp.vulnweb.com#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+            "http://testphp.vulnweb.com/userinfo.php",
+            "http://testphp.vulnweb.com/search.php?test=query",
+            "http://testphp.vulnweb.com/search.php?test=query?name=abc#<img src=\"random.gif\" onerror=alert(5397)>",
+            "http://testphp.vulnweb.com/listproducts.php?cat=2",
+            "http://testphp.vulnweb.com/cart.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+            "http://testphp.vulnweb.com/",
+            "http://testphp.vulnweb.com/disclaimer.php",
+            "http://testphp.vulnweb.com/cart.php",
+            "http://testphp.vulnweb.com/index.php",
+            "http://testphp.vulnweb.com/style.css",
+            "http://testphp.vulnweb.com/categories.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+            "http://testphp.vulnweb.com/listproducts.php?cat=%3Cscript%3Ealert(5397)%3C/script%3E",
+            "http://testphp.vulnweb.com/sitemap.xml",
+            "http://testphp.vulnweb.com/guestbook.php",
+            "http://testphp.vulnweb.com/privacy.php",
+            "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+            "http://testphp.vulnweb.com/artists.php",
+            "http://testphp.vulnweb.com/disclaimer.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+            "http://testphp.vulnweb.com/listproducts.php?cat=%27",
+            "http://testphp.vulnweb.com/login.php",
+            "http://testphp.vulnweb.com/listproducts.php?cat=4",
+            "http://testphp.vulnweb.com/listproducts.php?cat=%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+            "http://testphp.vulnweb.com/images/logo.gif",
+            "http://testphp.vulnweb.com/categories.php",
+            "http://testphp.vulnweb.com/Flash/add.swf",
+            "http://testphp.vulnweb.com/AJAX/index.php",
+            "http://testphp.vulnweb.com/hpp/",
+            "http://testphp.vulnweb.com/listproducts.php?cat=3",
+            "http://testphp.vulnweb.com/high",
+            "http://testphp.vulnweb.com/Mod_Rewrite_Shop/",
+            "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+            "http://testphp.vulnweb.com/robots.txt"
+        ],
+        "subdomains": [
+            "testphp.vulnweb.com"
+        ],
+        "scan_file": "scans/c295482c-dae6-4229-8237-7eae7c5049f7.json"
+    },
+    "chain_results": {
+        "total_chains": 31,
+        "critical": 31,
+        "high": 0,
+        "medium": 0,
+        "low": 0,
+        "chains": [
+            {
+                "id": "chain_0",
+                "risk_score": 420.52,
+                "confidence": 0.8799374999999998,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_1",
+                "risk_score": 379.75,
+                "confidence": 0.718029,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_2",
+                "risk_score": 367.96,
+                "confidence": 0.7699453124999999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    }
+                ]
+            },
+            {
+                "id": "chain_3",
+                "risk_score": 347.31,
+                "confidence": 0.72675,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing."
+                    },
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    }
+                ]
+            },
+            {
+                "id": "chain_4",
+                "risk_score": 342.12,
+                "confidence": 0.79194375,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/listproducts.php?cat=%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_5",
+                "risk_score": 340.75,
+                "confidence": 0.70395,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_6",
+                "risk_score": 327.07,
+                "confidence": 0.8799374999999998,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_7",
+                "risk_score": 316.29,
+                "confidence": 0.6534063899999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_8",
+                "risk_score": 316.29,
+                "confidence": 0.6534063899999999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/login.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    }
+                ]
+            },
+            {
+                "id": "chain_9",
+                "risk_score": 306.11,
+                "confidence": 0.7085812499999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_10",
+                "risk_score": 299.35,
+                "confidence": 0.69295078125,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    }
+                ]
+            },
+            {
+                "id": "chain_11",
+                "risk_score": 289.13,
+                "confidence": 0.6806316562499999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    }
+                ]
+            },
+            {
+                "id": "chain_12",
+                "risk_score": 285.96,
+                "confidence": 0.6731521874999999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_13",
+                "risk_score": 270.82,
+                "confidence": 0.7164543749999999,
+                "chain_type": "INFORMATION_GATHERING",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Information Disclosure",
+                        "url": "http://testphp.vulnweb.com/sitemap.xml",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_14",
+                "risk_score": 270.82,
+                "confidence": 0.7164543749999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_15",
+                "risk_score": 270.82,
+                "confidence": 0.7164543749999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_16",
+                "risk_score": 267.87,
+                "confidence": 0.7206688124999999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Information Disclosure",
+                        "url": "http://testphp.vulnweb.com/sitemap.xml",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_17",
+                "risk_score": 267.87,
+                "confidence": 0.7206688124999999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Information Disclosure",
+                        "url": "http://testphp.vulnweb.com/sitemap.xml",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_18",
+                "risk_score": 265.03,
+                "confidence": 0.70395,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_19",
+                "risk_score": 256.59,
+                "confidence": 0.79194375,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_20",
+                "risk_score": 252.99,
+                "confidence": 0.6806316562499999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    }
+                ]
+            },
+            {
+                "id": "chain_21",
+                "risk_score": 252.99,
+                "confidence": 0.6806316562499999,
+                "chain_type": "DATA_EXFILTRATION",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "SQL Injection",
+                        "url": "http://testphp.vulnweb.com/search.php?test=query",
+                        "risk": "HIGH",
+                        "description": "SQL injection may be possible."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_22",
+                "risk_score": 246.0,
+                "confidence": 0.6534063899999999,
+                "chain_type": "INFORMATION_GATHERING",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Information Disclosure",
+                        "url": "http://testphp.vulnweb.com/sitemap.xml",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_23",
+                "risk_score": 246.0,
+                "confidence": 0.6534063899999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_24",
+                "risk_score": 246.0,
+                "confidence": 0.6534063899999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_25",
+                "risk_score": 229.58,
+                "confidence": 0.7085812499999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_26",
+                "risk_score": 193.44,
+                "confidence": 0.7164543749999999,
+                "chain_type": "INFORMATION_GATHERING",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Information Disclosure",
+                        "url": "http://testphp.vulnweb.com/sitemap.xml",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_27",
+                "risk_score": 193.44,
+                "confidence": 0.7164543749999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/categories.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_28",
+                "risk_score": 193.44,
+                "confidence": 0.7164543749999999,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 4,
+                "vulnerabilities": [
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/privacy.php",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    },
+                    {
+                        "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+                        "url": "http://testphp.vulnweb.com/",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to."
+                    }
+                ]
+            },
+            {
+                "id": "chain_29",
+                "risk_score": 173.39,
+                "confidence": 0.75088,
+                "chain_type": "COMPOUND_EXPLOIT",
+                "length": 3,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "Missing Security Headers",
+                        "url": "http://testphp.vulnweb.com/AJAX/index.php",
+                        "risk": "MEDIUM",
+                        "description": "The response does not protect against 'ClickJacking' attacks. It should include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options."
+                    },
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/login.php#jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert(5397) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert(5397)//>\\x3e",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    }
+                ]
+            },
+            {
+                "id": "chain_30",
+                "risk_score": 110.29,
+                "confidence": 0.700245,
+                "chain_type": "INFORMATION_GATHERING",
+                "length": 3,
+                "vulnerabilities": [
+                    {
+                        "name": "Cross Site Scripting",
+                        "url": "http://testphp.vulnweb.com/search.php?test=%27%22%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E",
+                        "risk": "HIGH",
+                        "description": "Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.\nWhen an attacker gets a user's browser to execute his/her code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/her account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.\n\nThere are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.\nNon-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.\nPersistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code."
+                    },
+                    {
+                        "name": "ZAP is Out of Date",
+                        "url": "http://testphp.vulnweb.com/hpp/",
+                        "risk": "LOW",
+                        "description": "The version of ZAP you are using to test your app is out of date and is no longer being updated.\nThe risk level is set based on how out of date your ZAP version is."
+                    },
+                    {
+                        "name": "Information Disclosure",
+                        "url": "http://testphp.vulnweb.com/sitemap.xml",
+                        "risk": "LOW",
+                        "description": "The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to."
+                    }
+                ]
+            }
+        ],
+        "graph_stats": {
+            "nodes": 71,
+            "edges": 4721
+        }
+    },
+    "verify_results": null,
+    "logs": [
+        {
+            "timestamp": "2025-12-23T22:59:19.866326",
+            "level": "info",
+            "message": "Active scan progress: 63%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:24.879115",
+            "level": "info",
+            "message": "Active scan progress: 63%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:29.899382",
+            "level": "info",
+            "message": "Active scan progress: 63%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:34.931784",
+            "level": "info",
+            "message": "Active scan progress: 63%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:39.948507",
+            "level": "info",
+            "message": "Active scan progress: 63%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:44.968058",
+            "level": "info",
+            "message": "Active scan progress: 65%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:49.977900",
+            "level": "info",
+            "message": "Active scan progress: 65%"
+        },
+        {
+            "timestamp": "2025-12-23T22:59:55.011383",
+            "level": "info",
+            "message": "Active scan progress: 65%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:00.030739",
+            "level": "info",
+            "message": "Active scan progress: 65%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:05.043640",
+            "level": "info",
+            "message": "Active scan progress: 65%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:10.057944",
+            "level": "info",
+            "message": "Active scan progress: 65%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:15.078909",
+            "level": "info",
+            "message": "Active scan progress: 66%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:20.087744",
+            "level": "info",
+            "message": "Active scan progress: 68%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:25.138377",
+            "level": "info",
+            "message": "Active scan progress: 71%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:30.147449",
+            "level": "info",
+            "message": "Active scan progress: 72%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:35.167490",
+            "level": "info",
+            "message": "Active scan progress: 73%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:40.178311",
+            "level": "info",
+            "message": "Active scan progress: 73%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:45.194441",
+            "level": "info",
+            "message": "Active scan progress: 74%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:50.205550",
+            "level": "info",
+            "message": "Active scan progress: 75%"
+        },
+        {
+            "timestamp": "2025-12-23T23:00:55.223025",
+            "level": "info",
+            "message": "Active scan progress: 75%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:00.237261",
+            "level": "info",
+            "message": "Active scan progress: 79%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:05.253533",
+            "level": "info",
+            "message": "Active scan progress: 83%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:10.278024",
+            "level": "info",
+            "message": "Active scan progress: 86%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:15.292663",
+            "level": "info",
+            "message": "Active scan progress: 86%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:20.309096",
+            "level": "info",
+            "message": "Active scan progress: 86%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:25.323056",
+            "level": "info",
+            "message": "Active scan progress: 91%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:30.353196",
+            "level": "info",
+            "message": "Active scan progress: 93%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:35.366810",
+            "level": "info",
+            "message": "Active scan progress: 93%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:40.383843",
+            "level": "info",
+            "message": "Active scan progress: 93%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:45.398837",
+            "level": "info",
+            "message": "Active scan progress: 93%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:50.413729",
+            "level": "info",
+            "message": "Active scan progress: 96%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:55.426481",
+            "level": "info",
+            "message": "Active scan progress: 100%"
+        },
+        {
+            "timestamp": "2025-12-23T23:01:55.426687",
+            "level": "info",
+            "message": "Fetching alerts..."
+        },
+        {
+            "timestamp": "2025-12-23T23:01:56.493069",
+            "level": "info",
+            "message": "Parsing ZAP results..."
+        },
+        {
+            "timestamp": "2025-12-23T23:01:56.516700",
+            "level": "info",
+            "message": "Scan completed! Found 126 vulnerabilities"
+        },
+        {
+            "timestamp": "2025-12-23T23:03:02.497695",
+            "level": "info",
+            "message": "Starting chain analysis..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:02.500514",
+            "level": "info",
+            "message": "Analyzing 126 vulnerabilities"
+        },
+        {
+            "timestamp": "2025-12-23T23:03:02.528899",
+            "level": "info",
+            "message": "Building vulnerability graph..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.039228",
+            "level": "info",
+            "message": "Finding vulnerability chains with smart deduplication..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.120176",
+            "level": "info",
+            "message": "Processed 10/71 nodes, 23 unique chains from 5000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.179097",
+            "level": "info",
+            "message": "Processed 20/71 nodes, 23 unique chains from 10000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.238361",
+            "level": "info",
+            "message": "Processed 30/71 nodes, 23 unique chains from 15000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.296683",
+            "level": "info",
+            "message": "Processed 40/71 nodes, 23 unique chains from 20000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.355491",
+            "level": "info",
+            "message": "Processed 50/71 nodes, 23 unique chains from 25000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.413422",
+            "level": "info",
+            "message": "Processed 60/71 nodes, 32 unique chains from 30000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.464840",
+            "level": "info",
+            "message": "Processed 70/71 nodes, 53 unique chains from 35000 total..."
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.470710",
+            "level": "info",
+            "message": "Processed 71 nodes, found 53 unique chains (from 35500 total)"
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.472005",
+            "level": "info",
+            "message": "After removing subchains: 31 final chains"
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.472017",
+            "level": "info",
+            "message": "Found 31 chains total, displaying top 31"
+        },
+        {
+            "timestamp": "2025-12-23T23:03:06.472100",
+            "level": "info",
+            "message": "Found 31 vulnerability chains!"
+        }
+    ]
+}

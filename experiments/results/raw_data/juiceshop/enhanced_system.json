@@ -1,0 +1,549 @@
+{
+  "timestamp": "2025-12-24 12:29:47",
+  "target": "juiceshop",
+  "processing_time": 950.312,
+  "statistics": {
+    "total_vulnerabilities": 623,
+    "unique_vulnerabilities": 6,
+    "graph_nodes": 564,
+    "graph_edges": 317591,
+    "total_chains_found": 9936,
+    "unique_patterns": 50
+  },
+  "chains": [
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Command Injection",
+        "SQL Injection"
+      ],
+      "risk_score": 65.65,
+      "confidence": 0.245,
+      "length": 3
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    },
+    {
+      "vulnerabilities": [
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration",
+        "Cross-Domain Misconfiguration"
+      ],
+      "risk_score": 60.06,
+      "confidence": 0.211,
+      "length": 4
+    }
+  ]
+}

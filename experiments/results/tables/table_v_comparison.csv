@@ -1,0 +1,4 @@
+App,Baseline,Total Chains,Unique,Dedup (%),Time (s)
+DVWA,194,9828,8,99.92,30.1
+JUICESHOP,623,9936,50,99.5,950.3
+WEBGOAT,25,9080,27,99.7,13.4

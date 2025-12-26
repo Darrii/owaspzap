@@ -1,0 +1,67 @@
+{
+  "description": "Known vulnerability chains for test applications",
+  "source": "OWASP documentation and CVE database",
+  "applications": {
+    "dvwa": {
+      "known_chains": [
+        {
+          "chain": ["SQL Injection", "Authentication Bypass", "Privilege Escalation"],
+          "severity": "CRITICAL",
+          "description": "SQLi allows database access → bypass authentication → gain admin privileges"
+        },
+        {
+          "chain": ["Cross-Site Scripting (Reflected)", "Session Hijacking"],
+          "severity": "HIGH",
+          "description": "XSS steals session cookies → hijack user session"
+        },
+        {
+          "chain": ["Cross-Site Request Forgery", "Privilege Escalation"],
+          "severity": "HIGH",
+          "description": "CSRF forces admin action → escalate privileges"
+        },
+        {
+          "chain": ["File Upload", "Remote Code Execution"],
+          "severity": "CRITICAL",
+          "description": "Upload malicious file → execute arbitrary code on server"
+        },
+        {
+          "chain": ["Path Traversal", "Information Disclosure", "Credential Theft"],
+          "severity": "HIGH",
+          "description": "Directory traversal → read sensitive files → steal credentials"
+        }
+      ],
+      "total_known_chains": 5
+    },
+    "juiceshop": {
+      "known_chains": [
+        {
+          "chain": ["Cross-Site Scripting (Reflected)", "Session Hijacking", "Account Takeover"],
+          "severity": "CRITICAL",
+          "description": "XSS → steal JWT token → take over user account"
+        },
+        {
+          "chain": ["SQL Injection", "Information Disclosure"],
+          "severity": "HIGH",
+          "description": "SQLi in search → extract user database"
+        },
+        {
+          "chain": ["Broken Authentication", "Privilege Escalation"],
+          "severity": "CRITICAL",
+          "description": "Weak password reset → escalate to admin"
+        },
+        {
+          "chain": ["XXE Injection", "Server-Side Request Forgery", "Internal Network Access"],
+          "severity": "CRITICAL",
+          "description": "XXE → SSRF → access internal services"
+        }
+      ],
+      "total_known_chains": 4
+    }
+  },
+  "metadata": {
+    "created": "2024-12-24",
+    "version": "1.0",
+    "total_applications": 2,
+    "total_known_chains": 9
+  }
+}
