@@ -10,13 +10,14 @@
 \author{\IEEEauthorblockN{Dariga Yermakhankyzy, Syed Imran Moazzam Shah}
 \IEEEauthorblockA{School of Information Technology and Engineering\\ Kazakh-British Technical University\\
 Almaty, Kazakhstan\\
+Tel.: +7 747 536 2003\\
 Email: d\_yermakhankyzy@kbtu.kz }
 }
 
 \maketitle
 
 \begin{abstract}
-Web application vulnerability scanners identify security weaknesses in isolation. They fail to detect compound attack scenarios where multiple vulnerabilities combine to enable critical breaches. This paper presents a graph-based probabilistic approach for automated detection of multi-stage vulnerability chains in web applications. Our system models vulnerabilities as nodes in a directed graph with probabilistic rules creating edges that represent how attacks can transition between vulnerabilities. A depth-first search algorithm explores the graph to identify chains of length 2-4 and intelligent filtering reduces raw candidates to actionable attack patterns. The system integrates with OWASP ZAP through REST API enabling real-time chain analysis within existing security workflows. We evaluated the system on three deliberately vulnerable applications (DVWA Juice Shop WebGoat) containing 842 vulnerabilities. The system identified 19 distinct attack patterns representing realistic compound threats including XSS-enabled CSRF bypasses and configuration weaknesses facilitating SQL injection. Analysis completed in under 16 minutes demonstrating practical applicability for continuous security testing. Key contributions include a probabilistic rule engine encoding domain-specific attack patterns a graph-based detection algorithm with intelligent filtering and normalized risk scoring that helps security teams prioritize remediation of compound threats rather than treating all vulnerabilities equally.
+Web application vulnerability scanners identify security weaknesses in isolation. They fail to detect compound attack scenarios where multiple vulnerabilities combine to enable critical breaches. This paper presents a graph-based probabilistic approach for automated detection of multi-stage vulnerability chains in web applications. Our system models vulnerabilities as nodes in a directed graph with probabilistic rules creating edges that represent how attacks can transition between vulnerabilities. A depth-first search algorithm systematically explores the graph to identify chains of length 2-4 while intelligent filtering reduces raw candidates to actionable attack patterns. The system integrates seamlessly with OWASP ZAP through REST API enabling real-time chain analysis within existing security workflows. We evaluated the system on three deliberately vulnerable applications (DVWA Juice Shop WebGoat) containing 842 vulnerabilities. The system identified 19 distinct attack patterns representing realistic compound threats including XSS-enabled CSRF bypasses and configuration weaknesses facilitating SQL injection. Analysis completed in under 16 minutes demonstrating practical applicability for continuous security testing in production environments. Key contributions include a probabilistic rule engine with 53 domain-specific attack patterns encoding real-world exploitation sequences a graph-based detection algorithm with intelligent filtering and normalized risk scoring that helps security teams prioritize remediation of compound threats rather than treating all vulnerabilities equally.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -550,4 +551,20 @@ M. Ficco, D. Granata, M. Rak, and G. Salzillo, ``Threat Modeling of Edge-Based I
 M. Rak, G. Salzillo, and D. Granata, ``ESSecA: An Automated Expert System for Threat Modelling and Penetration Testing for IoT Ecosystems,'' \textit{Computers and Electrical Engineering}, vol. 99, p. 107721, 2022.
 
 \end{thebibliography}
+
+\section*{Funding}
+This research received no external funding.
+
+\section*{Conflicts of Interest}
+The authors declare that they have no conflicts of interest.
+
+\section*{Data Availability Statement}
+The source code, experimental data, and full documentation supporting the findings of this study are openly available on GitHub at \texttt{https://github.com/Darrii/owaspzap}. The repository includes the vulnerability chain detection system implementation, test applications scan results, chain analysis data, and scripts for reproducing the experiments.
+
+\section*{Author Biographies}
+
+\textbf{Dariga Yermakhankyzy} is a Master's student at the School of Information Technology and Engineering, Kazakh-British Technical University, Almaty, Kazakhstan. Her research interests include web application security, vulnerability analysis, automated security testing, and cybersecurity threat detection. She focuses on developing automated tools and methodologies for identifying complex attack patterns in web applications.
+
+\textbf{Syed Imran Moazzam Shah} holds a PhD in Mechatronics Engineering and is an Assistant Professor at the School of Information Technology and Engineering, Kazakh-British Technical University, Almaty, Kazakhstan. His research interests include cybersecurity, software security, and secure software development practices.
+
 \end{document}
