@@ -49,8 +49,7 @@ python3 web_ui_app.py
 
 ## 📖 Full Documentation
 
-> **For humans**: Read sections above for quick overview
-> **For AI/Claude**: Read detailed sections below for complete context
+> **Note**: Read sections above for quick overview, or detailed sections below for complete context
 
 ---
 
