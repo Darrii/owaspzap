@@ -3,13 +3,13 @@
 skinparam backgroundColor transparent
 skinparam shadowing false
 skinparam defaultFontName Arial
-skinparam defaultFontSize 11
-skinparam rectangleFontSize 11
+skinparam defaultFontSize 16
+skinparam rectangleFontSize 16
 skinparam rectangleFontStyle bold
 skinparam ArrowThickness 3
-skinparam ArrowColor #2C3E50
+skinparam ArrowColor #4A90D9
 
-title <size:18><b>System Architecture: Vulnerability Chain Detection Pipeline</b></size>
+title <size:22><b>System Architecture: Vulnerability Chain Detection Pipeline</b></size>
 
 rectangle "Web Application\nUnder Test" as webapp #ECF0F1 {
 }
@@ -19,9 +19,9 @@ note right of webapp
   <b>Example:</b> testphp.vulnweb.com
 end note
 
-rectangle "OWASP ZAP Scanner" as zap #34495E {
-  rectangle "Spider\n(Crawl pages)" as spider #5D6D7E
-  rectangle "Active Scan\n(Inject payloads)" as active #5D6D7E
+rectangle "OWASP ZAP Scanner" as zap #4A90D9 {
+  rectangle "Spider\n(Crawl pages)" as spider #7FB3E0
+  rectangle "Active Scan\n(Inject payloads)" as active #7FB3E0
 }
 
 note right of zap
@@ -32,7 +32,7 @@ note right of zap
   - Timeout: 28800s
 end note
 
-rectangle "JSON Parser\n(ZAPAlertParser)" as parser #2C3E50
+rectangle "JSON Parser\n(ZAPAlertParser)" as parser #4A90D9
 
 note right of parser
   <b>Input:</b> ZAP JSON Report
@@ -40,7 +40,7 @@ note right of parser
   <b>Dedup:</b> By alert signature
 end note
 
-rectangle "Graph Builder\n(NetworkX DiGraph)" as graph #2C3E50
+rectangle "Graph Builder\n(NetworkX DiGraph)" as graph #4A90D9
 
 note right of graph
   <b>Structure:</b>
@@ -49,7 +49,7 @@ note right of graph
   - Type: Directed Graph
 end note
 
-rectangle "Rule Engine\n(53 Probabilistic Rules + Config)" as rules #2C3E50
+rectangle "Rule Engine\n(53 Probabilistic Rules + Config)" as rules #4A90D9
 
 note right of rules
   <b>RuleEngineConfig:</b>
@@ -68,7 +68,7 @@ note right of rules
   - Bounded boosting (cap 2.5×)
 end note
 
-rectangle "DFS Chain Detector\nmax_depth=4, min_prob=0.65" as dfs #2C3E50
+rectangle "DFS Chain Detector\nmax_depth=4, min_prob=0.65" as dfs #4A90D9
 
 note right of dfs
   <b>Parameters:</b>
@@ -79,9 +79,9 @@ note right of dfs
   - max_unique_patterns: 100
 end note
 
-rectangle "Smart Filter" as filter #2C3E50 {
-  rectangle "Deduplicator\n(Hash-based)" as dedup #5D6D7E
-  rectangle "Subchain\nRemoval" as subchain #5D6D7E
+rectangle "Smart Filter" as filter #4A90D9 {
+  rectangle "Deduplicator\n(Hash-based)" as dedup #7FB3E0
+  rectangle "Subchain\nRemoval" as subchain #7FB3E0
 }
 
 note right of filter
@@ -93,7 +93,7 @@ note right of filter
     remove A→B and B→C
 end note
 
-rectangle "Risk Score\nCalculator" as risk #2C3E50
+rectangle "Risk Score\nCalculator" as risk #4A90D9
 
 note right of risk
   <b>Component-based Formula (0-100):</b>
@@ -120,13 +120,13 @@ end note
 
 ' Vertical flow with labels
 webapp -down-> zap : <b>Scan</b>
-zap -down-> parser : <b>JSON Report\n(129 alerts)</b>
-parser -down-> graph : <b>Vulnerabilities\n(classified)</b>
-graph -down-> rules : <b>Graph\n(74 nodes)</b>
-rules -down-> dfs : <b>Edges + P\n(5,325 edges)</b>
-dfs -down-> filter : <b>Raw Chains\n(~37,000)</b>
-filter -down-> risk : <b>Filtered Chains\n(55 unique)</b>
-risk -down-> report : <b>Scored Chains\n(44 final)</b>
+zap -down-> parser : <b>JSON Report\n(129 alerts)
+parser -down-> graph : <b>Vulnerabilities\n(classified)
+graph -down-> rules : <b>Graph\n(74 nodes)
+rules -down-> dfs : <b>Edges + P\n(5,325 edges)
+dfs -down-> filter : <b>Raw Chains\n(~37,000)
+filter -down-> risk : <b>Filtered Chains\n(55 unique)
+risk -down-> report : <b>Scored Chains\n(44 final)
 
 legend bottom
   <b>Performance Metrics:</b>

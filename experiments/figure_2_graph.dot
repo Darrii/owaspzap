@@ -4,15 +4,15 @@ digraph vulnerability_graph {
         bgcolor="white"
         rankdir=LR
         splines=spline
-        nodesep=1.0
-        ranksep=1.5
+        nodesep=0.6
+        ranksep=1.0
         fontname="Arial"
-        fontsize=14
-        dpi=600
+        fontsize=22
+        dpi=300
         labelloc=t
-        label=<<b><font point-size="18">Vulnerability Chain Detection: Example Attack Flow</font></b><br/>
-               <font point-size="12">Example Chain: V2 → V3 → V5 (XSS → Info Disclosure → CSRF)</font><br/>
-               <font point-size="10">53 Probabilistic Rules | Risk Scoring 0-100 | Bounded Boosting (max 2.5×)</font>>
+        label=<<b><font point-size="30">Vulnerability Chain Detection: Example Attack Flow</font></b><br/>
+               <font point-size="22">Example Chain: V2 → V3 → V5 (XSS → Info Disclosure → CSRF)</font><br/>
+               <font point-size="18">53 Probabilistic Rules | Risk Scoring 0-100 | Bounded Boosting (max 2.5×)</font>>
     ];
 
     // Node defaults
@@ -20,10 +20,10 @@ digraph vulnerability_graph {
         style="filled,rounded"
         shape=box
         fontname="Arial"
-        fontsize=11
+        fontsize=20
         fontcolor=white
-        penwidth=2
-        margin=0.25
+        penwidth=2.5
+        margin=0.3
         width=2.2
         height=1.0
     ];
@@ -31,10 +31,10 @@ digraph vulnerability_graph {
     // Edge defaults
     edge [
         fontname="Arial"
-        fontsize=11
+        fontsize=18
         fontcolor="#2C3E50"
         penwidth=2
-        arrowsize=1.2
+        arrowsize=1.0
     ];
 
     // ============ ATTACK FLOW: ENTRY POINTS ============
@@ -59,12 +59,12 @@ digraph vulnerability_graph {
         V2 [
             label=<
                 <b>V2: Reflected XSS</b><br/>
-                <font point-size="10">CVSS: 7.3 (High)</font><br/>
-                <font point-size="9" color="#27AE60"><b>★ CHAIN START</b></font>
+                <font point-size="16">CVSS: 7.3 (High)</font><br/>
+                <font point-size="14" color="#27AE60"><b>★ CHAIN START</b></font>
             >
             fillcolor="#E67E22"
             color="#CA6F1E"
-            penwidth=3
+            penwidth=2.5
         ];
 
         V1 [
@@ -80,12 +80,12 @@ digraph vulnerability_graph {
         V3 [
             label=<
                 <b>V3: Info Disclosure</b><br/>
-                <font point-size="10">CVSS: 5.3 (Medium)</font><br/>
-                <font point-size="9" color="#27AE60"><b>★ CHAIN STEP 2</b></font>
+                <font point-size="16">CVSS: 5.3 (Medium)</font><br/>
+                <font point-size="14" color="#27AE60"><b>★ CHAIN STEP 2</b></font>
             >
             fillcolor="#F39C12"
             color="#D68910"
-            penwidth=3
+            penwidth=2.5
         ];
     }
 
@@ -95,29 +95,29 @@ digraph vulnerability_graph {
         V5 [
             label=<
                 <b>V5: CSRF</b><br/>
-                <font point-size="10">CVSS: 6.5 (Medium)</font><br/>
-                <font point-size="9" color="#27AE60"><b>★ CHAIN END</b></font>
+                <font point-size="16">CVSS: 6.5 (Medium)</font><br/>
+                <font point-size="14" color="#27AE60"><b>★ CHAIN END</b></font>
             >
             fillcolor="#F39C12"
             color="#D68910"
-            penwidth=3
+            penwidth=2.5
         ];
     }
 
     // ============ EXAMPLE CHAIN EDGES (HIGHLIGHTED) ============
 
     V2 -> V3 [
-        label=<<b>p=0.85</b><br/><font point-size="9">XSS steals CSRF token<br/>via injected JavaScript</font>>
+        label=<<b>p=0.85</b><br/><font point-size="14">XSS steals CSRF token<br/>via injected JavaScript</font>>
         color="#27AE60"
-        penwidth=5
+        penwidth=4
         style=bold
         fontcolor="#27AE60"
     ];
 
     V3 -> V5 [
-        label=<<b>p=0.80</b><br/><font point-size="9">Stolen token enables<br/>CSRF attack</font>>
+        label=<<b>p=0.80</b><br/><font point-size="14">Stolen token enables<br/>CSRF attack</font>>
         color="#27AE60"
-        penwidth=5
+        penwidth=4
         style=bold
         fontcolor="#27AE60"
     ];
@@ -125,35 +125,35 @@ digraph vulnerability_graph {
     // ============ OTHER EDGES (SECONDARY CHAINS) ============
 
     V1 -> V3 [
-        label=<<b>p=0.90</b><br/><font point-size="8">SQLi extracts<br/>sensitive data</font>>
+        label=<<b>p=0.90</b><br/><font point-size="13">SQLi extracts<br/>sensitive data</font>>
         color="#95A5A6"
         penwidth=2
         style=dashed
     ];
 
     V4 -> V2 [
-        label=<<b>p=0.75</b><br/><font point-size="8">Missing X-Frame<br/>enables XSS</font>>
+        label=<<b>p=0.75</b><br/><font point-size="13">Missing X-Frame<br/>enables XSS</font>>
         color="#95A5A6"
         penwidth=2
         style=dashed
     ];
 
     V2 -> V5 [
-        label=<<b>p=0.82</b><br/><font point-size="8">Direct XSS<br/>to CSRF</font>>
+        label=<<b>p=0.82</b><br/><font point-size="13">Direct XSS<br/>to CSRF</font>>
         color="#95A5A6"
         penwidth=2
         style=dashed
     ];
 
     V6 -> V1 [
-        label=<<b>p=0.70</b><br/><font point-size="8">Brute force<br/>enables SQLi</font>>
+        label=<<b>p=0.70</b><br/><font point-size="13">Brute force<br/>enables SQLi</font>>
         color="#95A5A6"
         penwidth=2
         style=dashed
     ];
 
     V3 -> V6 [
-        label=<<b>p=0.65</b><br/><font point-size="8">Info leaks<br/>credentials</font>>
+        label=<<b>p=0.65</b><br/><font point-size="13">Info leaks<br/>credentials</font>>
         color="#95A5A6"
         penwidth=2
         style=dashed
@@ -168,7 +168,7 @@ digraph vulnerability_graph {
         <!-- Заголовок -->
         <tr>
             <td align="left">
-                <font color="black" point-size="18"><b>Legend</b></font>
+                <font color="black" point-size="24"><b>Legend</b></font>
             </td>
         </tr>
 
@@ -186,11 +186,11 @@ digraph vulnerability_graph {
                             <table border="0" cellspacing="10">
                                 <tr>
                                     <td><font color="#27AE60">━━━━━</font></td>
-                                    <td><font point-size="9" color="#27AE60"><b>Critical Path</b></font></td>
+                                    <td><font point-size="16" color="#27AE60"><b>Critical Path</b></font></td>
                                 </tr>
                                 <tr>
                                     <td><font color="#95A5A6">╌╌╌╌╌</font></td>
-                                    <td><font point-size="9" color="#95A5A6">Alternative Paths</font></td>
+                                    <td><font point-size="16" color="#95A5A6">Alternative Paths</font></td>
                                 </tr>
                             </table>
                         </td>
@@ -215,12 +215,12 @@ digraph vulnerability_graph {
 
     // Attack flow labels
     {
-        node [shape=plaintext, fontsize=12, fontcolor="#2C3E50", style=""];
+        node [shape=plaintext, fontsize=20, fontcolor="#2C3E50", style=""];
 
-        Stage1 [label=<<b>Entry Points</b><br/><font point-size="9">(Weak defenses)</font>>];
-        Stage2 [label=<<b>Exploitation</b><br/><font point-size="9">(Active attack)</font>>];
-        Stage3 [label=<<b>Pivoting</b><br/><font point-size="9">(Data extraction)</font>>];
-        Stage4 [label=<<b>Impact</b><br/><font point-size="9">(Privilege abuse)</font>>];
+        Stage1 [label=<<b>Entry Points</b><br/><font point-size="16">(Weak defenses)</font>>];
+        Stage2 [label=<<b>Exploitation</b><br/><font point-size="16">(Active attack)</font>>];
+        Stage3 [label=<<b>Pivoting</b><br/><font point-size="16">(Data extraction)</font>>];
+        Stage4 [label=<<b>Impact</b><br/><font point-size="16">(Privilege abuse)</font>>];
 
         Stage1 -> Stage2 -> Stage3 -> Stage4 [style=invis];
 

@@ -3,43 +3,48 @@
 skinparam {
   BackgroundColor transparent
   shadowing true
-  DefaultFontSize 10
+  DefaultFontSize 16
   DefaultFontName Arial
-  ArrowColor #2C3E50
+  ArrowColor #34495E
   ArrowThickness 2
 
   activity {
     BackgroundColor #ECF0F1
-    BorderColor #34495E
+    BorderColor #4A90D9
     BorderThickness 2
     FontColor #2C3E50
-    FontSize 10
+    FontSize 16
     FontStyle bold
     DiamondBackgroundColor #F39C12
     DiamondBorderColor #D68910
     DiamondFontColor white
     StartColor #27AE60
     EndColor #C0392B
+    StopColor #C0392B
   }
 
   partition {
-    BackgroundColor #34495E
-    BorderColor #2C3E50
+    BackgroundColor #4A90D9
+    BorderColor #3A7BC8
     BorderThickness 2
-    FontColor #ECF0F1
-    FontSize 11
+    FontColor white
+    FontSize 18
   }
 
   note {
-    BackgroundColor #3498DB
-    BorderColor #2874A6
+    BackgroundColor #5BA4E6
+    BorderColor #4A90D9
     FontColor white
-    FontSize 9
+    FontSize 14
+  }
+
+  legend {
+    FontSize 16
   }
 }
 
 title Chain Detection Workflow with Performance Metrics
-title <size:16><b>Chain Detection Workflow with Performance Metrics</b></size>
+title <size:24><b>Chain Detection Workflow with Performance Metrics</b></size>
 
 |#ECF0F1|PHASE 1: INPUT|
 start
@@ -63,7 +68,7 @@ note right
   <b>Output:</b> Vulnerability[]
 end note
 
-if (<b>Vulnerabilities\nFound?</b>) then (yes)
+if (<b>Vulnerabilities\nFound?) then (yes)
   :<b>Classify by Taxonomy</b>
   (VulnerabilityTaxonomy)|
   note right
@@ -140,8 +145,8 @@ partition "**DFS Loop (Per Node)**" {
   :<b>Explore Paths</b>
   (Depth-First Search)|
 
-  if (<b>Path Length\n≥ 2?</b>) then (yes)
-    if (<b>Chain Prob\n≥ 0.65?</b>) then (yes)
+  if (<b>Path Length\n≥ 2?) then (yes)
+    if (<b>Chain Prob\n≥ 0.65?) then (yes)
       :<b>Create Chain</b>
       (Add to results)|
       note right
@@ -151,7 +156,7 @@ partition "**DFS Loop (Per Node)**" {
         - risk_score (0-100)
       end note
 
-      if (<b>Chains\n≥ 500?</b>) then (yes)
+      if (<b>Chains\n≥ 500?) then (yes)
         :<b>Stop Node Search</b>|
       else (no)
         :<b>Continue DFS</b>|
@@ -160,7 +165,7 @@ partition "**DFS Loop (Per Node)**" {
       :<b>Skip Chain</b>|
     endif
   else (no)
-    if (<b>Depth\n< 4?</b>) then (yes)
+    if (<b>Depth\n< 4?) then (yes)
       :<b>Continue DFS</b>|
     else (no)
       :<b>Backtrack</b>|
@@ -177,7 +182,7 @@ partition "**DFS Loop (Per Node)**" {
     <b>Reduction:</b> 37,000 → 55
   end note
 
-  if (<b>Unique Patterns\n≥ 100?</b>) then (yes)
+  if (<b>Unique Patterns\n≥ 100?) then (yes)
     :<b>Stop Global Search</b>|
   else (no)
     :<b>Next Source Node</b>|
