@@ -16,54 +16,54 @@ plt.rcParams['font.size'] = 10
 
 def create_figure_1_architecture():
     """Figure 1: System Architecture"""
-    fig, ax = plt.subplots(figsize=(12, 6))
-    ax.set_xlim(0, 12)
+    fig, ax = plt.subplots(figsize=(14, 6))
+    ax.set_xlim(0, 14)
     ax.set_ylim(0, 6)
     ax.axis('off')
 
-    # Components
+    # Components - lighter blue for readability
     components = [
-        ("OWASP ZAP\nScanner", 1, 3, '#2c3e50'),
-        ("JSON\nParser", 2.8, 3, '#34495e'),
-        ("Graph\nBuilder", 4.6, 3, '#34495e'),
-        ("Rule Engine\n(24 Rules)", 6.4, 3, '#34495e'),
-        ("DFS Chain\nDetector", 8.2, 3, '#34495e'),
-        ("Smart Filter\n(Dedup)", 10, 3, '#34495e'),
+        ("OWASP ZAP\nScanner", 1, 3, '#4a86c8'),
+        ("JSON\nParser", 3, 3, '#5a9bd5'),
+        ("Graph\nBuilder", 5, 3, '#5a9bd5'),
+        ("Rule Engine\n(24 Rules)", 7, 3, '#5a9bd5'),
+        ("DFS Chain\nDetector", 9, 3, '#5a9bd5'),
+        ("Smart Filter\n(Dedup)", 11, 3, '#5a9bd5'),
     ]
 
     # Draw components
     for label, x, y, color in components:
-        box = FancyBboxPatch((x-0.6, y-0.5), 1.2, 1,
+        box = FancyBboxPatch((x-0.75, y-0.55), 1.5, 1.1,
                              boxstyle="round,pad=0.1",
-                             facecolor=color, edgecolor='black', linewidth=1.5)
+                             facecolor=color, edgecolor='#2c3e50', linewidth=1.5)
         ax.add_patch(box)
         ax.text(x, y, label, ha='center', va='center',
-                color='white', fontsize=9, fontweight='bold')
+                color='white', fontsize=12, fontweight='bold')
 
     # Arrows
-    arrow_positions = [(1.6, 3), (3.4, 3), (5.2, 3), (7, 3), (8.8, 3)]
+    arrow_positions = [(1.75, 3), (3.75, 3), (5.75, 3), (7.75, 3), (9.75, 3)]
     for x, y in arrow_positions:
-        arrow = FancyArrowPatch((x, y), (x+0.6, y),
+        arrow = FancyArrowPatch((x, y), (x+0.5, y),
                                arrowstyle='->', mutation_scale=20,
                                linewidth=2, color='#2c3e50')
         ax.add_patch(arrow)
 
     # Output
-    output_box = FancyBboxPatch((10.6, 2.5), 1, 1,
+    output_box = FancyBboxPatch((12.0, 2.45), 1.5, 1.1,
                                 boxstyle="round,pad=0.1",
-                                facecolor='#27ae60', edgecolor='black', linewidth=1.5)
+                                facecolor='#3aad6e', edgecolor='#2c3e50', linewidth=1.5)
     ax.add_patch(output_box)
-    ax.text(11.1, 3, 'HTML/JSON\nReport', ha='center', va='center',
-            color='white', fontsize=9, fontweight='bold')
+    ax.text(12.75, 3, 'HTML/JSON\nReport', ha='center', va='center',
+            color='white', fontsize=12, fontweight='bold')
 
     # Final arrow
-    arrow = FancyArrowPatch((10.6, 3), (10.6, 3),
+    arrow = FancyArrowPatch((11.75, 3), (12.0, 3),
                            arrowstyle='->', mutation_scale=20,
                            linewidth=2, color='#2c3e50')
     ax.add_patch(arrow)
 
     # Title
-    ax.text(6, 5.2, 'System Architecture: Vulnerability Chain Detection Pipeline',
+    ax.text(7, 5.2, 'System Architecture: Vulnerability Chain Detection Pipeline',
             ha='center', fontsize=14, fontweight='bold')
 
     # Save
