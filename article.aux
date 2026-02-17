@@ -48,41 +48,52 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System Architecture: Eight-stage vulnerability chain detection pipeline showing data flow from OWASP ZAP scanning through graph construction, rule application, DFS detection, and intelligent filtering to final report generation.  \textit  {Alt text: A block diagram with eight sequential boxes connected by arrows from left to right, labeled ZAP Scanner, Alert Parser, Graph Builder, Rule Engine, DFS Detector, Smart Filter, Risk Calculator, and Report Generator, illustrating the data processing pipeline.}}}{4}{}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:architecture}{{1}{4}{}{figure.1}{}}
+\citation{nvd2024}
+\citation{msf2024}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Base Impact Scores and Chain Type Multipliers}}{6}{}\protected@file@percent }
 \newlabel{tab:chain_type_impact}{{I}{6}{}{table.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Vulnerability Graph Representation}{6}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Probabilistic Rule Derivation}{6}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Representative CVE Examples Supporting Chain Rules}}{6}{}\protected@file@percent }
-\newlabel{tab:cve_examples}{{II}{6}{}{table.2}{}}
+\newlabel{eq:mle}{{7}{6}{}{equation.7}{}}
+\newlabel{eq:hybrid}{{8}{6}{}{equation.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Vulnerability graph with six nodes (V1--V6) colored by severity and probabilistic edges. Highlighted path: V2$\rightarrow $V3$\rightarrow $V5 (cumulative probability 0.68).  \textit  {Alt text: Directed graph with six color-coded nodes. Green path V2--V3--V5 shows the detected chain.}}}{7}{}\protected@file@percent }
 \newlabel{fig:graph}{{2}{7}{}{figure.2}{}}
 \citation{Bozic2019}
+\citation{Newsome2005}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Representative CVE Examples Supporting Chain Rules}}{8}{}\protected@file@percent }
+\newlabel{tab:cve_examples}{{II}{8}{}{table.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Chain Detection Algorithm}{8}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Results}{8}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Experimental Setup}{8}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Chain detection workflow showing the four-phase process: (1) Input parsing and classification, (2) Graph construction with probabilistic rules, (3) DFS-based chain detection with on-the-fly deduplication, (4) Subchain removal and risk scoring. Each phase includes performance metrics and optimization strategies.  \textit  {Alt text: A flowchart divided into four vertical phases. Phase 1 shows input parsing boxes, Phase 2 shows graph construction with rule application, Phase 3 shows DFS traversal with deduplication, and Phase 4 shows filtering and report generation. Arrows indicate data flow between phases.}}}{9}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Chain detection workflow showing the four-phase process: (1) Input parsing and classification, (2) Graph construction with probabilistic Markov-calibrated rules and reachability pre-filtering, (3) A*-based chain detection with on-the-fly deduplication, (4) Subchain removal and risk scoring. Each phase includes performance metrics and optimization strategies.  \textit  {Alt text: A flowchart divided into four vertical phases. Phase 1 shows input parsing boxes, Phase 2 shows graph construction with rule application and reachability filter, Phase 3 shows A* traversal with deduplication, and Phase 4 shows filtering and report generation. Arrows indicate data flow between phases.}}}{9}{}\protected@file@percent }
 \newlabel{fig:workflow}{{3}{9}{}{figure.3}{}}
+\newlabel{eq:astar}{{9}{10}{}{equation.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Experimental Results}{10}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Experimental Setup}{10}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Test Applications Overview}}{10}{}\protected@file@percent }
 \newlabel{tab:table_iv_applications}{{III}{10}{}{table.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Chain Detection Performance}{10}{}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Baseline vs Enhanced System Comparison}}{10}{}\protected@file@percent }
 \newlabel{tab:table_v_comparison}{{IV}{10}{}{table.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Vulnerability Chain Characteristics}{10}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Processing time and total chains detected per application, demonstrating near-linear scalability with respect to vulnerability count and graph size.  \textit  {Alt text: A dual-axis bar chart with three groups for DVWA, Juice Shop, and WebGoat. Blue bars show processing time in seconds and orange bars show total chains detected. Juice Shop has the tallest bars for both metrics.}}}{10}{}\protected@file@percent }
-\newlabel{fig:performance}{{4}{10}{}{figure.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces System Performance Metrics}}{10}{}\protected@file@percent }
-\newlabel{tab:table_vi_performance}{{V}{10}{}{table.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Vulnerability Chain Characteristics}}{10}{}\protected@file@percent }
-\newlabel{tab:table_vii_characteristics}{{VI}{10}{}{table.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Processing time and total chains detected per application, demonstrating near-linear scalability with respect to vulnerability count and graph size.  \textit  {Alt text: A dual-axis bar chart with three groups for DVWA, Juice Shop, and WebGoat. Blue bars show processing time in seconds and orange bars show total chains detected. Juice Shop has the tallest bars for both metrics.}}}{11}{}\protected@file@percent }
+\newlabel{fig:performance}{{4}{11}{}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces System Performance Metrics}}{11}{}\protected@file@percent }
+\newlabel{tab:table_vi_performance}{{V}{11}{}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Vulnerability Chain Characteristics}}{11}{}\protected@file@percent }
+\newlabel{tab:table_vii_characteristics}{{VI}{11}{}{table.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Risk score distribution across applications showing concentration in the 50-65 range, indicating predominantly medium-severity chains.  \textit  {Alt text: A histogram with overlapping distributions for three applications. The x-axis shows risk scores from 0 to 100 and the y-axis shows frequency. Most values cluster between 50 and 65, with DVWA in blue, Juice Shop in orange, and WebGoat in green.}}}{11}{}\protected@file@percent }
 \newlabel{fig:risk_distribution}{{5}{11}{}{figure.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Real-World Applicability}{11}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Chain length distribution showing dominance of 3-step chains across all applications, validating the maximum chain length parameter of 4.  \textit  {Alt text: A grouped bar chart with chain lengths 2, 3, and 4 on the x-axis and count on the y-axis. Length-3 chains have the tallest bars for all three applications, confirming their dominance in the detected patterns.}}}{11}{}\protected@file@percent }
-\newlabel{fig:length_distribution}{{6}{11}{}{figure.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Comparative Analysis}{11}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Comparison with Baseline Approaches}}{12}{}\protected@file@percent }
+\citation{veracode2024}
+\citation{invicti2024}
+\citation{owasp_testing_guide}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Chain length distribution showing dominance of 3-step chains across all applications, validating the maximum chain length parameter of 4.  \textit  {Alt text: A grouped bar chart with chain lengths 2, 3, and 4 on the x-axis and count on the y-axis. Length-3 chains have the tallest bars for all three applications, confirming their dominance in the detected patterns.}}}{12}{}\protected@file@percent }
+\newlabel{fig:length_distribution}{{6}{12}{}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Comparative Analysis}{12}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Comparative Evaluation of Chain Detection Methods}}{12}{}\protected@file@percent }
 \newlabel{tab:comparison}{{VII}{12}{}{table.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-F}}Qualitative Analysis and Validation}{12}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-F}}Validation and Statistical Analysis}{12}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Extended Validation Results ($n = 37$ chains)}}{13}{}\protected@file@percent }
+\newlabel{tab:validation}{{VIII}{13}{}{table.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Conclusion}{13}{}\protected@file@percent }
 \bibcite{Potti2025}{1}
 \bibcite{Laponina2017}{2}
@@ -110,6 +121,7 @@
 \bibcite{Srinivasan2017}{24}
 \bibcite{Alzahrani2017}{25}
 \bibcite{Ghanem2023}{26}
+\@writefile{toc}{\contentsline {section}{References}{14}{}\protected@file@percent }
 \bibcite{Zhang2020Auto}{27}
 \bibcite{Touseef2019}{28}
 \bibcite{Kasturi2024Priority}{29}
@@ -125,7 +137,6 @@
 \bibcite{Kieyzun2009}{39}
 \bibcite{Alaoui2023XSS}{40}
 \bibcite{Li2018Vul}{41}
-\@writefile{toc}{\contentsline {section}{References}{14}{}\protected@file@percent }
 \bibcite{Li2022SySeVR}{42}
 \bibcite{Antunes2011}{43}
 \bibcite{Felderer2016}{44}
@@ -133,4 +144,10 @@
 \bibcite{Mauw2006}{46}
 \bibcite{Ficco2021}{47}
 \bibcite{Rak2022}{48}
+\bibcite{nvd2024}{49}
+\bibcite{msf2024}{50}
+\bibcite{Newsome2005}{51}
+\bibcite{owasp_testing_guide}{52}
+\bibcite{veracode2024}{53}
+\bibcite{invicti2024}{54}
 \gdef \@abspage@last{15}

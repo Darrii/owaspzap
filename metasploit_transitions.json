@@ -1,0 +1,74 @@
+{
+  "privilege_escalation": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "command_injection": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "xss": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "path_traversal": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "auth_bypass": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "sql_injection": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "deserialization": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "file_upload": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  },
+  "info_disclosure": {
+    "command_injection": 0.3466666666666667,
+    "info_disclosure": 0.5933333333333334,
+    "privilege_escalation": 0.03333333333333333,
+    "xss": 0.006666666666666667,
+    "sql_injection": 0.013333333333333334,
+    "session_hijack": 0.006666666666666667
+  }
+}
